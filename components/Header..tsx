@@ -4,35 +4,14 @@ import React from "react";
 import logo from "@/public/logo.png";
 import hamburger from "@/public/hamburger-menu.svg";
 import { Button } from "./ui/button";
+import { IHeaderData } from "@/types";
 
-const Header = () => {
-  const links = [
-    {
-      name: "home",
-      link: "/",
-      id: 1,
-    },
-    {
-      name: "the area",
-      link: "/area",
-      id: 2,
-    },
-    {
-      name: "booking",
-      link: "/booking",
-      id: 3,
-    },
-    {
-      name: "about",
-      link: "/about",
-      id: 4,
-    },
-    {
-      name: "faq",
-      link: "/faq",
-      id: 5,
-    },
-  ];
+interface IHeaderDataProps {
+  links: IHeaderData[];
+  isDashboard: boolean;
+}
+
+const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (
     <header>
       <nav className="flex-center fixed top-0 z-50 w-full borber-black-200 py-7 text-white bg-emerald-800">
@@ -54,11 +33,13 @@ const Header = () => {
             ))}
           </ul>
           <div className="flex flex-row gap-x-6 max-xs:gap-x-2">
-            <Link href="/booking">
-              <Button className="bg-black-100 font-light uppercase sm:text-sm text-base lg:text-lg">
-                BOOK NOW
-              </Button>
-            </Link>
+            {!isDashboard && (
+              <Link href="/booking">
+                <Button className="bg-black-100 font-light uppercase sm:text-sm text-base lg:text-lg">
+                  BOOK NOW
+                </Button>
+              </Link>
+            )}
             <Image
               src={hamburger}
               width={30}

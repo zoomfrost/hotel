@@ -10,7 +10,7 @@ const DashboardHeader = () => {
     },
     {
       name: "History",
-      link: "/history",
+      link: "/dashboard/history",
       id: 2,
     },
   ];

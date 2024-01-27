@@ -27,9 +27,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     },
   ];
 
-  const arr = [1, 2];
   return (
-    <div className="bg-black-100">
+    <div className="bg-amber-50">
       <Header isDashboard={false} links={links} />
       <Promo />
       <main className="flex-center max-w-screen-2xl paddings mx-auto w-full flex-col">

@@ -4,17 +4,12 @@ import React from "react";
 import logo from "@/public/logo.png";
 import hamburger from "@/public/hamburger-menu.svg";
 import { Button } from "./ui/button";
-import { IHeaderData } from "@/types";
-
-interface IHeaderDataProps {
-  links: IHeaderData[];
-  isDashboard: boolean;
-}
+import { IHeaderDataProps } from "@/types";
 
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (
     <header>
-      <nav className="flex-center fixed top-0 z-50 w-full borber-black-200 py-7 text-white bg-emerald-800">
+      <nav className="flex-center fixed top-0 z-50 w-full borber-black-200 py-7  bg-lime-100">
         <div className="flex-between mx-auto w-full max-w-screen-2xl px-6 xs:px-8 sm:px-16 max=md:">
           <Link href="/">
             <Image src={logo} alt="logo" />
@@ -35,7 +30,7 @@ const Header = ({ links, isDashboard }: IHeaderDataProps) => {
           <div className="flex flex-row gap-x-6 max-xs:gap-x-2">
             {!isDashboard && (
               <Link href="/booking">
-                <Button className="bg-black-100 font-light uppercase sm:text-sm text-base lg:text-lg">
+                <Button className="bg-black-100 text-white font-light uppercase sm:text-sm text-base lg:text-lg">
                   BOOK NOW
                 </Button>
               </Link>

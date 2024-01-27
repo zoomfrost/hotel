@@ -16,6 +16,7 @@ const Home = () => {
   const descrArr = [
     {
       photo: promoPhoto,
+      heading: "The Cabins",
       text: "Løvtag’s three exclusive and comfortable cabins, Et, Ro and Ly, are designed by architect Sigurd Larsen. They all have an open space with a double bed, a double sofa bed, kitchen, separate toilet and an outdoor shower. On the roof, surrounded by treetops, there is a terrace, which is about nine meters above ground. The cottages are built around tall, old trees that go through the entire cottage from floor to ceiling.",
     },
   ];
@@ -36,7 +37,7 @@ const Home = () => {
         ))}
       </div>
       <Facilities />
-      <div className="grid grid-cols-2 p-4 mt-24 gap-x-44 justify-items-center">
+      <div className="grid grid-cols-2 max-md:grid-cols-1 max-md:gap-y-5 p-4 mt-24 gap-x-44 justify-items-center">
         <div className="flex flex-col gap-y-8">
           <h4 className="text-5xl">Stay in touch</h4>
           <p>Saint-Petersburg, Baskov, 13-15</p>

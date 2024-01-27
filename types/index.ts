@@ -13,6 +13,7 @@ export interface IHeaderDataProps {
 
 interface IDescriptionData {
   photo: StaticImageData;
+  heading: string;
   text: string;
 }
 export interface IDescriptionDataProps {

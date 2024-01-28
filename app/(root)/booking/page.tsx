@@ -27,7 +27,7 @@ const Booking = () => {
         <CalendarDate />
         <div className="w-1/4">
           <form className="caform">
-            <div className="caform__title">Create new appointment</div>
+            <div className="caform__title">Book a room</div>
             <label htmlFor="name">
               Name<span>*</span>
             </label>
@@ -39,14 +39,14 @@ const Booking = () => {
               required
             />
 
-            <label htmlFor="service">
+            <label htmlFor="room">
               Service<span>*</span>
             </label>
             <input
               type="text"
-              name="service"
-              id="service"
-              placeholder="Service name"
+              name="room"
+              id="room"
+              placeholder="Chosen room"
               required
             />
 

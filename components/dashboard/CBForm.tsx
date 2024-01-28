@@ -1,9 +1,9 @@
 import React from "react";
 
-const CAForm = () => {
+const CBForm = () => {
   return (
     <form className="caform">
-      <div className="caform__title">Create new appointment</div>
+      <div className="caform__title">Book a room</div>
       <label htmlFor="name">
         Name<span>*</span>
       </label>
@@ -14,18 +14,6 @@ const CAForm = () => {
         placeholder="User name"
         required
       />
-
-      <label htmlFor="service">
-        Service<span>*</span>
-      </label>
-      <input
-        type="text"
-        name="service"
-        id="service"
-        placeholder="Service name"
-        required
-      />
-
       <label htmlFor="phone">
         Phone number<span>*</span>
       </label>
@@ -38,7 +26,16 @@ const CAForm = () => {
         title="Format should be +1 804 944 567"
         required
       />
-
+      <label htmlFor="room">
+        Service<span>*</span>
+      </label>
+      <input
+        type="text"
+        name="room"
+        id="room"
+        placeholder="Chosen room"
+        required
+      />
       <label htmlFor="date">
         Date<span>*</span>
       </label>
@@ -56,4 +53,4 @@ const CAForm = () => {
   );
 };
 
-export default CAForm;
+export default CBForm;

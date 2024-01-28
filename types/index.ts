@@ -24,3 +24,15 @@ export interface IBookingRules {
   heading: string;
   rules: string[];
 }
+
+type HTTPRequestMethods = "GET" | "POST" | "PATCH" | "DELETE";
+interface IHTTPHeaders {
+  [key: string]: string;
+}
+
+export interface IRequestConfig {
+  url: string;
+  method?: HTTPRequestMethods;
+  body?: string | null;
+  headers?: IHTTPHeaders;
+}

@@ -49,6 +49,7 @@ const config = {
         pink: "#ED5FBD",
         violet: "#F16565",
         orange: "#FF964B",
+        main: "#5B6460",
       },
       backgroundImage: {
         banner: "url('/promo.jpg')",

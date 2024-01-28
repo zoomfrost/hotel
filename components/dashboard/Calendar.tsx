@@ -3,15 +3,11 @@
 import { useState } from "react";
 import { Calendar } from "../ui/calendar";
 import { DateRange } from "react-day-picker";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 
 export default function CalendarDate() {
   const pastMonth = new Date();
-  const defaultSelected: DateRange = {
-    from: pastMonth,
-    to: addDays(pastMonth, 4),
-  };
-  const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
+  const [range, setRange] = useState<DateRange | undefined>(undefined);
 
   let footer = <p>Please pick the first day.</p>;
   if (range?.from) {
@@ -33,6 +29,9 @@ export default function CalendarDate() {
       selected={range}
       footer={footer}
       onSelect={setRange}
+      modifiersClassNames={{
+        selected: "selected",
+      }}
     />
   );
 }

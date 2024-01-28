@@ -250,3 +250,10 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.selected {
+  color: #5b6460;
+  border-color: #5b6460;
+  border: 2px solid;
+  border-radius: 50%;
+}

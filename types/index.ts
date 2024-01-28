@@ -19,3 +19,8 @@ interface IDescriptionData {
 export interface IDescriptionDataProps {
   photos: IDescriptionData[];
 }
+
+export interface IBookingRules {
+  heading: string;
+  rules: string[];
+}

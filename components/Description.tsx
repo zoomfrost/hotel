@@ -11,7 +11,10 @@ const Description = ({ photos }: IDescriptionDataProps) => {
     <>
       {photos.map((item, i) => (
         <div
-          className={` grid grid-cols-2 lfex- max-md:grid-cols-1 max-md:gap-y-5 justify-items-center max-sm:px-6 max-sm:gap-y-6 gap-x-10 mb-36 px-8`}
+          key={i}
+          className={` flex ${
+            i % 2 === 0 ? "flex-row-reverse" : ""
+          } max-md:flex-col  max-md:gap-y-5 justify-items-center max-sm:px-6 max-sm:gap-y-6 gap-x-10 mb-36 px-8`}
         >
           <div className="grid auto-rows-auto max-md:text-center max-md:justify-items-center  max-md:text-sm text-md gap-y-4 items-center">
             <h2 className=" heading2 max-md:heading3">{item.heading}</h2>
@@ -22,13 +25,9 @@ const Description = ({ photos }: IDescriptionDataProps) => {
               </Link>
             ) : null}
           </div>
-          <Image
-            width={450}
-            height={450}
-            className="bg-cover"
-            src={item.photo}
-            alt="photo"
-          />
+          <div>
+            <Image className="bg-cover" src={item.photo} alt="photo" />
+          </div>
         </div>
       ))}
     </>

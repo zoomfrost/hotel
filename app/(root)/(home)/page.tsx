@@ -60,9 +60,11 @@ const Home = () => {
         <div className="w-80">
           <Image className="object-cover" src={bookHotel} alt="room" />
           <div className="flex w-full">
-            <Button className="w-3/5 h-24 bg-gray-600 hover:bg-gray-500 rounded-none">
-              Book
-            </Button>
+            <Link className="w-3/5 block" href="/booking">
+              <Button className="w-full h-24 bg-gray-600 hover:bg-gray-500 rounded-none">
+                Book
+              </Button>
+            </Link>
             <div className="bg-amber-100 w-2/5 flex-center">
               <span>
                 From <br />

@@ -1,5 +1,5 @@
+import Rules from "@/components/Rules";
 import CalendarDate from "@/components/dashboard/Calendar";
-import { IBookingRules } from "@/types";
 
 const Booking = () => {
   const rules = [
@@ -26,8 +26,8 @@ const Booking = () => {
       <div className="flex flex-row justify-evenly">
         <CalendarDate />
         <div className="w-1/4">
-          <form className="caform">
-            <div className="caform__title">Book a room</div>
+          <form>
+            <div>Book a room</div>
             <label htmlFor="name">
               Name<span>*</span>
             </label>
@@ -40,15 +40,14 @@ const Booking = () => {
             />
 
             <label htmlFor="room">
-              Service<span>*</span>
+              Room<span>*</span>
             </label>
-            <input
-              type="text"
-              name="room"
-              id="room"
-              placeholder="Chosen room"
-              required
-            />
+            <select name="room" id="room" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
 
             <label htmlFor="phone">
               Phone number<span>*</span>
@@ -85,23 +84,3 @@ const Booking = () => {
 };
 
 export default Booking;
-
-const Rules = ({ rules }: { rules: IBookingRules[] }) => {
-  return (
-    <div className="paddings">
-      {rules.map((item, i) => (
-        <div key={i} className="flex flex-col gap-y-3 mt-7">
-          <h4 className="text-main text-2xl">{item.heading}</h4>
-          <span className="h-[1px] w-full bg-main block"></span>
-          <ul>
-            {item.rules.map((rule, i) => (
-              <li key={i} className="list-disc text-lg">
-                {rule}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
-};

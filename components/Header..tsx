@@ -25,7 +25,7 @@ const Header = ({ links, isDashboard }: IHeaderDataProps) => {
       <nav className="flex-center fixed top-0 z-50 w-[100vw] borber-black-200 py-7  bg-gray-400">
         <div className="flex-between mx-auto w-full max-w-screen-2xl px-6 xs:px-8 sm:px-16 max=md:">
           <Link href="/">
-            <Image src={logo} alt="logo" />
+            <Image priority src={logo} alt="logo" />
           </Link>
           <ul className="flex-center gap-x-3 max-md:hidden md:gap-x-10 lg:gap-x-14">
             {links.map((item, i) => (

@@ -1,6 +1,5 @@
+import BookingForm from "@/components/BookingForm";
 import Rules from "@/components/Rules";
-import CBForm from "@/components/dashboard/CBForm";
-import CalendarDate from "@/components/dashboard/Calendar";
 
 const Booking = () => {
   const rules = [
@@ -24,11 +23,8 @@ const Booking = () => {
   ];
   return (
     <section>
-      <div className="flex flex-row justify-evenly max-md:flex-col max-md:items-center">
-        <CalendarDate />
-        <div className="w-1/4 max-md:w-1/2">
-          <CBForm />
-        </div>
+      <div className="grid grid-cols-2 max-md:grid-cols-1 justify-items-center">
+        <BookingForm />
       </div>
       <Rules rules={rules} />
     </section>

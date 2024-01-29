@@ -41,7 +41,7 @@ const Home = () => {
         <div className="flex flex-col gap-y-8">
           <h4 className="text-5xl">Stay in touch</h4>
           <p>Saint-Petersburg, Baskov, 13-15</p>
-          <div className="">
+          <div>
             <Link
               className='after:content-["\260e"] after:ml-2'
               href="tel:+79129112937"
@@ -49,7 +49,9 @@ const Home = () => {
               +7912012012
             </Link>
             <br />
-            <Link href="mailto:baskov@gmail.com">baskov@gmail.com</Link>
+            <Link className="mt-5" href="mailto:baskov@gmail.com">
+              baskov@gmail.com
+            </Link>
           </div>
           <ul className="flex flex-row items-center justify-start gap-x-5">
             <li>WhatsUp</li>

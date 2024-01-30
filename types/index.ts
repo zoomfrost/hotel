@@ -26,6 +26,7 @@ export interface IBookingRules {
 }
 
 type HTTPRequestMethods = "GET" | "POST" | "PATCH" | "DELETE";
+
 interface IHTTPHeaders {
   [key: string]: string;
 }
@@ -36,3 +37,14 @@ export interface IRequestConfig {
   body?: string | null;
   headers?: IHTTPHeaders;
 }
+
+export interface IBooking {
+  name: string;
+  phone: string;
+  room: string;
+  date: string;
+  checkIn: string;
+  canceled: boolean;
+}
+
+export type activeBooking = Omit<IBooking, "canceled">;

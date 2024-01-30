@@ -42,20 +42,15 @@ const formSchema = z.object({
 });
 
 const BookingForm = () => {
-  let fromValue: string = "No check-in day";
-  let toValue: string = "no check-out day";
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
   let days = "";
   if (range?.from) {
     if (!range.to) {
-      fromValue = format(range.from, "PPP");
-      days = fromValue;
+      days = format(range.from, "PPP");
     } else if (range.to) {
-      fromValue = format(range.from, "PPP");
-      toValue = format(range.to, "PPP");
-      days = `${fromValue} - ${toValue}`;
+      days = `${format(range.from, "PPP")} - ${format(range.to, "PPP")}`;
     }
   }
 
@@ -66,7 +61,7 @@ const BookingForm = () => {
       phone: "",
       room: "double",
       checkIn: "",
-      date: new Date().toDateString(),
+      date: "",
     },
   });
 
@@ -79,6 +74,7 @@ const BookingForm = () => {
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values);
     setRange(undefined);
     form.reset();
   };
@@ -88,7 +84,7 @@ const BookingForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 border-[1px] border-main p-4 w-3/4"
+          className="space-y-8 p-4 w-3/4"
         >
           <FormField
             control={form.control}
@@ -192,7 +188,9 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Book</Button>
+          <Button name="submit" type="submit">
+            Book
+          </Button>
         </form>
       </Form>
     </>

@@ -1,23 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import logo from "@/public/logo.png";
 import hamburger from "@/public/hamburger-menu.svg";
-import { Button } from "./ui/button";
 import { IHeaderDataProps } from "@/types";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "./ui/alert-dialog";
+
+import AlertForm from "./AlertForm";
 
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (
@@ -41,30 +29,7 @@ const Header = ({ links, isDashboard }: IHeaderDataProps) => {
             ))}
           </ul>
           <div className="flex flex-row gap-x-6 max-xs:gap-x-2">
-            {!isDashboard && (
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button className="uppercase" variant="outline">
-                    Book Now
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="bg-black-100 ">
-                  <AlertDialogHeader className="text-white">
-                    <AlertDialogTitle>Choose your room</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      your account and remove your data from our servers.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter className="text-white">
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => console.log("clicked")}>
-                      Book
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            )}
+            {!isDashboard && <AlertForm />}
             <Image
               src={hamburger}
               width={30}

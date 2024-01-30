@@ -26,7 +26,7 @@ const Description = ({ photos }: IDescriptionDataProps) => {
             ) : null}
           </div>
           <div>
-            <Image className="bg-cover" src={item.photo} alt="photo" />
+            <Image className="object-cover" src={item.photo} alt="photo" />
           </div>
         </div>
       ))}

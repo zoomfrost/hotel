@@ -84,7 +84,7 @@ const BookingForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 p-4 w-3/4"
+          className="space-y-8 p-4 w-3/4 relative pb-7"
         >
           <FormField
             control={form.control}
@@ -188,7 +188,7 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <Button name="submit" type="submit">
+          <Button variant={"outline"} name="submit" type="submit">
             Book
           </Button>
         </form>

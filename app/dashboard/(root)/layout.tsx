@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header.";
 import React from "react";
 
@@ -20,7 +21,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       <main className="flex-center mt-6 max-w-screen-2xl paddings mx-auto w-full flex-col">
         {children}
       </main>
-      Footer
+      <Footer />
     </div>
   );
 };

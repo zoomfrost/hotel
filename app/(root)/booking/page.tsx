@@ -24,9 +24,9 @@ const Booking = () => {
   return (
     <section>
       <div className="grid grid-cols-2 max-md:grid-cols-1 justify-items-center">
+        <Rules rules={rules} />
         <BookingForm />
       </div>
-      <Rules rules={rules} />
     </section>
   );
 };

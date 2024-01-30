@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
+import promo from "@/public/promo.jpg";
 
 const Promo = () => {
   const pathname = usePathname();
@@ -31,17 +33,21 @@ const Layout = ({
   isHomePage?: boolean;
 }) => {
   return (
-    <>
-      <div
-        className={`flex-col rounded-xl bg-banner bg-cover bg-center text-center brightness-50 flex-center w-full min-h-[150px] ${
-          isHomePage
-            ? " xs:min-h-[200px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[600px]"
-            : " lg:min-h-[300px]"
-        } `}
-      ></div>
+    <div
+      className={`w-full h-[150px] ${
+        isHomePage
+          ? " xs:h-[200px] sm:h-[300px] md:h-[400px] lg:h-[600px]"
+          : " lg:h-[300px]"
+      } `}
+    >
+      <Image
+        className=" h-full brightness-50 object-cover"
+        src={promo}
+        alt="promo photo"
+      />
       <h1 className="max-xs:hidden xs:text-lg sm:heading3 heading1 uppercase font-light  text-center top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 text-white absolute">
         {title}
       </h1>
-    </>
+    </div>
   );
 };

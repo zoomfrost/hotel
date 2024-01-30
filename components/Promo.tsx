@@ -41,6 +41,7 @@ const Layout = ({
       } `}
     >
       <Image
+        priority
         className=" h-full brightness-50 object-cover"
         src={promo}
         alt="promo photo"

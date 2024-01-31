@@ -1,29 +1,25 @@
+import { IBooking } from "@/types";
+
+let bookedRooms: IBooking[] = [
+  {
+    name: "Alex",
+    canceled: false,
+    checkIn: "15:00",
+    date: "12.02.2024",
+    phone: "8911902632",
+    room: "triple",
+  },
+];
+
 export async function GET(request: Request) {
-  const bookedRooms = [
-    {
-      name: "Alex",
-      phone: "7932323923",
-      room: "triple",
-      date: "12.05.2024",
-      checkIn: "",
-      canceled: false,
-    },
-    {
-      name: "Bob",
-      phone: "7932323923",
-      room: "triple",
-      date: "12.05.2024",
-      checkIn: "",
-      canceled: false,
-    },
-    {
-      name: "Carol",
-      phone: "7932323923",
-      room: "double",
-      date: "12.05.2024",
-      checkIn: "",
-      canceled: true,
-    },
-  ];
   return new Response(JSON.stringify(bookedRooms));
+}
+
+export async function POST(request: Request) {
+  const { name, phone, room, date, checkIn, canceled } = await request.json();
+  bookedRooms = [
+    ...bookedRooms,
+    { name, phone, room, date, checkIn, canceled },
+  ];
+  return new Response(JSON.stringify(request));
 }

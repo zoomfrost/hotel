@@ -41,7 +41,7 @@ export interface IRequestConfig {
 export interface IBooking {
   name: string;
   phone: string;
-  room: string;
+  room: "double" | "triple";
   date: string;
   checkIn: string;
   canceled: boolean;

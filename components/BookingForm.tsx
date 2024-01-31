@@ -27,6 +27,7 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
+import useBookingService from "@/services/BookingsService";
 
 const formSchema = z.object({
   name: z
@@ -42,6 +43,7 @@ const formSchema = z.object({
 });
 
 const BookingForm = () => {
+  const { postBooking } = useBookingService();
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
@@ -66,15 +68,15 @@ const BookingForm = () => {
   });
 
   const onSelectDays = (e: any) => {
-    days = `${format(e.from, "PPP")} - ${
-      e.to ? format(e.to, "PPP") : "No day"
+    days = `${format(e.from, "dd.MM.yyyy")} - ${
+      e.to ? format(e.to, "dd.MM.yyyy") : "No day"
     }`;
     setRange(e);
     form.setValue("date", days);
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    postBooking({ ...values, canceled: false });
     setRange(undefined);
     form.reset();
   };

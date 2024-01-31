@@ -39,7 +39,8 @@ const formSchema = z.object({
   room: z.enum(["double", "triple"]),
   phone: z.string().min(6).max(12),
   checkIn: z.string(),
-  date: z.string(),
+  dateFrom: z.date(),
+  dateTo: z.date(),
 });
 
 const BookingForm = () => {
@@ -63,16 +64,21 @@ const BookingForm = () => {
       phone: "",
       room: "double",
       checkIn: "",
-      date: "",
+      dateFrom: new Date(),
+      dateTo: new Date(),
     },
   });
 
   const onSelectDays = (e: any) => {
-    days = `${format(e.from, "dd.MM.yyyy")} - ${
-      e.to ? format(e.to, "dd.MM.yyyy") : "No day"
-    }`;
     setRange(e);
-    form.setValue("date", days);
+    if (e?.from) {
+      if (!e.to) {
+        form.setValue("dateFrom", e.from);
+      } else if (e.to) {
+        form.setValue("dateFrom", e.from);
+        form.setValue("dateTo", e.to);
+      }
+    }
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -117,7 +123,7 @@ const BookingForm = () => {
 
           <FormField
             control={form.control}
-            name="date"
+            name="dateFrom"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Date</FormLabel>

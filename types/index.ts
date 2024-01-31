@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { DateRange } from "react-day-picker";
 
 interface IHeaderData {
   name: string;
@@ -42,7 +43,8 @@ export interface IBooking {
   name: string;
   phone: string;
   room: "double" | "triple";
-  date: string;
+  dateFrom: Date;
+  dateTo: Date;
   checkIn: string;
   canceled: boolean;
 }

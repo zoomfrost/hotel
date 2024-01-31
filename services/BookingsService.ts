@@ -4,7 +4,7 @@ import { IBooking, ActiveBooking } from "@/types";
 const useBookingService = () => {
   const { loading, request } = useHttp();
 
-  const _apiBase = "https://hotel-five-umber.vercel.app/api";
+  const _apiBase = "http://localhost:3000/api";
 
   const getAllBookings = async (): Promise<IBooking[]> => {
     const res = await request({ url: `${_apiBase}/booking` });
@@ -21,7 +21,8 @@ const useBookingService = () => {
           checkIn: item.checkIn,
           phone: item.phone,
           room: item.room,
-          date: item.date,
+          dateFrom: item.dateFrom,
+          dateTo: item.dateTo,
         };
       });
 

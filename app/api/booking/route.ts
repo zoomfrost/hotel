@@ -5,7 +5,8 @@ let bookedRooms: IBooking[] = [
     name: "Alex",
     canceled: false,
     checkIn: "15:00",
-    date: "12.02.2024",
+    dateFrom: new Date(),
+    dateTo: new Date(),
     phone: "8911902632",
     room: "triple",
   },
@@ -16,9 +17,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { name, phone, room, date, checkIn, canceled } = await request.json();
+  const { name, phone, room, dateFrom, dateTo, checkIn, canceled } =
+    await request.json();
   bookedRooms = [
     ...bookedRooms,
-    { name, phone, room, date, checkIn, canceled },
+    { name, phone, room, dateFrom, dateTo, checkIn, canceled },
   ];
 }

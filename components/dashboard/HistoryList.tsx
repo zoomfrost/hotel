@@ -4,10 +4,10 @@ import AppointmentItem from "./AppointmentItem";
 const HistoryList = () => {
   return (
     <>
+      {/* <AppointmentItem />
       <AppointmentItem />
       <AppointmentItem />
-      <AppointmentItem />
-      <AppointmentItem />
+      <AppointmentItem /> */}
     </>
   );
 };

@@ -21,5 +21,4 @@ export async function POST(request: Request) {
     ...bookedRooms,
     { name, phone, room, date, checkIn, canceled },
   ];
-  return new Response(JSON.stringify(request));
 }

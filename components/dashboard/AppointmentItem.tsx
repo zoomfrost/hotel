@@ -9,9 +9,11 @@ const AppointmentItem = () => {
         <br />
         <span>Name: Alex Smith</span>
         <br />
-        <span>Service: Manicure</span>
+        <span>Room: triple</span>
         <br />
         <span>Phone: +1 948 945 344</span>
+        <br />
+        <span>Check in: 15:00</span>
       </div>
       <div>
         <span>Time left:</span>

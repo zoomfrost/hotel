@@ -1,15 +1,12 @@
-"use client";
-
 import React, { useState } from "react";
 
 import { Button } from "./ui/button";
 import BookingForm from "./BookingForm";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 const AlertForm = () => {
-  const [open, setOpen] = useState(false);
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button className="uppercase" variant="outline">
           Book Now

@@ -4,7 +4,7 @@ import { IBooking, activeBooking } from "@/types";
 const useBookingService = () => {
   const { loading, request } = useHttp();
 
-  const _apiBase = "https://localhost:3000/api";
+  const _apiBase = "http://localhost:3000/api";
 
   const getAllBookings = async (): Promise<IBooking[]> => {
     const res = await request({ url: `${_apiBase}/booking` });
@@ -32,3 +32,5 @@ const useBookingService = () => {
     getAllActiveBookings,
   };
 };
+
+export default useBookingService;

@@ -47,4 +47,4 @@ export interface IBooking {
   canceled: boolean;
 }
 
-export type activeBooking = Omit<IBooking, "canceled">;
+export type ActiveBooking = Omit<IBooking, "canceled">;

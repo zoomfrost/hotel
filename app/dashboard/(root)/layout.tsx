@@ -1,8 +1,23 @@
+"use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header.";
-import React from "react";
+import useBookingService from "@/services/BookingsService";
+import React, { useEffect } from "react";
+
+import { IInitialState } from "@/context/bookings/reducer";
+
+const initialState: IInitialState = {
+  allBookings: [],
+  allActiveBookings: [],
+};
 
 const layout = ({ children }: { children: React.ReactNode }) => {
+  const { loading, getAllBookings, getAllActiveBookings } = useBookingService();
+
+  useEffect(() => {
+    getAllBookings().then((data) => console.log(data));
+  }, []);
+
   const links = [
     {
       name: "Schedule",

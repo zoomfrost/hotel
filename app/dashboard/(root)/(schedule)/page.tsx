@@ -7,7 +7,7 @@ const DashboardHome = () => {
       <div className="grid grid-cols-1 gap-y-12">
         <BookingForm />
       </div>
-      <div className="grid auto-rows-[140px] gap-y-6">
+      <div className="grid auto-rows-[180px] gap-y-6">
         <AppointmentList />
       </div>
     </section>

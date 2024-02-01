@@ -28,6 +28,7 @@ export interface IBookingRules {
 }
 
 type HTTPRequestMethods = "GET" | "POST" | "PATCH" | "DELETE";
+export type loadingStatusOptions = "idle" | "loading" | "error";
 
 interface IHTTPHeaders {
   [key: string]: string;

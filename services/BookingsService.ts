@@ -1,5 +1,6 @@
 import { useHttp } from "@/hooks/http.hook";
 import { IBooking, ActiveBooking } from "@/types";
+import { differenceInDays } from "date-fns";
 
 const useBookingService = () => {
   const { loading, request } = useHttp();
@@ -14,7 +15,11 @@ const useBookingService = () => {
   const getAllActiveBookings = async () => {
     const res = await getAllBookings();
     const transformed: ActiveBooking[] = res
-      .filter((item) => !item.canceled)
+      .filter((item) => {
+        return (
+          !item.canceled && differenceInDays(item.dateFrom, new Date()) > 0
+        );
+      })
       .map((item: ActiveBooking) => {
         return {
           name: item.name,

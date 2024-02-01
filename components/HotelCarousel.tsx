@@ -9,13 +9,12 @@ import {
 import hotel1 from "@/public/hotel1.jpg";
 import hotel2 from "@/public/hotel2.jpg";
 import hotel3 from "@/public/hotel3.jpg";
-import hotel4 from "@/public/hotel4.jpg";
 import hotel5 from "@/public/hotel5.jpg";
 import hotel6 from "@/public/hotel6.jpg";
 import Image from "next/image";
 
 const HotelCarousel = () => {
-  const photoArr = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
+  const photoArr = [hotel1, hotel2, hotel3, hotel5, hotel6];
   return (
     <div className="paddings">
       <h2 className="heading3 text-center">Overview</h2>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 
 import { ActiveBooking, IBooking } from "@/types";
@@ -9,6 +9,7 @@ interface BookingItemProps {
 }
 const AppointmentItem = ({ bookings }: BookingItemProps) => {
   const { checkIn, name, phone, dateFrom, dateTo, room } = bookings;
+
   return (
     <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-14 text-black">
       <div>

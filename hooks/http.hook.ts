@@ -1,8 +1,8 @@
-import { IRequestConfig } from "@/types";
+import { IRequestConfig, loadingStatusOptions } from "@/types";
 import { useState, useCallback, use } from "react";
 
 export const useHttp = () => {
-  const [loading, setLoading] = useState("idle");
+  const [loading, setLoading] = useState<loadingStatusOptions>("idle");
   const [error, setError] = useState<string | null>(null);
 
   const request = useCallback(

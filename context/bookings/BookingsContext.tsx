@@ -1,21 +1,23 @@
 "use client";
 
 import { createContext, useReducer } from "react";
-import reducer, { IInitialState } from "./reducer";
+import reducer, { IBookingState } from "./reducer";
 import useBookingService from "@/services/BookingsService";
 
-const initialState: IInitialState = {
+const initialState: IBookingState = {
   allBookings: [],
   allActiveBookings: [],
+  loadingStatus: "idle",
 };
 
-interface IBookingsContextValue extends IInitialState {
+interface IBookingsContextValue extends IBookingState {
   getBookings: () => void;
   getActiveBookings: () => void;
 }
 export const BookingContext = createContext<IBookingsContextValue>({
   allBookings: initialState.allBookings,
   allActiveBookings: initialState.allActiveBookings,
+  loadingStatus: initialState.loadingStatus,
   getBookings: () => {},
   getActiveBookings: () => {},
 });
@@ -31,6 +33,7 @@ const BookingContextProvider = ({
   const value: IBookingsContextValue = {
     allBookings: state.allBookings,
     allActiveBookings: state.allActiveBookings,
+    loadingStatus: loading,
     getBookings: () => {
       getAllBookings().then((data) =>
         dispatch({ type: "SET_ALL_BOOKINGS", payload: data })

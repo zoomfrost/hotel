@@ -27,7 +27,7 @@ const Area = () => {
   ];
   return (
     <section>
-      <Description photos={descrArr} />
+      <Description isHomePage={false} photos={descrArr} />
     </section>
   );
 };

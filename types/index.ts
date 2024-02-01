@@ -19,6 +19,7 @@ interface IDescriptionData {
 }
 export interface IDescriptionDataProps {
   photos: IDescriptionData[];
+  isHomePage: boolean;
 }
 
 export interface IBookingRules {

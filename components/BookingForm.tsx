@@ -71,14 +71,8 @@ const BookingForm = () => {
 
   const onSelectDays = (e: any) => {
     setRange(e);
-    if (e?.from) {
-      if (!e.to) {
-        form.setValue("dateFrom", e.from);
-      } else if (e.to) {
-        form.setValue("dateFrom", e.from);
-        form.setValue("dateTo", e.to);
-      }
-    }
+    form.setValue("dateFrom", e.from);
+    form.setValue("dateTo", e.to);
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {

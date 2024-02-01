@@ -23,4 +23,6 @@ export async function POST(request: Request) {
     ...bookedRooms,
     { name, phone, room, dateFrom, dateTo, checkIn, canceled },
   ];
+
+  return new Response(JSON.stringify(request));
 }

@@ -12,9 +12,9 @@ const HistoryList = () => {
   }, []);
   return (
     <>
-      {allBookings.map((item, i) => (
+      {/* {allBookings.map((item, i) => (
         <AppointmentItem key={i} bookings={item} />
-      ))}
+      ))} */}
     </>
   );
 };

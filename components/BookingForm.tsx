@@ -3,10 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useState } from "react";
-import { DateRange, SelectRangeEventHandler } from "react-day-picker";
+import { DateRange } from "react-day-picker";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
+import { v4 as uuidv4 } from "uuid";
 import {
   Form,
   FormControl,
@@ -76,7 +77,7 @@ const BookingForm = () => {
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    postBooking({ ...values, canceled: false });
+    postBooking({ ...values, canceled: false, id: uuidv4() });
     setRange(undefined);
     form.reset();
   };

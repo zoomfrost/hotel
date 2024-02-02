@@ -9,7 +9,7 @@ const useBookingService = () => {
 
   const getAllBookings = async (): Promise<IBooking[]> => {
     const res = await request({ url: `${_apiBase}/booking` });
-    return res;
+    return res.sort();
   };
 
   const getAllActiveBookings = async () => {
@@ -28,6 +28,7 @@ const useBookingService = () => {
           room: item.room,
           dateFrom: item.dateFrom,
           dateTo: item.dateTo,
+          id: item.id,
         };
       });
 

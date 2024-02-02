@@ -49,6 +49,7 @@ export interface IBooking {
   dateTo: Date;
   checkIn: string;
   canceled: boolean;
+  id: string;
 }
 
 export type ActiveBooking = Omit<IBooking, "canceled">;

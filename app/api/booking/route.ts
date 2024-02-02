@@ -1,9 +1,9 @@
 import { IBooking } from "@/types";
 
-let bookedRooms: IBooking[] = [
+export let bookedRooms: IBooking[] = [
   {
     name: "Alex",
-    canceled: true,
+    canceled: false,
     checkIn: "15:00",
     dateFrom: new Date("01.12.2024"),
     dateTo: new Date("01.14.2024"),

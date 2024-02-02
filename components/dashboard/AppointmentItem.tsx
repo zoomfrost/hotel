@@ -4,14 +4,6 @@ import { Optional } from "utility-types";
 
 import { IBooking } from "@/types";
 import { format } from "date-fns";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
 
 interface BookingItemProps {
   bookings: Optional<IBooking, "canceled">;
@@ -22,7 +14,6 @@ const AppointmentItem = memo(
   ({ bookings, setOpen, selectId }: BookingItemProps) => {
     const { checkIn, name, phone, dateFrom, dateTo, room, canceled, id } =
       bookings;
-    console.log("render item");
 
     return (
       <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-14 text-black">

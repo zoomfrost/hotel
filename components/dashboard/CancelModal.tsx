@@ -1,13 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../ui/dialog";
+import useBookingService from "@/services/BookingsService";
 
 interface IModalProps {
   selectedId: string;
@@ -15,6 +17,18 @@ interface IModalProps {
   setOpen: (state: boolean) => void;
 }
 const CancelModal = ({ selectedId, open, setOpen }: IModalProps) => {
+  const [btnDisabled, setBtnDisabled] = useState(false);
+  const [cancelStatus, setCancelStatus] = useState<boolean | null>(null);
+
+  const { cancelBooking } = useBookingService();
+
+  const handleCancelBooking = (id: string) => {
+    setBtnDisabled(true);
+    cancelBooking(id).then((data) => {
+      console.log(data);
+      setCancelStatus(true);
+    });
+  };
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogContent className="bg-white">
@@ -24,8 +38,16 @@ const CancelModal = ({ selectedId, open, setOpen }: IModalProps) => {
           </DialogTitle>
         </DialogHeader>
         <DialogFooter>
-          <Button>Ok</Button>
-          <Button onClick={() => setOpen(false)}>Close</Button>
+          <Button
+            onClick={() => handleCancelBooking(selectedId)}
+            disabled={btnDisabled}
+            variant={"outline"}
+          >
+            Ok
+          </Button>
+          <Button variant={"outline"} onClick={() => setOpen(false)}>
+            Close
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

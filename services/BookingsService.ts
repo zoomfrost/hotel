@@ -44,11 +44,20 @@ const useBookingService = () => {
     return res;
   };
 
+  const cancelBooking = async (id: string) => {
+    return await request({
+      url: `${_apiBase}/booking/${id}`,
+      method: "PATCH",
+      body: JSON.stringify({ canceled: true }),
+    });
+  };
+
   return {
     loading,
     getAllBookings,
     getAllActiveBookings,
     postBooking,
+    cancelBooking,
   };
 };
 

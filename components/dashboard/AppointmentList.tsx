@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 import { BookingContext } from "@/context/bookings/BookingsContext";
 
 import AppointmentItem from "./AppointmentItem";
@@ -27,12 +20,10 @@ const AppointmentList = memo(() => {
   const handleSelectId = useCallback((id: string) => {
     selectId(id);
   }, []);
-  const selectedMemoId = useMemo(() => selectedId, []);
 
   useEffect(() => {
     getActiveBookings();
   }, []);
-  console.log("render list");
 
   if (loadingStatus === "loading") {
     return <Skeleton className="h-[125px] w-[250px] rounded-xl" />;

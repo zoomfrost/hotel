@@ -46,7 +46,6 @@ const formSchema = z.object({
 });
 
 const BookingForm = () => {
-  const { pending } = useFormStatus();
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
@@ -197,13 +196,7 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <Button
-            disabled={pending}
-            className="disabled:bg-white-400"
-            variant={"outline"}
-            name="submit"
-            type="submit"
-          >
+          <Button variant={"outline"} name="submit" type="submit">
             Book
           </Button>
         </form>

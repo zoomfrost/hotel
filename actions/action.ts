@@ -1,24 +1,51 @@
 "use server";
 
-import { request } from "@/hooks/http.hook";
+import { Booking } from "@/models/booking";
+import { connectToDB } from "@/utils/database";
 import { revalidatePath } from "next/cache";
 
 export const addBooking = async (formData: any) => {
-  const res = await request({
-    url: "https://hotel-five-umber.vercel.app/api/booking",
-    method: "POST",
-    body: JSON.stringify(formData),
-  });
+  const {
+    name,
+    phone,
+    room,
+    dateFrom,
+    dateTo,
+    checkIn,
+    canceled,
+    id,
+    created,
+  } = await formData;
 
-  revalidatePath("/dashboard");
+  try {
+    await connectToDB();
+    const newBooking = new Booking({
+      name,
+      phone,
+      room,
+      dateFrom,
+      dateTo,
+      checkIn,
+      canceled,
+      id,
+      created,
+    });
+
+    await newBooking.save();
+    revalidatePath("/dashboard");
+  } catch (error) {
+    return new Response("Failed to create a new booking");
+  }
 };
 
 export const cancelBookingAction = async (id: string) => {
-  const res = await request({
-    url: `https://hotel-five-umber.vercel.app/api/booking?query=${id}`,
-    method: "PATCH",
-    body: JSON.stringify({ canceled: true }),
-  });
+  try {
+    await connectToDB();
 
-  revalidatePath("/dashboard");
+    // await Booking.findOneAndDelete({ id: id });
+    await Booking.findOneAndUpdate({ id: id }, { canceled: true });
+    revalidatePath("/dashboard");
+  } catch (error) {
+    return error;
+  }
 };

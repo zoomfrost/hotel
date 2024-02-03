@@ -1,12 +1,18 @@
 import BookingForm from "@/components/BookingForm";
 import AppointmentList from "@/components/dashboard/AppointmentList";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Booking } from "@/models/booking";
 import { ActiveBooking, IBooking } from "@/types";
+import { connectToDB } from "@/utils/database";
 import { differenceInDays } from "date-fns";
+import { Suspense } from "react";
 
 const DashboardHome = async () => {
-  const res = await fetch("https://hotel-five-umber.vercel.app/api/booking");
-  const data = await res.json();
-  const allActiveBookings: IBooking[] = data
+  await connectToDB();
+
+  const bookings = await Booking.find({});
+
+  const data = bookings
     .filter((item: IBooking) => {
       return !item.canceled && differenceInDays(item.dateFrom, new Date()) > 0;
     })
@@ -28,7 +34,9 @@ const DashboardHome = async () => {
         <BookingForm />
       </div>
       <div className="grid auto-rows-[180px] gap-y-6">
-        <AppointmentList allActiveBookings={allActiveBookings} />
+        <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
+          <AppointmentList allActiveBookings={data} />
+        </Suspense>
       </div>
     </section>
   );

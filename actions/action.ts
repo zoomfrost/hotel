@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 export const addBooking = async (formData: any) => {
   const res = await request({
-    url: "http://localhost:3000/api/booking",
+    url: "https://hotel-five-umber.vercel.app/api/booking",
     method: "POST",
     body: JSON.stringify(formData),
   });
@@ -15,7 +15,7 @@ export const addBooking = async (formData: any) => {
 
 export const cancelBookingAction = async (id: string) => {
   const res = await request({
-    url: `http://localhost:3000/api/booking?query=${id}`,
+    url: `https://hotel-five-umber.vercel.app/api/booking?query=${id}`,
     method: "PATCH",
     body: JSON.stringify({ canceled: true }),
   });

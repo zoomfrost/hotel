@@ -1,6 +1,7 @@
 import { IBooking } from "@/types";
+import { NextRequest } from "next/server";
 
-export let bookedRooms: IBooking[] = [
+let bookedRooms: IBooking[] = [
   {
     name: "Alex",
     canceled: false,
@@ -37,6 +38,20 @@ export let bookedRooms: IBooking[] = [
 ];
 
 export async function GET(request: Request) {
+  return new Response(JSON.stringify(bookedRooms));
+}
+
+export async function PATCH(request: NextRequest) {
+  const { canceled } = await request.json();
+  const searchParams = request.nextUrl.searchParams;
+  const query = searchParams.get("query");
+
+  bookedRooms.forEach((room) => {
+    if (room.id === query) {
+      room.canceled = canceled;
+    }
+  });
+
   return new Response(JSON.stringify(bookedRooms));
 }
 

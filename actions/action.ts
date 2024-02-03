@@ -15,7 +15,7 @@ export const addBooking = async (formData: any) => {
 
 export const cancelBookingAction = async (id: string) => {
   const res = await request({
-    url: `http://localhost:3000/api/booking/${id}`,
+    url: `http://localhost:3000/api/booking?query=${id}`,
     method: "PATCH",
     body: JSON.stringify({ canceled: true }),
   });

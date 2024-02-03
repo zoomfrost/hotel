@@ -4,7 +4,7 @@ import { ActiveBooking, IBooking } from "@/types";
 import { differenceInDays } from "date-fns";
 
 const DashboardHome = async () => {
-  const res = await fetch("http://localhost:3000/api/booking");
+  const res = await fetch("https://hotel-five-umber.vercel.app/api/booking");
   const data = await res.json();
   const allActiveBookings: IBooking[] = data
     .filter((item: IBooking) => {

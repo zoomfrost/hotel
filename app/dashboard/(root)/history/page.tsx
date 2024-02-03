@@ -3,7 +3,7 @@ import { IBooking } from "@/types";
 import React from "react";
 
 const History = async () => {
-  const res = await fetch("http://localhost:3000/api/booking");
+  const res = await fetch("https://hotel-five-umber.vercel.app/api/booking");
   const data = await res.json();
   const allBookings: IBooking[] = data.filter((item: IBooking) => {
     return !item.canceled;

@@ -10,6 +10,7 @@ export let bookedRooms: IBooking[] = [
     phone: "8911902632",
     room: "triple",
     id: "1",
+    created: new Date("01.14.2024"),
   },
   {
     name: "Bob",
@@ -20,6 +21,7 @@ export let bookedRooms: IBooking[] = [
     phone: "8911902632",
     room: "triple",
     id: "2",
+    created: new Date("01.14.2024"),
   },
   {
     name: "Alex",
@@ -30,6 +32,7 @@ export let bookedRooms: IBooking[] = [
     phone: "8911902632",
     room: "triple",
     id: "3",
+    created: new Date("01.14.2024"),
   },
 ];
 
@@ -38,11 +41,20 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { name, phone, room, dateFrom, dateTo, checkIn, canceled, id } =
-    await request.json();
+  const {
+    name,
+    phone,
+    room,
+    dateFrom,
+    dateTo,
+    checkIn,
+    canceled,
+    id,
+    created,
+  } = await request.json();
   bookedRooms = [
     ...bookedRooms,
-    { name, phone, room, dateFrom, dateTo, checkIn, canceled, id },
+    { name, phone, room, dateFrom, dateTo, checkIn, canceled, id, created },
   ];
 
   return new Response(JSON.stringify(request));

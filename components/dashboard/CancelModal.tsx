@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import useBookingService from "@/services/BookingsService";
+import { cancelBookingAction } from "@/actions/action";
 
 interface IModalProps {
   selectedId: string;
@@ -18,24 +18,19 @@ interface IModalProps {
 }
 const CancelModal = ({ selectedId, open, setOpen }: IModalProps) => {
   const [btnDisabled, setBtnDisabled] = useState(false);
-  const [cancelStatus, setCancelStatus] = useState<boolean | null>(null);
-
-  const { cancelBooking } = useBookingService();
 
   const handleCancelBooking = (id: string) => {
     setBtnDisabled(true);
-    cancelBooking(id).then((data) => {
-      console.log(data);
-      setCancelStatus(true);
-    });
+    cancelBookingAction(id);
+
+    setTimeout(() => setOpen(false), 500);
+    setBtnDisabled(false);
   };
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogContent className="bg-white">
         <DialogHeader>
-          <DialogTitle>
-            Are you absolutely to delete this booking {selectedId}
-          </DialogTitle>
+          <DialogTitle>Are you absolutely to delete this booking?</DialogTitle>
         </DialogHeader>
         <DialogFooter>
           <Button

@@ -1,15 +1,9 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import { IBooking } from "@/types";
 import AppointmentItem from "./AppointmentItem";
-import { BookingContext } from "@/context/bookings/BookingsContext";
 
-const HistoryList = () => {
-  const { allBookings, getBookings } = useContext(BookingContext);
-
-  useEffect(() => {
-    getBookings();
-  }, []);
+const HistoryList = ({ allBookings }: { allBookings: IBooking[] }) => {
   return (
     <>
       {/* {allBookings.map((item, i) => (

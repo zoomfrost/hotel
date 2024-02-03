@@ -12,9 +12,17 @@ interface BookingItemProps {
 }
 const AppointmentItem = memo(
   ({ bookings, setOpen, selectId }: BookingItemProps) => {
-    const { checkIn, name, phone, dateFrom, dateTo, room, canceled, id } =
-      bookings;
-
+    const {
+      checkIn,
+      name,
+      phone,
+      dateFrom,
+      dateTo,
+      room,
+      canceled,
+      id,
+      created,
+    } = bookings;
     return (
       <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-14 text-black">
         <div>
@@ -30,6 +38,8 @@ const AppointmentItem = memo(
           <span>Phone: {phone}</span>
           <br />
           <span>Check in: {checkIn}</span>
+          <br />
+          <span>Created {format(created, "dd.MM.yyyy  HH.mm.ss")} </span>
         </div>
         {!canceled ? (
           <Button

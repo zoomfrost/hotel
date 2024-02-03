@@ -28,7 +28,8 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import useBookingService from "@/services/BookingsService";
+import { addBooking } from "@/actions/action";
+import { useFormStatus } from "react-dom";
 
 const formSchema = z.object({
   name: z
@@ -45,7 +46,7 @@ const formSchema = z.object({
 });
 
 const BookingForm = () => {
-  const { postBooking } = useBookingService();
+  const { pending } = useFormStatus();
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
@@ -77,7 +78,12 @@ const BookingForm = () => {
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    postBooking({ ...values, canceled: false, id: uuidv4() });
+    addBooking({
+      ...values,
+      canceled: false,
+      id: uuidv4(),
+      created: new Date(),
+    });
     setRange(undefined);
     form.reset();
   };
@@ -191,7 +197,13 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <Button variant={"outline"} name="submit" type="submit">
+          <Button
+            disabled={pending}
+            className="disabled:bg-white-400"
+            variant={"outline"}
+            name="submit"
+            type="submit"
+          >
             Book
           </Button>
         </form>

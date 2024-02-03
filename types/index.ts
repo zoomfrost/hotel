@@ -1,5 +1,4 @@
 import { StaticImageData } from "next/image";
-import { DateRange } from "react-day-picker";
 
 interface IHeaderData {
   name: string;
@@ -28,7 +27,6 @@ export interface IBookingRules {
 }
 
 type HTTPRequestMethods = "GET" | "POST" | "PATCH" | "DELETE";
-export type loadingStatusOptions = "idle" | "loading" | "error";
 
 interface IHTTPHeaders {
   [key: string]: string;
@@ -50,6 +48,7 @@ export interface IBooking {
   checkIn: string;
   canceled: boolean;
   id: string;
+  created: Date;
 }
 
 export type ActiveBooking = Omit<IBooking, "canceled">;

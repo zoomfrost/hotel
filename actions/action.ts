@@ -42,8 +42,8 @@ export const cancelBookingAction = async (id: string) => {
   try {
     await connectToDB();
 
-    // await Booking.findOneAndDelete({ id: id });
-    await Booking.findOneAndUpdate({ id: id }, { canceled: true });
+    await Booking.findOneAndDelete({ id: id });
+    // await Booking.findOneAndUpdate({ id: id }, { canceled: true });
     revalidatePath("/dashboard");
   } catch (error) {
     return error;

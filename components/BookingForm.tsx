@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useState } from "react";
 import { DateRange } from "react-day-picker";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
 import { v4 as uuidv4 } from "uuid";
@@ -70,6 +70,8 @@ const BookingForm = () => {
     },
   });
 
+  const { isSubmitSuccessful } = useFormState(form);
+
   const onSelectDays = (e: any) => {
     setRange(e);
     form.setValue("dateFrom", e.from);
@@ -85,6 +87,9 @@ const BookingForm = () => {
     });
     setRange(undefined);
     form.reset();
+    setTimeout(() => {
+      document.getElementById("success")?.remove();
+    }, 2500);
   };
 
   return (
@@ -196,9 +201,15 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <Button variant={"outline"} name="submit" type="submit">
+          <Button variant={"outline"} type="submit">
             Book
           </Button>
+          <br />
+          {isSubmitSuccessful ? (
+            <p id="success" className="text-red-600">
+              Booked successull
+            </p>
+          ) : null}
         </form>
       </Form>
     </>

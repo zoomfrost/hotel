@@ -22,7 +22,7 @@ const MobileNav = ({ links }: { links: IHeaderData[] }) => {
       {isDesktop ? null : (
         <Drawer open={open} onOpenChange={setOpen} direction="left">
           <DrawerTrigger className="select-none">
-            <HamburgerMenuIcon height={30} width={30} />
+            <HamburgerMenuIcon className="select-none" height={30} width={30} />
           </DrawerTrigger>
           <DrawerContent className="bg-amber-50 w-3/5 h-full rounded-none">
             <DrawerHeader className="block absolute top-3 right-3 h-5 p-0">

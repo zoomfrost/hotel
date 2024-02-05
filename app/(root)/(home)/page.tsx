@@ -6,7 +6,6 @@ import Description from "@/components/Description";
 import PhotoGallery from "@/components/PhotoGallery";
 import InTouch from "@/components/InTouch";
 import HotelCarousel from "@/components/HotelCarousel";
-import Promo from "@/components/Promo";
 import Container from "@/components/ui/container";
 
 const Home = () => {

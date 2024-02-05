@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import React from "react";
-import promo from "@/public/promo.jpg";
+import promo from "@/public/promo-min.jpg";
 import { IPromoProps } from "@/types";
 
 const Promo = ({ title, isHomePage }: IPromoProps) => {

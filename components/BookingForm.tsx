@@ -29,7 +29,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { addBooking } from "@/actions/action";
-import { useFormStatus } from "react-dom";
 
 const formSchema = z.object({
   name: z
@@ -70,7 +69,7 @@ const BookingForm = () => {
     },
   });
 
-  const { isSubmitSuccessful } = useFormState(form);
+  const { isSubmitting, isSubmitSuccessful } = useFormState(form);
 
   const onSelectDays = (e: any) => {
     setRange(e);
@@ -78,8 +77,8 @@ const BookingForm = () => {
     form.setValue("dateTo", e.to);
   };
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    addBooking({
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const response = await addBooking({
       ...values,
       canceled: false,
       id: uuidv4(),
@@ -202,7 +201,7 @@ const BookingForm = () => {
             )}
           />
           <Button variant={"outline"} type="submit">
-            Book
+            {isSubmitting ? "Booking..." : "Book"}
           </Button>
           <br />
           {isSubmitSuccessful ? (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import promo from "@/public/promo-min.jpg";
+import promo from "@/public/promo.jpg";
 import { IPromoProps } from "@/types";
 
 const Promo = ({ title, isHomePage }: IPromoProps) => {

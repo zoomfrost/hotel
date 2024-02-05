@@ -6,6 +6,17 @@ import hamburger from "@/public/hamburger-menu.svg";
 import { IHeaderDataProps } from "@/types";
 
 import AlertForm from "./AlertForm";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import MobileNav from "./MobileNav";
 
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (
@@ -28,15 +39,9 @@ const Header = ({ links, isDashboard }: IHeaderDataProps) => {
               </li>
             ))}
           </ul>
-          <div className="flex flex-row gap-x-6 max-xs:gap-x-2">
+          <div className="flex flex-row gap-x-7 max-xs:gap-x-2">
             {!isDashboard && <AlertForm />}
-            <Image
-              src={hamburger}
-              width={30}
-              height={30}
-              alt="Hamburger menu"
-              className="block md:hidden"
-            />
+            <MobileNav links={links} />
           </div>
         </div>
       </nav>

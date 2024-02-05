@@ -1,10 +1,11 @@
 "use server";
 
 import { Booking } from "@/models/booking";
+import { IBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
 import { revalidatePath } from "next/cache";
 
-export const addBooking = async (formData: any) => {
+export const addBooking = async (formData: IBooking) => {
   const {
     name,
     phone,
@@ -16,6 +17,15 @@ export const addBooking = async (formData: any) => {
     id,
     created,
   } = await formData;
+  // const name = formData.get("name");
+  // const phone = formData.get("phone");
+  // const room = formData.get("room");
+  // const dateFrom = formData.get("dateFrom");
+  // const dateTo = formData.get("dateTo");
+  // const checkIn = formData.get("checkIn");
+  // const canceled = formData.get("canceled");
+  // const id = formData.get("id");
+  // const created = formData.get("created");
 
   try {
     await connectToDB();

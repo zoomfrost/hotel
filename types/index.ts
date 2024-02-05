@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 
-interface IHeaderData {
+export interface IHeaderData {
   name: string;
   link: string;
   id: number;

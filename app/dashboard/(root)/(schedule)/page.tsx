@@ -12,7 +12,7 @@ const DashboardHome = async () => {
 
   const bookings = await Booking.find({});
 
-  const data = bookings
+  const allActiveBookings = bookings
     .filter((item: IBooking) => {
       return !item.canceled && differenceInDays(item.dateFrom, new Date()) > 0;
     })
@@ -35,7 +35,7 @@ const DashboardHome = async () => {
       </div>
       <div className="grid auto-rows-[180px] gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
-          <AppointmentList allActiveBookings={data} />
+          <AppointmentList allActiveBookings={allActiveBookings} />
         </Suspense>
       </div>
     </section>

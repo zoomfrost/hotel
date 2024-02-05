@@ -1,6 +1,7 @@
 import Description from "@/components/Description";
 import React from "react";
 import descrPhoto from "@/public/palace-bridge.jpeg";
+import Container from "@/components/ui/container";
 
 const Area = () => {
   const descrArr = [
@@ -26,9 +27,11 @@ const Area = () => {
     },
   ];
   return (
-    <section>
-      <Description isHomePage={false} photos={descrArr} />
-    </section>
+    <Container title="area">
+      <section>
+        <Description isHomePage={false} photos={descrArr} />
+      </section>
+    </Container>
   );
 };
 

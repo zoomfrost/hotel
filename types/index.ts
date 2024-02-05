@@ -11,6 +11,11 @@ export interface IHeaderDataProps {
   isDashboard: boolean;
 }
 
+export interface IPromoProps {
+  title: string;
+  isHomePage?: boolean;
+}
+
 interface IDescriptionData {
   photo: StaticImageData;
   heading: string;

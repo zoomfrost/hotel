@@ -1,5 +1,6 @@
 import BookingForm from "@/components/BookingForm";
 import Rules from "@/components/Rules";
+import Container from "@/components/ui/container";
 
 const Booking = () => {
   const rules = [
@@ -22,12 +23,14 @@ const Booking = () => {
     },
   ];
   return (
-    <section>
-      <div className="grid grid-cols-2 max-md:grid-cols-1 justify-items-center">
-        <Rules rules={rules} />
-        <BookingForm />
-      </div>
-    </section>
+    <Container title="Booking">
+      <section>
+        <div className="grid grid-cols-2 max-md:grid-cols-1 justify-items-center">
+          <Rules rules={rules} />
+          <BookingForm />
+        </div>
+      </section>
+    </Container>
   );
 };
 

@@ -6,6 +6,8 @@ import Description from "@/components/Description";
 import PhotoGallery from "@/components/PhotoGallery";
 import InTouch from "@/components/InTouch";
 import HotelCarousel from "@/components/HotelCarousel";
+import Promo from "@/components/Promo";
+import Container from "@/components/ui/container";
 
 const Home = () => {
   const descrArr = [
@@ -16,13 +18,15 @@ const Home = () => {
     },
   ];
   return (
-    <section className="w-full">
-      <Description isHomePage={true} photos={descrArr} />
-      <PhotoGallery />
-      <Facilities />
-      <HotelCarousel />
-      <InTouch />
-    </section>
+    <Container isHomePage title="Hotel in the center of Saint-Petesrburg">
+      <section className="w-full">
+        <Description isHomePage={true} photos={descrArr} />
+        <PhotoGallery />
+        <Facilities />
+        <HotelCarousel />
+        <InTouch />
+      </section>
+    </Container>
   );
 };
 

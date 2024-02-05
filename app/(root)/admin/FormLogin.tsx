@@ -30,7 +30,7 @@ const FormLogin = () => {
       password: values.password,
       redirect: false,
     });
-
+    form.reset;
     if (!response?.error) {
       router.push("/dashboard");
       router.refresh();
@@ -42,7 +42,7 @@ const FormLogin = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 p-4 w-3/4 relative pb-7 max-md:w-4/5"
+          className="space-y-8  p-4 w-3/4 relative pb-7 max-md:w-4/5"
         >
           <FormField
             control={form.control}

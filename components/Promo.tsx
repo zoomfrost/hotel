@@ -16,8 +16,10 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
         <Image
           priority
           fill={true}
+          sizes="100vw"
+          placeholder="blur"
           className=" h-full w-fulls brightness-50 object-cover"
-          src="https://i.postimg.cc/htmgFC56/promo.jpg"
+          src={promo}
           alt="promo photo"
         />
         <h1 className="max-xs:hidden xs:text-lg sm:heading3 heading1 uppercase font-light  text-center top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 text-white absolute">

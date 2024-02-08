@@ -17,6 +17,7 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
           priority
           fill={true}
           sizes="100vw"
+          quality={80}
           placeholder="blur"
           className=" h-full w-fulls brightness-50 object-cover"
           src={promo}

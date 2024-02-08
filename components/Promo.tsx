@@ -7,7 +7,7 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
   return (
     <section className="nav-padding w-full relative ">
       <div
-        className={`w-full h-[150px] ${
+        className={`w-full h-[150px]  ${
           isHomePage
             ? " xs:h-[200px] sm:h-[300px] md:h-[400px] lg:h-[600px]"
             : " lg:h-[300px]"
@@ -19,8 +19,9 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
           sizes="100vw"
           quality={60}
           placeholder="blur"
+          blurDataURL="loading"
           className=" h-full w-fulls brightness-50 object-cover"
-          src={promo}
+          src="https://i.postimg.cc/htmgFC56/promo.jpg"
           alt="promo photo"
         />
         <h1 className="max-xs:hidden xs:text-lg sm:heading3 heading1 uppercase font-light  text-center top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 text-white absolute">

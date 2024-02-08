@@ -27,14 +27,20 @@ const Faq = () => {
     },
   ];
   return (
-    <Accordion type="multiple" className="w-3/4 gap-y-9 flex flex-col">
+    <Accordion
+      type="multiple"
+      className="w-full md:w-3/4 gap-y-9 flex flex-col"
+    >
       {rules.map((rule, i) => (
         <AccordionItem key={i} className="" value={`item-${i}`}>
-          <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 heading4 text-main">
+          <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 text-xs xs:text-sm  text-main">
             {rule.heading}
           </AccordionTrigger>
           {rule.rules.map((item, i) => (
-            <AccordionContent key={`content-${i}`} className="p-3 text-lg">
+            <AccordionContent
+              key={`content-${i}`}
+              className="p-3 text-sm md:text-lg font-semibold"
+            >
               {item}
             </AccordionContent>
           ))}

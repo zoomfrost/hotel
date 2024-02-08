@@ -10,7 +10,7 @@ const AlertForm = () => {
           Book Now
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-amber-50 flex justify-center">
+      <DialogContent className="max-xs:w-[90%] bg-amber-50 flex justify-center">
         <BookingForm />
       </DialogContent>
     </Dialog>

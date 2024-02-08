@@ -21,26 +21,6 @@
 }
 
 @layer utilities {
-  .paddle-checkout {
-    @apply min-h-screen w-full py-10 md:py-20 lg:w-1/2;
-  }
-
-  .hero-height {
-    @apply min-h-[calc(100vh-100px)];
-  }
-
-  .heading1 {
-    @apply text-[64px] leading-[67.2px] font-bold;
-  }
-
-  .heading2 {
-    @apply font-bold text-[48px] leading-[50.4px];
-  }
-
-  .heading3 {
-    @apply font-bold sm:text-[32px] sm:leading-[33.6px] text-[28px] leading-[40px] tracking-[-0.25%];
-  }
-
   .base-regular {
     @apply text-[24px] font-normal leading-[31.2px];
   }
@@ -83,10 +63,6 @@
 
   .body-text {
     @apply text-[16px] leading-[22px] font-normal;
-  }
-
-  .nav-padding {
-    @apply pt-[98px];
   }
 
   .paddings {

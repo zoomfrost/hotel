@@ -106,7 +106,7 @@ const BookingForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 p-4 w-3/4 relative pb-7"
+          className="space-y-8 p-4 w-3/4 relative pb-7 max-xs:text-sm"
         >
           <FormField
             control={form.control}
@@ -142,11 +142,11 @@ const BookingForm = () => {
                 <FormLabel>Date</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <FormControl className="">
+                    <FormControl>
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "w-full pl-3 text-left font-normal",
+                          "w-full pl-3 h-auto whitespace-normal text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >

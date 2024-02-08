@@ -5,7 +5,7 @@ import { IPromoProps } from "@/types";
 
 const Promo = ({ title, isHomePage }: IPromoProps) => {
   return (
-    <section className="nav-padding w-full relative ">
+    <section className="mt-[122px] w-full relative ">
       <div
         className={`w-full h-[150px]  ${
           isHomePage
@@ -15,16 +15,16 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
       >
         <Image
           priority
-          fill={true}
-          sizes="100vw"
           quality={60}
           placeholder="blur"
-          blurDataURL="loading"
-          className=" h-full w-fulls brightness-50 object-cover"
-          src="https://i.postimg.cc/htmgFC56/promo.jpg"
+          className=" h-full w-full brightness-50 object-cover"
+          src={promo}
           alt="promo photo"
         />
-        <h1 className="max-xs:hidden xs:text-lg sm:heading3 heading1 uppercase font-light  text-center top-1/2 translate-y-1/2 right-1/2 translate-x-1/2 text-white absolute">
+        <h1
+          className="max-xs:hidden xs:text-lg sm:text-xl md:text-2xl lg:text-4xl uppercase font-light  text-center top-1/2 
+        -translate-y-1/2 right-1/2 translate-x-1/2 text-white absolute"
+        >
           {title}
         </h1>
       </div>

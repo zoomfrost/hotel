@@ -4,12 +4,15 @@ const Rules = ({ rules }: { rules: IBookingRules[] }) => {
   return (
     <div className="">
       {rules.map((item, i) => (
-        <div key={i} className="flex flex-col gap-y-3 mt-7">
-          <h4 className="heading4 text-main">{item.heading}</h4>
+        <div key={i} className="flex flex-col gap-y-3 mt-7 p-7 xs:p-5">
+          <h4 className="text-xl font-semibold text-main">{item.heading}</h4>
           <span className="h-[1px] w-full bg-main block"></span>
           <ul>
             {item.rules.map((rule, i) => (
-              <li key={i} className="list-disc text-lg">
+              <li
+                key={i}
+                className="list-disc text-black-100 text-lg font-extralight"
+              >
                 {rule}
               </li>
             ))}

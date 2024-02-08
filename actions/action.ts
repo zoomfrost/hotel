@@ -63,3 +63,7 @@ export const deleteBookingAction = async (id: string) => {
     return error;
   }
 };
+
+export async function getData<T>(data: T[]) {
+  return data;
+}

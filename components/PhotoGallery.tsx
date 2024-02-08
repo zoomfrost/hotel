@@ -1,11 +1,12 @@
-import kazan from "@/public/kazan.jpeg";
-import isaaks from "@/public/isaaks.jpeg";
-import bridge from "@/public/palace-bridge.jpeg";
 import Image from "next/image";
-import { CarouselContent } from "./ui/carousel";
+import { getData } from "@/actions/action";
 
-const PhotoGallery = () => {
-  const photoArr = [kazan, isaaks, bridge];
+const PhotoGallery = async () => {
+  const photoArr = await getData([
+    "https://i.postimg.cc/7PXZXQFN/kazan.jpg",
+    "https://i.postimg.cc/k5rJBrS7/isaaks.jpg",
+    "https://i.postimg.cc/3JV7cMn2/palace-bridge.jpg",
+  ]);
   return (
     <div className="flex items-center justify-evenly gap-x-10 lg:gap-x-20 max-md:flex-col max-md:gap-y-4">
       {photoArr.map((item, i) => (

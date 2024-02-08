@@ -17,7 +17,7 @@ export interface IPromoProps {
 }
 
 interface IDescriptionData {
-  photo: StaticImageData;
+  photo: string | StaticImageData;
   heading: string;
   text: string;
 }

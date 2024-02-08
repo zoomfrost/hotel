@@ -3,13 +3,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "@/models/booking";
 import { IBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
+import { differenceInDays } from "date-fns";
 import React, { Suspense } from "react";
 
 const History = async () => {
   await connectToDB();
 
-  const bookings = await Booking.find({});
-
+  const bookings = await Booking.find({ canceled: true });
   const data = bookings.map((item: IBooking) => {
     return {
       name: item.name,
@@ -28,7 +28,7 @@ const History = async () => {
       <div className="grid grid-rows-2 gap-y-12"></div>
       <div className="grid auto-rows-[180px] gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
-          <HistoryList allBookings={data} />
+          <HistoryList bookings={data} />
         </Suspense>
       </div>
     </section>

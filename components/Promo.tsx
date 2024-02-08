@@ -15,7 +15,7 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
       >
         <Image
           priority
-          className=" h-full brightness-50 object-cover"
+          className=" h-full w-fulls brightness-50 object-cover"
           src={promo}
           alt="promo photo"
         />

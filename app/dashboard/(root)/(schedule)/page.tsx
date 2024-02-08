@@ -1,5 +1,6 @@
 import BookingForm from "@/components/BookingForm";
-import AppointmentList from "@/components/dashboard/AppointmentList";
+import BookingList from "@/components/dashboard/BookingList";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "@/models/booking";
 import { ActiveBooking, IBooking } from "@/types";
@@ -10,11 +11,11 @@ import { Suspense } from "react";
 const DashboardHome = async () => {
   await connectToDB();
 
-  const bookings = await Booking.find({});
+  const bookings = await Booking.find({ canceled: false });
 
   const allActiveBookings = bookings
     .filter((item: IBooking) => {
-      return !item.canceled && differenceInDays(item.dateFrom, new Date()) > 0;
+      return differenceInDays(item.dateFrom, new Date()) > 0;
     })
     .map((item: ActiveBooking) => {
       return {
@@ -35,7 +36,7 @@ const DashboardHome = async () => {
       </div>
       <div className="grid auto-rows-[180px] gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
-          <AppointmentList allActiveBookings={allActiveBookings} />
+          <BookingList allActiveBookings={allActiveBookings} />
         </Suspense>
       </div>
     </section>

@@ -9,34 +9,41 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
-import { cancelBookingAction } from "@/actions/action";
-
+import ErrorNotification from "../ErrorNotification";
 interface IModalProps {
   selectedId: string;
   open: boolean;
   setOpen: (state: boolean) => void;
+  action: (id: string) => Promise<unknown>;
 }
-const CancelModal = ({ selectedId, open, setOpen }: IModalProps) => {
+const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
   const [btnDisabled, setBtnDisabled] = useState(false);
+  const [cancelStatus, setCancelStatus] = useState<boolean | null>(null);
 
   const handleCancelBooking = (id: string) => {
     setBtnDisabled(true);
-    cancelBookingAction(id);
+    setCancelStatus(null);
+    action(id)
+      .then(() => setCancelStatus(true))
+      .catch(() => {
+        setCancelStatus(false);
+        setBtnDisabled(false);
+      });
 
-    setTimeout(() => setOpen(false), 500);
     setBtnDisabled(false);
   };
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogContent className="bg-white">
         <DialogHeader>
-          <DialogTitle>Are you absolutely to delete this booking?</DialogTitle>
+          <DialogTitle>Удалить/отменить бронирование?</DialogTitle>
         </DialogHeader>
         <DialogFooter>
           <Button
             onClick={() => handleCancelBooking(selectedId)}
             disabled={btnDisabled}
             variant={"outline"}
+            className="disabled:bg-white-400"
           >
             Ok
           </Button>
@@ -44,6 +51,9 @@ const CancelModal = ({ selectedId, open, setOpen }: IModalProps) => {
             Close
           </Button>
         </DialogFooter>
+        <div className="text-center">
+          <ErrorNotification status={cancelStatus} />
+        </div>
       </DialogContent>
     </Dialog>
   );

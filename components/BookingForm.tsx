@@ -29,6 +29,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { addBooking } from "@/actions/action";
+import ErrorNotification from "./ErrorNotification";
 
 const formSchema = z.object({
   name: z
@@ -45,6 +46,8 @@ const formSchema = z.object({
 });
 
 const BookingForm = () => {
+  const [bookingStatus, setBookingStatus] = useState<boolean | null>(null);
+
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
@@ -69,7 +72,7 @@ const BookingForm = () => {
     },
   });
 
-  const { isSubmitting, isSubmitSuccessful } = useFormState(form);
+  const { isSubmitting } = useFormState(form);
 
   const onSelectDays = (e: any) => {
     setRange(e);
@@ -78,17 +81,24 @@ const BookingForm = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setBookingStatus(null);
     const response = await addBooking({
       ...values,
       canceled: false,
       id: uuidv4(),
       created: new Date(),
-    });
+    })
+      .then(() => {
+        setBookingStatus(true);
+        setTimeout(() => {
+          setBookingStatus(null);
+        }, 2500);
+      })
+      .catch(() => {
+        setBookingStatus(false);
+      });
     setRange(undefined);
     form.reset();
-    setTimeout(() => {
-      document.getElementById("success")?.remove();
-    }, 2500);
   };
 
   return (
@@ -124,7 +134,6 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="dateFrom"
@@ -200,15 +209,16 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <Button variant={"outline"} type="submit">
+          <Button
+            className="disabled:bg-amber-100"
+            disabled={isSubmitting}
+            variant={"outline"}
+            type="submit"
+          >
             {isSubmitting ? "Booking..." : "Book"}
           </Button>
           <br />
-          {isSubmitSuccessful ? (
-            <p id="success" className="text-red-600">
-              Booked successull
-            </p>
-          ) : null}
+          <ErrorNotification status={bookingStatus} />.
         </form>
       </Form>
     </>

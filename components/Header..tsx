@@ -2,20 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import logo from "@/public/logo.png";
-import hamburger from "@/public/hamburger-menu.svg";
 import { IHeaderDataProps } from "@/types";
 
 import AlertForm from "./AlertForm";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "./ui/drawer";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+
 import MobileNav from "./MobileNav";
 
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {

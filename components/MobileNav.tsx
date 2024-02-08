@@ -9,7 +9,6 @@ import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "./ui/drawer";
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";

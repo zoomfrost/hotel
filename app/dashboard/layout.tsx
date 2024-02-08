@@ -16,9 +16,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     },
   ];
   return (
-    <div className="bg-fuchsia-50">
+    <div className="bg-fuchsia-50 ">
       <Header isDashboard={true} links={links} />
-      <main className="flex-center mt-6 max-w-screen-2xl paddings mx-auto w-full flex-col">
+      <main className="flex-center mt-6 max-w-screen-2xl min-h-screen paddings mx-auto  w-full flex-col">
         {children}
       </main>
       <Footer />

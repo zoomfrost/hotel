@@ -8,7 +8,7 @@ const handler = NextAuth({
     strategy: "jwt",
   },
   jwt: {
-    maxAge: 60 * 60,
+    maxAge: 60 * 60 * 24,
   },
   pages: {
     signIn: "/admin",

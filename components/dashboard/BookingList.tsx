@@ -2,12 +2,13 @@
 
 import { memo, useCallback, useState } from "react";
 
-import AppointmentItem from "./AppointmentItem";
+import AppointmentItem from "./BookingItem";
 
 import CancelModal from "./CancelModal";
 import { ActiveBooking } from "@/types";
+import { cancelBookingAction } from "@/actions/action";
 
-const AppointmentList = memo(
+const BookingList = memo(
   ({ allActiveBookings }: { allActiveBookings: ActiveBooking[] }) => {
     const [open, setOpen] = useState(false);
     const [selectedId, selectId] = useState("0");
@@ -21,7 +22,7 @@ const AppointmentList = memo(
     }, []);
     return (
       <>
-        {allActiveBookings.map((item, i) => (
+        {allActiveBookings.map((item) => (
           <AppointmentItem
             key={item.id}
             bookings={item}
@@ -32,6 +33,7 @@ const AppointmentList = memo(
 
         <CancelModal
           open={open}
+          action={cancelBookingAction}
           selectedId={selectedId}
           setOpen={handleSetOpen}
         />
@@ -40,4 +42,4 @@ const AppointmentList = memo(
   }
 );
 
-export default AppointmentList;
+export default BookingList;

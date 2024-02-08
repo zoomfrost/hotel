@@ -10,7 +10,7 @@ interface BookingItemProps {
   setOpen: (open: boolean) => void;
   selectId: (id: string) => void;
 }
-const AppointmentItem = memo(
+const BookingItem = memo(
   ({ bookings, setOpen, selectId }: BookingItemProps) => {
     const {
       checkIn,
@@ -41,7 +41,22 @@ const AppointmentItem = memo(
           <br />
           <span>Created {format(created, "dd.MM.yyyy  HH.mm.ss")} </span>
         </div>
-        {!canceled ? (
+        {!!canceled ? (
+          <>
+            <Button
+              onClick={() => {
+                setOpen(true);
+                selectId(id);
+              }}
+              className="absolute w-16 h-5 right-4 bottom-2 px-1 py-0 bg-fuchsia-600 cursor-pointer font-semibold transition-all hover:bg-fuchsia-900"
+            >
+              Удалить
+            </Button>
+            <div className="absolute left-4 bottom-1 w-24 h-5 bg-rose-400 text-center px-1">
+              Отменено
+            </div>
+          </>
+        ) : (
           <Button
             onClick={() => {
               setOpen(true);
@@ -49,16 +64,12 @@ const AppointmentItem = memo(
             }}
             className="absolute w-16 h-5 right-4 bottom-2 px-1 py-0 bg-fuchsia-600 cursor-pointer font-semibold transition-all hover:bg-fuchsia-900"
           >
-            Cancel
+            Отменить
           </Button>
-        ) : (
-          <div className="absolute left-4 bottom-2 w-20 h-5 bg-stone-500 text-center px-1">
-            Canceled
-          </div>
         )}
       </div>
     );
   }
 );
 
-export default AppointmentItem;
+export default BookingItem;

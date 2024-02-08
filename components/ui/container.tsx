@@ -14,7 +14,7 @@ const Container = ({
   return (
     <>
       <Promo isHomePage={isHomePage} title={title} />
-      <main className="max-w-screen-2xl mx-auto paddings w-full ">
+      <main className="max-w-screen-2xl mx-auto h-full paddings w-full ">
         {children}
       </main>
     </>

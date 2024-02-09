@@ -10,7 +10,7 @@ const Description = ({ photos, isHomePage }: IDescriptionDataProps) => {
           key={i}
           className={` flex ${
             i % 2 === 0 ? "flex-row-reverse" : ""
-          } max-md:flex-col  max-md:gap-y-5 justify-items-center max-sm:px-6 max-sm:gap-y-6 gap-x-10 mb-36 px-8`}
+          } max-md:flex-col  max-md:gap-y-5 justify-items-center max-sm:px-6 max-sm:gap-y-6 gap-x-10 mb-24 px-8`}
         >
           <div className="grid auto-rows-auto max-md:text-center max-md:justify-items-center  max-md:text-sm text-md gap-y-4 items-center">
             <h2 className="font-semibold max-md:text-2xl text-4xl ">

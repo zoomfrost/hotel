@@ -47,13 +47,18 @@ export interface IRequestConfig {
 export interface IBooking {
   name: string;
   phone: string;
-  room: "double" | "triple";
+  room: string;
   dateFrom: Date;
   dateTo: Date;
   checkIn: string;
   canceled: boolean;
   id: string;
   created: Date;
+}
+
+export interface BookingsFromDB extends IBooking {
+  _id?: string;
+  __v?: number;
 }
 
 export type ActiveBooking = Omit<IBooking, "canceled">;

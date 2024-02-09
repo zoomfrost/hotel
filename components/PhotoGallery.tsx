@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { getData } from "@/actions/action";
 
 const PhotoGallery = async () => {
-  const photoArr = await getData([
+  const photoArr = [
     "https://i.postimg.cc/7PXZXQFN/kazan.jpg",
     "https://i.postimg.cc/k5rJBrS7/isaaks.jpg",
     "https://i.postimg.cc/3JV7cMn2/palace-bridge.jpg",
-  ]);
+  ];
   return (
     <div className="flex items-center justify-evenly gap-x-10 lg:gap-x-20 max-md:flex-col max-md:gap-y-4">
       {photoArr.map((item, i) => (

@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { useState } from "react";
-import { DateRange } from "react-day-picker";
+import { useEffect, useState } from "react";
+import { DateRange, Matcher } from "react-day-picker";
 import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -28,8 +28,9 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { addBooking } from "@/actions/action";
+import { addBooking, getBookings } from "@/actions/action";
 import ErrorNotification from "./ErrorNotification";
+import { BookingsFromDB } from "@/types";
 
 const formSchema = z.object({
   name: z
@@ -38,8 +39,13 @@ const formSchema = z.object({
       message: "Name must be min 2 ",
     })
     .max(50),
-  room: z.enum(["double", "triple"]),
-  phone: z.string().min(6).max(12),
+  room: z.string(),
+  phone: z
+    .string()
+    .regex(
+      /^\++[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}/,
+      "Неверный формат номера"
+    ),
   checkIn: z.string(),
   dateFrom: z.date(),
   dateTo: z.date(),
@@ -51,6 +57,33 @@ const BookingForm = () => {
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
 
+  const [disabledDays, setDisabledDays] = useState<
+    Matcher | Matcher[] | undefined
+  >(undefined);
+
+  function createDisabledDays(array: BookingsFromDB[]) {
+    const days = array.map((booking) => {
+      return { from: booking.dateFrom, to: booking.dateTo };
+    });
+
+    setDisabledDays(days);
+  }
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      room: undefined,
+      checkIn: "",
+      dateFrom: new Date(),
+      dateTo: new Date(),
+    },
+  });
+
+  const { isSubmitting } = useFormState(form);
+  const typeOfRooms = form.getValues("room");
+
   let days = "";
   if (range?.from) {
     if (!range.to) {
@@ -60,19 +93,9 @@ const BookingForm = () => {
     }
   }
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      room: "double",
-      checkIn: "",
-      dateFrom: new Date(),
-      dateTo: new Date(),
-    },
-  });
-
-  const { isSubmitting } = useFormState(form);
+  // useEffect(() => {
+  //   getBookings().then((data) => createDisabledDays(data as BookingsFromDB[]));
+  // }, [typeOfRooms, bookingStatus]);
 
   const onSelectDays = (e: any) => {
     setRange(e);
@@ -128,7 +151,7 @@ const BookingForm = () => {
               <FormItem>
                 <FormLabel>Phone</FormLabel>
                 <FormControl>
-                  <Input placeholder="+7..." {...field} />
+                  <Input placeholder="+79008007060" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -161,10 +184,13 @@ const BookingForm = () => {
                       selected={range}
                       onSelect={onSelectDays}
                       defaultMonth={pastMonth}
-                      initialFocus
                       modifiersClassNames={{
                         selected: "selected",
                       }}
+                      modifiersStyles={{
+                        disabled: { color: "red" },
+                      }}
+                      disabled={disabledDays}
                     />
                   </PopoverContent>
                 </Popover>
@@ -184,7 +210,10 @@ const BookingForm = () => {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a room you need" />
+                      <SelectValue
+                        defaultValue={field.value}
+                        placeholder="Select a room you need"
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-white">

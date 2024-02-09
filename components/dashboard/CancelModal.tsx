@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
+
 import ErrorNotification from "../ErrorNotification";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog";
 interface IModalProps {
   selectedId: string;
   open: boolean;
@@ -33,12 +34,12 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
     setBtnDisabled(false);
   };
   return (
-    <Dialog onOpenChange={setOpen} open={open}>
-      <DialogContent className="bg-white">
-        <DialogHeader>
-          <DialogTitle>Удалить/отменить бронирование?</DialogTitle>
-        </DialogHeader>
-        <DialogFooter>
+    <AlertDialog onOpenChange={setOpen} open={open}>
+      <AlertDialogContent className="bg-white">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Удалить/отменить бронирование?</AlertDialogTitle>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
           <Button
             onClick={() => handleCancelBooking(selectedId)}
             disabled={btnDisabled}
@@ -50,12 +51,12 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
           <Button variant={"outline"} onClick={() => setOpen(false)}>
             Close
           </Button>
-        </DialogFooter>
+        </AlertDialogFooter>
         <div className="text-center">
           <ErrorNotification status={cancelStatus} />
         </div>
-      </DialogContent>
-    </Dialog>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

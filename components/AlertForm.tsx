@@ -1,19 +1,32 @@
+"use client";
+
 import { Button } from "./ui/button";
 import BookingForm from "./BookingForm";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
+import { useState } from "react";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 const AlertForm = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger asChild>
         <Button className="uppercase" variant="outline">
           Book Now
         </Button>
-      </DialogTrigger>
-      <DialogContent className="max-xs:w-[90%] bg-amber-50 flex justify-center">
+      </AlertDialogTrigger>
+      <AlertDialogContent className="max-md:w-[90%] max-h-[100%] overflow-y-auto bg-amber-50 flex justify-center">
+        <Cross1Icon
+          className="hover:cursor-pointer absolute right-5"
+          onClick={() => setOpen(false)}
+        />
         <BookingForm />
-      </DialogContent>
-    </Dialog>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

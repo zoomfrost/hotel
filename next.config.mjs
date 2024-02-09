@@ -2,7 +2,14 @@
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    domains: ["i.postimg.cc"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+        port: "",
+        pathname: "**/*",
+      },
+    ],
   },
 };
 

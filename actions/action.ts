@@ -1,7 +1,7 @@
 "use server";
 
 import { Booking } from "@/models/booking";
-import { IBooking } from "@/types";
+import { BookingsFromDB, IBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
 import { revalidatePath } from "next/cache";
 
@@ -64,6 +64,14 @@ export const deleteBookingAction = async (id: string) => {
   }
 };
 
-export async function getData<T>(data: T[]) {
-  return data;
+export async function getBookings() {
+  try {
+    await connectToDB();
+
+    const data: BookingsFromDB[] = await Booking.find({});
+
+    return data;
+  } catch (error) {
+    return error;
+  }
 }

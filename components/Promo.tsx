@@ -9,7 +9,7 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
       <div
         className={`w-full h-[150px]  ${
           isHomePage
-            ? " xs:h-[200px] sm:h-[300px] md:h-[400px] lg:h-[450px]"
+            ? " xs:h-[150px] sm:h-[200px] md:h-[300px] lg:h-[400px]"
             : " lg:h-[300px]"
         } `}
       >

@@ -3,10 +3,11 @@ import Link from "next/link";
 import React from "react";
 import logo from "@/public/logo.png";
 import { IHeaderDataProps } from "@/types";
+import dynamic from "next/dynamic";
 
 import AlertForm from "./AlertForm";
 
-import MobileNav from "./MobileNav";
+const MobileNav = dynamic(() => import("@/components/MobileNav"));
 
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (

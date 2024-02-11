@@ -1,12 +1,11 @@
-import React from "react";
-import promoPhoto from "@/public/hotel6.jpg";
-
-import Facilities from "@/components/Facilities";
-import Description from "@/components/Description";
-import PhotoGallery from "@/components/PhotoGallery";
-import InTouch from "@/components/InTouch";
-import HotelCarousel from "@/components/HotelCarousel";
+import dynamic from "next/dynamic";
 import Container from "@/components/ui/container";
+
+const Description = dynamic(() => import("@/components/Description"));
+const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
+const Facilities = dynamic(() => import("@/components/Facilities"));
+const HotelCarousel = dynamic(() => import("@/components/HotelCarousel"));
+const InTouch = dynamic(() => import("@/components/InTouch"));
 
 const Home = async () => {
   const descrArr = [

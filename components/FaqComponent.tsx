@@ -33,7 +33,7 @@ const Faq = () => {
     >
       {rules.map((rule, i) => (
         <AccordionItem key={i} className="" value={`item-${i}`}>
-          <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 text-xs xs:text-sm  text-main">
+          <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 text-xs xs:text-sm md:text-lg  text-main">
             {rule.heading}
           </AccordionTrigger>
           {rule.rules.map((item, i) => (

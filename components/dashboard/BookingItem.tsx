@@ -24,7 +24,7 @@ const BookingItem = memo(
       created,
     } = bookings;
     return (
-      <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-14 text-black">
+      <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-10 text-black xs:text-xs sm:text-sm md:text-base max-md:gap-x-1">
         <div>
           <span>
             Date: {format(dateFrom, "dd.MM.yyyy")} -{" "}
@@ -52,7 +52,7 @@ const BookingItem = memo(
             >
               Удалить
             </Button>
-            <div className="absolute left-4 bottom-1 w-24 h-5 bg-rose-400 text-center px-1">
+            <div className="absolute right-2 top-3 w-24 h-5 bg-rose-400 text-center px-1">
               Отменено
             </div>
           </>

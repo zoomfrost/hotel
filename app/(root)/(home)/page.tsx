@@ -7,6 +7,13 @@ const Facilities = dynamic(() => import("@/components/Facilities"));
 const HotelCarousel = dynamic(() => import("@/components/HotelCarousel"));
 const InTouch = dynamic(() => import("@/components/InTouch"));
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Baskov",
+  description: "Гостевой дом / Отель в центре Санкт-Петербурга",
+};
+
 const Home = async () => {
   const descrArr = [
     {

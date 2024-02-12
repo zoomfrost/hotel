@@ -24,9 +24,8 @@ const History = async () => {
     };
   });
   return (
-    <section className="grid grid-cols-2 gap-y-32 pt-12 ">
-      <div className="grid grid-rows-2 gap-y-12"></div>
-      <div className="grid auto-rows-[180px] gap-y-6">
+    <section className="grid grid-cols-1 gap-y-32 pt-12 ">
+      <div className="grid auto-rows-min gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
           <HistoryList bookings={data} />
         </Suspense>

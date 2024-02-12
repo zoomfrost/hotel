@@ -21,7 +21,7 @@ const AlertForm = () => {
       </AlertDialogTrigger>
       <AlertDialogContent className="max-md:w-[90%] max-h-[100%] overflow-y-auto bg-amber-50 flex justify-center">
         <Cross1Icon
-          className="hover:cursor-pointer absolute right-5"
+          className="hover:cursor-pointer absolute right-5 z-10"
           onClick={() => setOpen(false)}
         />
         <BookingForm />

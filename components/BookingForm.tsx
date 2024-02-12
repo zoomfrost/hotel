@@ -29,7 +29,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { addBooking, getBookings } from "@/actions/action";
-import ErrorNotification from "./ErrorNotification";
+import FeedBackNotification from "./FeedBackNotification";
 import { BookingsFromDB } from "@/types";
 
 const formSchema = z.object({
@@ -52,21 +52,27 @@ const formSchema = z.object({
 });
 
 const BookingForm = () => {
+  const [typeOfRooms, setTypeOfRooms] = useState("");
   const [bookingStatus, setBookingStatus] = useState<boolean | null>(null);
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
-
+  const daysBefore = [{ before: new Date() }];
   const [disabledDays, setDisabledDays] = useState<
     Matcher | Matcher[] | undefined
-  >(undefined);
+  >(daysBefore);
 
   function createDisabledDays(array: BookingsFromDB[]) {
-    const days = array.map((booking) => {
-      return { from: booking.dateFrom, to: booking.dateTo };
-    });
-
-    setDisabledDays(days);
+    if (array.length > 0) {
+      const days = array.map((booking) => {
+        return { from: booking.dateFrom, to: booking.dateTo };
+      });
+      setDisabledDays(() => {
+        return [...daysBefore, ...days];
+      });
+    } else {
+      setDisabledDays(daysBefore);
+    }
   }
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -82,7 +88,6 @@ const BookingForm = () => {
   });
 
   const { isSubmitting } = useFormState(form);
-  const typeOfRooms = form.getValues("room");
 
   let days = "";
   if (range?.from) {
@@ -93,9 +98,11 @@ const BookingForm = () => {
     }
   }
 
-  // useEffect(() => {
-  //   getBookings().then((data) => createDisabledDays(data as BookingsFromDB[]));
-  // }, [typeOfRooms, bookingStatus]);
+  useEffect(() => {
+    getBookings(form.getValues("room")).then((data) =>
+      createDisabledDays(data as BookingsFromDB[])
+    );
+  }, [typeOfRooms, bookingStatus]);
 
   const onSelectDays = (e: any) => {
     setRange(e);
@@ -121,6 +128,7 @@ const BookingForm = () => {
         setBookingStatus(false);
       });
     setRange(undefined);
+
     form.reset();
   };
 
@@ -153,6 +161,32 @@ const BookingForm = () => {
                 <FormControl>
                   <Input placeholder="+79008007060" {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="room"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Your room</FormLabel>
+                <Select
+                  onValueChange={(event) => {
+                    setTypeOfRooms(event);
+                    field.onChange(event);
+                  }}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a room you need" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="double">Двухместный</SelectItem>
+                    <SelectItem value="triple">Трехместный</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -200,33 +234,6 @@ const BookingForm = () => {
           />
           <FormField
             control={form.control}
-            name="room"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Your room</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue
-                        defaultValue={field.value}
-                        placeholder="Select a room you need"
-                      />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="double">Двухместный</SelectItem>
-                    <SelectItem value="triple">Трехместный</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="checkIn"
             render={({ field }) => (
               <FormItem>
@@ -247,7 +254,7 @@ const BookingForm = () => {
             {isSubmitting ? "Booking..." : "Book"}
           </Button>
           <br />
-          <ErrorNotification status={bookingStatus} />.
+          <FeedBackNotification status={bookingStatus} />.
         </form>
       </Form>
     </>

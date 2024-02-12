@@ -8,6 +8,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   authors: [{ name: "Anton", url: "https://github.com/zoomfrost" }],
+  creator: "Anton Rez",
+  publisher: "Anton Rez",
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
 };
 
 export default function RootLayout({

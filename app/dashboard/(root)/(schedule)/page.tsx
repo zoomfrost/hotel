@@ -5,7 +5,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "@/models/booking";
 import { ActiveBooking, IBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
-import { differenceInDays } from "date-fns";
 import { Suspense } from "react";
 
 const DashboardHome = async () => {
@@ -13,22 +12,18 @@ const DashboardHome = async () => {
 
   const bookings = await Booking.find({ canceled: false });
 
-  const allActiveBookings = bookings
-    .filter((item: IBooking) => {
-      return differenceInDays(item.dateFrom, new Date()) > 0;
-    })
-    .map((item: ActiveBooking) => {
-      return {
-        name: item.name,
-        checkIn: item.checkIn,
-        phone: item.phone,
-        room: item.room,
-        dateFrom: item.dateFrom,
-        dateTo: item.dateTo,
-        id: item.id,
-        created: item.created,
-      };
-    });
+  const allActiveBookings = bookings.map((item: ActiveBooking) => {
+    return {
+      name: item.name,
+      checkIn: item.checkIn,
+      phone: item.phone,
+      room: item.room,
+      dateFrom: item.dateFrom,
+      dateTo: item.dateTo,
+      id: item.id,
+      created: item.created,
+    };
+  });
   return (
     <section className="grid mt-10 max-lg:grid-cols-1 grid-cols-2 gap-x-14 gap-y-14 pt-10">
       <div className="grid auto-rows-min gap-y-6">

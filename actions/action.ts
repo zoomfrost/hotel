@@ -64,11 +64,12 @@ export const deleteBookingAction = async (id: string) => {
   }
 };
 
-export async function getBookings() {
+export async function getBookings(roomType: string) {
   try {
     await connectToDB();
 
-    const data: BookingsFromDB[] = await Booking.find({});
+    const data: BookingsFromDB[] = await Booking.find({ room: roomType });
+    console.log(data);
 
     return data;
   } catch (error) {

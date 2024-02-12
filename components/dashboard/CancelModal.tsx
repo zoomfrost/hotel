@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-import ErrorNotification from "../ErrorNotification";
+import FeedBackNotification from "../FeedBackNotification";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -39,7 +39,7 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Удалить/отменить бронирование?</AlertDialogTitle>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className="max-sm:w-3/4 mx-auto gap-y-4">
           <Button
             onClick={() => handleCancelBooking(selectedId)}
             disabled={btnDisabled}
@@ -53,7 +53,7 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
           </Button>
         </AlertDialogFooter>
         <div className="text-center">
-          <ErrorNotification status={cancelStatus} />
+          <FeedBackNotification status={cancelStatus} />
         </div>
       </AlertDialogContent>
     </AlertDialog>

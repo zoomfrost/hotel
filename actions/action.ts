@@ -3,6 +3,7 @@
 import { Booking } from "@/models/booking";
 import { BookingsFromDB, IBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
+import { getOverlappingDaysInIntervals } from "date-fns";
 import { revalidatePath } from "next/cache";
 
 export const addBooking = async (formData: IBooking) => {

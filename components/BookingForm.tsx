@@ -84,12 +84,7 @@ const BookingForm = () => {
           return item > form.getValues("dateFrom");
         }) as Date[]
       );
-
-      if (
-        compareAsc(form.getValues("dateFrom"), closestBookedDay as Date) ===
-          -1 &&
-        range?.from
-      ) {
+      if (range?.from) {
         setDisabledDays((prevState) => {
           return [...prevState, { after: closestBookedDay } as DateAfter];
         });
@@ -141,28 +136,6 @@ const BookingForm = () => {
       setRange(undefined);
     }
   };
-
-  // useEffect(() => {
-  //   getArrayOfBookingsStartDay(typeOfRooms).then((data) => {
-  //     const closestBookedDay = closestTo(
-  //       form.getValues("dateFrom"),
-  //       data as Date[]
-  //     );
-
-  //     if (
-  //       (closestBookedDay as Date) > form.getValues("dateFrom") &&
-  //       range?.from
-  //     ) {
-  //       setDisabledDays((prevState) => {
-  //         return [...prevState, { after: closestBookedDay } as DateAfter];
-  //       });
-  //     } else {
-  //       setDisabledDays(() => {
-  //         return [...daysBefore, ...(bookedDays as DateRange[])];
-  //       });
-  //     }
-  //   });
-  // }, [range, typeOfRooms]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setBookingStatus(null);

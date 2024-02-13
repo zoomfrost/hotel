@@ -27,7 +27,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="bg-amber-50">
+    <div className="">
       <Header isDashboard={false} links={links} />
       {children}
       <Footer />

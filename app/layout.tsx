@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
@@ -20,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru-RU">
-      <body className="w-[100vw] overflow-x-hidden">{children}</body>
+      <body className="w-[100vw] overflow-x-hidden">
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }

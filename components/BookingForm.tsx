@@ -81,13 +81,10 @@ const BookingForm = () => {
       const closestBookedDay = closestTo(
         range?.from as Date,
         startsDayArray.filter((item) => {
-          return item > range?.from;
+          return item > form.getValues("dateFrom");
         }) as Date[]
       );
 
-      console.log(
-        compareAsc(form.getValues("dateFrom"), closestBookedDay as Date)
-      );
       if (
         compareAsc(form.getValues("dateFrom"), closestBookedDay as Date) ===
           -1 &&

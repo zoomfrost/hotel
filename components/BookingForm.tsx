@@ -1,9 +1,19 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { DateRange, Matcher } from "react-day-picker";
+import {
+  format,
+  closestTo,
+  differenceInCalendarDays,
+  compareAsc,
+} from "date-fns";
+import { SetStateAction, useEffect, useState } from "react";
+import {
+  DateAfter,
+  DateRange,
+  Matcher,
+  SelectRangeEventHandler,
+} from "react-day-picker";
 import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -32,25 +42,6 @@ import { addBooking, getBookings } from "@/actions/action";
 import FeedBackNotification from "./FeedBackNotification";
 import { BookingsFromDB } from "@/types";
 
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name must be min 2 ",
-    })
-    .max(50),
-  room: z.string(),
-  phone: z
-    .string()
-    .regex(
-      /^\++[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}/,
-      "Неверный формат номера"
-    ),
-  checkIn: z.string(),
-  dateFrom: z.date(),
-  dateTo: z.date(),
-});
-
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
   const [bookingStatus, setBookingStatus] = useState<boolean | null>(null);
@@ -58,18 +49,58 @@ const BookingForm = () => {
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
   const daysBefore = [{ before: new Date() }];
-  const [disabledDays, setDisabledDays] = useState<
-    Matcher | Matcher[] | undefined
-  >(daysBefore);
+  const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
+
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(2, {
+        message: "Name must be min 2 ",
+      })
+      .max(50),
+    room: z.string(),
+    phone: z
+      .string()
+      .regex(
+        /^\++[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}/,
+        "Неверный формат номера"
+      ),
+    checkIn: z.string(),
+    dateFrom: z.date(),
+    dateTo: z.date(),
+  });
 
   function createDisabledDays(array: BookingsFromDB[]) {
     if (array.length > 0) {
       const days = array.map((booking) => {
         return { from: booking.dateFrom, to: booking.dateTo };
       });
-      setDisabledDays(() => {
-        return [...daysBefore, ...days];
+      const startsDayArray = array.map((item) => {
+        return item.dateFrom;
       });
+      const closestBookedDay = closestTo(
+        range?.from as Date,
+        startsDayArray.filter((item) => {
+          return item > range?.from;
+        }) as Date[]
+      );
+
+      console.log(
+        compareAsc(form.getValues("dateFrom"), closestBookedDay as Date)
+      );
+      if (
+        compareAsc(form.getValues("dateFrom"), closestBookedDay as Date) ===
+          -1 &&
+        range?.from
+      ) {
+        setDisabledDays((prevState) => {
+          return [...prevState, { after: closestBookedDay } as DateAfter];
+        });
+      } else {
+        setDisabledDays(() => {
+          return [...daysBefore, ...days];
+        });
+      }
     } else {
       setDisabledDays(daysBefore);
     }
@@ -99,16 +130,42 @@ const BookingForm = () => {
   }
 
   useEffect(() => {
-    getBookings(form.getValues("room")).then((data) =>
+    getBookings(typeOfRooms).then((data) =>
       createDisabledDays(data as BookingsFromDB[])
     );
-  }, [typeOfRooms, bookingStatus]);
+  }, [typeOfRooms, range, bookingStatus]);
 
   const onSelectDays = (e: any) => {
-    setRange(e);
-    form.setValue("dateFrom", e.from);
-    form.setValue("dateTo", e.to);
+    if (e !== undefined) {
+      setRange(e);
+      form.setValue("dateFrom", e.from);
+      form.setValue("dateTo", e.to);
+    } else {
+      setRange(undefined);
+    }
   };
+
+  // useEffect(() => {
+  //   getArrayOfBookingsStartDay(typeOfRooms).then((data) => {
+  //     const closestBookedDay = closestTo(
+  //       form.getValues("dateFrom"),
+  //       data as Date[]
+  //     );
+
+  //     if (
+  //       (closestBookedDay as Date) > form.getValues("dateFrom") &&
+  //       range?.from
+  //     ) {
+  //       setDisabledDays((prevState) => {
+  //         return [...prevState, { after: closestBookedDay } as DateAfter];
+  //       });
+  //     } else {
+  //       setDisabledDays(() => {
+  //         return [...daysBefore, ...(bookedDays as DateRange[])];
+  //       });
+  //     }
+  //   });
+  // }, [range, typeOfRooms]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setBookingStatus(null);
@@ -127,9 +184,10 @@ const BookingForm = () => {
       .catch(() => {
         setBookingStatus(false);
       });
-    setRange(undefined);
-
+    // setTypeOfRooms("");
     form.reset();
+
+    setRange(undefined);
   };
 
   return (
@@ -172,6 +230,8 @@ const BookingForm = () => {
               <FormItem>
                 <FormLabel>Your room</FormLabel>
                 <Select
+                  key={field.value}
+                  defaultValue={field.value}
                   onValueChange={(event) => {
                     setTypeOfRooms(event);
                     field.onChange(event);
@@ -179,7 +239,10 @@ const BookingForm = () => {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a room you need" />
+                      <SelectValue
+                        defaultValue={field.value}
+                        placeholder="Select a room you need"
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-white">

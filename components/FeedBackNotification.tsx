@@ -1,4 +1,4 @@
-const ErrorNotification = ({ status }: { status: boolean | null }) => {
+const FeedBackNotification = ({ status }: { status: boolean | null }) => {
   switch (status) {
     case null:
       return null;
@@ -9,4 +9,4 @@ const ErrorNotification = ({ status }: { status: boolean | null }) => {
   }
 };
 
-export default ErrorNotification;
+export default FeedBackNotification;

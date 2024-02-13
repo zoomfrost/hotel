@@ -68,8 +68,10 @@ export async function getBookings(roomType: string) {
   try {
     await connectToDB();
 
-    const data: BookingsFromDB[] = await Booking.find({ room: roomType });
-    console.log(data);
+    const data: BookingsFromDB[] = await Booking.find({
+      room: roomType,
+      canceled: false,
+    });
 
     return data;
   } catch (error) {

@@ -25,8 +25,8 @@ const Description = ({ photos, isHomePage }: IDescriptionDataProps) => {
           </div>
           <div>
             <Image
-              width={3000}
-              height={3000}
+              width={2500}
+              height={2500}
               className="object-cover"
               src={item.photo}
               alt="photo"

@@ -1,13 +1,18 @@
 import dynamic from "next/dynamic";
 import Container from "@/components/ui/container";
 
-const Description = dynamic(() => import("@/components/Description"));
-const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
-const Facilities = dynamic(() => import("@/components/Facilities"));
-const HotelCarousel = dynamic(() => import("@/components/HotelCarousel"));
-const InTouch = dynamic(() => import("@/components/InTouch"));
+// const Description = dynamic(() => import("@/components/Description"));
+// const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
+// const Facilities = dynamic(() => import("@/components/Facilities"));
+// const HotelCarousel = dynamic(() => import("@/components/HotelCarousel"));
+// const InTouch = dynamic(() => import("@/components/InTouch"));
 
 import type { Metadata } from "next";
+import Description from "@/components/Description";
+import PhotoGallery from "@/components/PhotoGallery";
+import Facilities from "@/components/Facilities";
+import HotelCarousel from "@/components/HotelCarousel";
+import InTouch from "@/components/InTouch";
 
 export const metadata: Metadata = {
   title: "Baskov",

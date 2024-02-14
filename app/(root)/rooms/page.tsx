@@ -31,23 +31,23 @@ export const metadata: Metadata = {
 const Area = () => {
   const descrArr = [
     {
-      photo: "https://i.postimg.cc/fbXbKWs3/hotel1.jpg",
-      heading: "Nearby",
+      photo: "https://i.postimg.cc/8PmCLJBH/photo-2024-02-14-16-52-42-min.jpg",
+      heading: "Трехместный №1",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
     {
       photo: "https://i.postimg.cc/SNhsX78R/photo-2024-02-14-16-52-40-min.jpg",
-      heading: "Nearby",
+      heading: "Трехместный №2",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
     {
       photo: "https://i.postimg.cc/m2BLZZfF/photo-2024-02-14-16-52-54-min.jpg",
-      heading: "Nearby",
+      heading: "Двухместный №1",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
     {
       photo: "https://i.postimg.cc/FzQ9LNY8/photo-2024-02-14-16-52-49-min.jpg",
-      heading: "Nearby",
+      heading: "Двухместный №2",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
   ];

@@ -1,13 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  format,
-  closestTo,
-  differenceInCalendarDays,
-  compareAsc,
-  sub,
-} from "date-fns";
+import { format, closestTo, sub } from "date-fns";
 import { SetStateAction, useEffect, useState } from "react";
 import {
   DateAfter,
@@ -51,6 +45,25 @@ const BookingForm = () => {
   const [range, setRange] = useState<DateRange | undefined>(undefined);
   const daysBefore = [{ before: new Date() }];
   const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
+
+  const selectRoomData = [
+    {
+      value: "№1",
+      text: "Трехместный №1",
+    },
+    {
+      value: "№2",
+      text: "Трехместный №2",
+    },
+    {
+      value: "№3",
+      text: "Двухместный №1",
+    },
+    {
+      value: "№4",
+      text: "Двухместный №2",
+    },
+  ];
 
   const formSchema = z.object({
     name: z
@@ -233,10 +246,11 @@ const BookingForm = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-white">
-                    <SelectItem value="№1">Трехместный №1</SelectItem>
-                    <SelectItem value="№2">Трехместный №2</SelectItem>
-                    <SelectItem value="№3">Двухместный №1</SelectItem>
-                    <SelectItem value="№4">Двухместный №2</SelectItem>
+                    {selectRoomData.map((item) => (
+                      <SelectItem key={item.value} value={item.value}>
+                        {item.text}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />

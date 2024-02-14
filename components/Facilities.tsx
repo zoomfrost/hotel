@@ -1,73 +1,74 @@
 import React from "react";
 import Image from "next/image";
 import bed from "@/public/bed.svg";
-import calculator from "@/public/calculator.svg";
 import camera from "@/public/camera.svg";
-import cart from "@/public/cart.svg";
 import connection from "@/public/connection.svg";
 import library from "@/public/library.svg";
-import location from "@/public/location.svg";
-import manWoman from "@/public/man-woman.svg";
-import map from "@/public/map.svg";
 import shower from "@/public/shower.svg";
 import spoonKnife from "@/public/spoon-knife.svg";
-import users from "@/public/users.svg";
+import briefcase from "@/public/briefcase.svg";
+import clock from "@/public/clock.svg";
+import key from "@/public/key.svg";
+import location from "@/public/location2.svg";
+import discount from "@/public/price-tags.svg";
+import railway from "@/public/road.svg";
+import cart from "@/public/cart.svg";
 
 const Facilities = () => {
   const arr = [
     {
       imgSrc: bed,
-      text: "spalnoe mesto",
+      text: "Комфортные кровати",
     },
     {
-      imgSrc: calculator,
-      text: "spalnoe mesto",
+      imgSrc: briefcase,
+      text: "Возможность оставить багаж до заезда",
     },
     {
       imgSrc: camera,
-      text: "spalnoe mesto",
+      text: "Исторический центр города",
     },
     {
-      imgSrc: cart,
-      text: "spalnoe mesto",
+      imgSrc: clock,
+      text: "Удобное время заезда",
     },
     {
       imgSrc: connection,
-      text: "spalnoe mesto",
+      text: "Бесплатный доступ в интернет",
     },
     {
       imgSrc: library,
-      text: "spalnoe mesto",
+      text: "Известные достопримечательности недалеко",
+    },
+    {
+      imgSrc: key,
+      text: "Ключ от номера есть только у вас",
     },
     {
       imgSrc: location,
-      text: "spalnoe mesto",
+      text: "Расположение в тихом месте",
     },
     {
-      imgSrc: manWoman,
-      text: "spalnoe mesto",
+      imgSrc: discount,
+      text: "Скидки постоянным гостям",
     },
     {
-      imgSrc: map,
-      text: "spalnoe mesto",
-    },
-    {
-      imgSrc: shower,
-      text: "spalnoe mesto",
+      imgSrc: cart,
+      text: "Возможность готовить самим ",
     },
     {
       imgSrc: spoonKnife,
-      text: "spalnoe mesto",
+      text: "Столовые и кафе в шаговой доступности",
     },
     {
-      imgSrc: users,
-      text: "spalnoe mesto",
+      imgSrc: railway,
+      text: "Вокзал в 10 минутах пешком",
     },
   ];
   return (
     <section className="bg-amber-100 mt-12 p-5">
       <h3 className="text-center my-3 text-2xl mb-6">Удобства</h3>
-      <div className="grid grid-cols-4 gap-y-8 gap-x-24 p-5 max-md:grid-cols-3 max-sm:grid-cols-2 ">
+      <div className="grid grid-cols-4 hyphens-auto gap-y-7 gap-x-24 p-5 max-md:grid-cols-3 max-sm:grid-cols-2 ">
         {arr.map((item, i) => (
           <div className="flex-center flex-col gap-y-1" key={i}>
             <Image src={item.imgSrc} alt="photo" />

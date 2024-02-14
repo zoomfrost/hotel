@@ -17,7 +17,7 @@ const InTouch = () => {
     },
     {
       text: "Telegram",
-      link: "",
+      link: "https://t.me/lu_malolu",
       icon: telegram,
       id: 2,
     },
@@ -56,6 +56,7 @@ const InTouch = () => {
                   alt="social photo"
                 />
                 <Link
+                  target="_blank"
                   className="max-sm:text-xs after:hover:w-full after:block after:w-0 after:h-0.5 after:bg-gray-600 after:transition-all after:duration-300 "
                   href={link.link}
                 >

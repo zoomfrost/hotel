@@ -13,7 +13,7 @@ const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (
     <header>
       <nav className="flex-center fixed top-0 z-50 w-[100vw] borber-black-200 py-7  bg-gray-400">
-        <div className="flex-between mx-auto w-full max-w-screen-2xl px-6 xs:px-8 sm:px-16 max=md:">
+        <div className="flex items-center justify-around mx-auto w-full max-w-screen-2xl px-6 xs:px-8 sm:px-16 max=md:">
           <Link href="/">
             <Image priority src={logo} alt="logo" />
           </Link>

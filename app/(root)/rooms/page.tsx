@@ -1,12 +1,12 @@
 import Description from "@/components/Description";
 import React from "react";
-import descrPhoto from "@/public/palace-bridge.jpeg";
 import Container from "@/components/ui/container";
 import { Metadata } from "next";
+import HotelCarousel from "@/components/HotelCarousel";
 
 export const metadata: Metadata = {
-  title: "Местность",
-  description: "Гостевой дом / Отель в центре Санкт-Петербурга",
+  title: "Номера",
+  description: "Обзор номеров",
   keywords: [
     "Басков",
     "Отель Басков",
@@ -31,30 +31,42 @@ export const metadata: Metadata = {
 const Area = () => {
   const descrArr = [
     {
-      photo: descrPhoto,
+      photo: "https://i.postimg.cc/fbXbKWs3/hotel1.jpg",
       heading: "Nearby",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
     {
-      photo: descrPhoto,
+      photo: "https://i.postimg.cc/SNhsX78R/photo-2024-02-14-16-52-40-min.jpg",
       heading: "Nearby",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
     {
-      photo: descrPhoto,
+      photo: "https://i.postimg.cc/m2BLZZfF/photo-2024-02-14-16-52-54-min.jpg",
       heading: "Nearby",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
     {
-      photo: descrPhoto,
+      photo: "https://i.postimg.cc/FzQ9LNY8/photo-2024-02-14-16-52-49-min.jpg",
       heading: "Nearby",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
     },
   ];
+
+  const photos = {
+    photos: [
+      "https://i.postimg.cc/nhNzBjyb/hotel3.jpg",
+      "https://i.postimg.cc/6q65tdvR/hotel7.jpg",
+      "https://i.postimg.cc/cHB4pDr0/hotel8.jpg",
+      "https://i.postimg.cc/gj0dfmCH/hotel9.jpg",
+    ],
+    title: "Обзор",
+    alt: "Hotel",
+  };
   return (
     <Container title="area">
       <section>
         <Description isHomePage={false} photos={descrArr} />
+        <HotelCarousel array={photos} />
       </section>
     </Container>
   );

@@ -4,8 +4,8 @@ import Container from "@/components/ui/container";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Забронировать",
-  description: "Гостевой дом / Отель в центре Санкт-Петербурга",
+  title: "Бронирование",
+  description: "Забронировать номер",
   keywords: [
     "Басков",
     "Отель Басков",
@@ -29,8 +29,17 @@ export const metadata: Metadata = {
 const Booking = () => {
   const rules = [
     {
+      heading: "Важная информация",
+      rules: ["Предоплата включает в себя первые сутки проживания"],
+    },
+    {
       heading: "Rules",
-      rules: ["No smoking", "No pets"],
+      rules: [
+        "Не курить",
+        "Не распивать алкоголь",
+        "Выезд до 12:00",
+        "Заезд после 14:00",
+      ],
     },
     {
       heading: "Cancellation policy",

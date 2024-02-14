@@ -6,6 +6,7 @@ import {
   closestTo,
   differenceInCalendarDays,
   compareAsc,
+  sub,
 } from "date-fns";
 import { SetStateAction, useEffect, useState } from "react";
 import {
@@ -58,6 +59,7 @@ const BookingForm = () => {
         message: "Name must be min 2 ",
       })
       .max(50),
+    surname: z.string(),
     room: z.string(),
     phone: z
       .string()
@@ -73,7 +75,7 @@ const BookingForm = () => {
   function createDisabledDays(array: BookingsFromDB[]) {
     if (array.length > 0) {
       const days = array.map((booking) => {
-        return { from: booking.dateFrom, to: booking.dateTo };
+        return { from: booking.dateFrom, to: sub(booking.dateTo, { days: 1 }) };
       });
       const startsDayArray = array.map((item) => {
         return item.dateFrom;
@@ -102,6 +104,7 @@ const BookingForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
+      surname: "",
       phone: "",
       room: undefined,
       checkIn: "",
@@ -115,9 +118,12 @@ const BookingForm = () => {
   let days = "";
   if (range?.from) {
     if (!range.to) {
-      days = format(range.from, "PPP");
+      days = `Заезд ${format(range.from, "dd.MM.yyyy")}`;
     } else if (range.to) {
-      days = `${format(range.from, "PPP")} - ${format(range.to, "PPP")}`;
+      days = `Заезд ${format(range.from, "dd.MM.yyyy")} - Выезд ${format(
+        range.to,
+        "dd.MM.yyyy"
+      )}`;
     }
   }
 
@@ -154,7 +160,6 @@ const BookingForm = () => {
       .catch(() => {
         setBookingStatus(false);
       });
-    // setTypeOfRooms("");
     form.reset();
 
     setRange(undefined);
@@ -172,9 +177,22 @@ const BookingForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Fullname</FormLabel>
+                <FormLabel>Имя</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your name" {...field} />
+                  <Input placeholder="Иван" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="surname"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Фамилия</FormLabel>
+                <FormControl>
+                  <Input placeholder="Иванов" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -185,7 +203,7 @@ const BookingForm = () => {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone</FormLabel>
+                <FormLabel>Номер телефона</FormLabel>
                 <FormControl>
                   <Input placeholder="+79008007060" {...field} />
                 </FormControl>
@@ -198,7 +216,6 @@ const BookingForm = () => {
             name="room"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Your room</FormLabel>
                 <Select
                   key={field.value}
                   defaultValue={field.value}
@@ -211,13 +228,15 @@ const BookingForm = () => {
                     <SelectTrigger>
                       <SelectValue
                         defaultValue={field.value}
-                        placeholder="Select a room you need"
+                        placeholder="Выберите номер"
                       />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-white">
-                    <SelectItem value="double">Двухместный</SelectItem>
-                    <SelectItem value="triple">Трехместный</SelectItem>
+                    <SelectItem value="№1">Трехместный №1</SelectItem>
+                    <SelectItem value="№2">Трехместный №2</SelectItem>
+                    <SelectItem value="№3">Двухместный №1</SelectItem>
+                    <SelectItem value="№4">Двухместный №2</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -229,7 +248,6 @@ const BookingForm = () => {
             name="dateFrom"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Date</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -240,7 +258,7 @@ const BookingForm = () => {
                           !field.value && "text-muted-foreground"
                         )}
                       >
-                        {days ? days : <span>Pick a date</span>}
+                        {days ? days : <span>Выберите даты</span>}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>
@@ -270,14 +288,15 @@ const BookingForm = () => {
             name="checkIn"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Check-in time</FormLabel>
+                <FormLabel>Время заезда</FormLabel>
                 <FormControl>
-                  <Input placeholder="time" {...field} />
+                  <Input placeholder="15:00" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          {/* <p>к оплате 1000 руб.</p> */}
           <Button
             className="disabled:bg-amber-100"
             disabled={isSubmitting}

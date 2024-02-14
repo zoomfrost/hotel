@@ -66,7 +66,7 @@ const Facilities = () => {
   ];
   return (
     <section className="bg-amber-100 mt-12 p-5">
-      <h3 className="text-center my-3 text-2xl mb-6">Facilities</h3>
+      <h3 className="text-center my-3 text-2xl mb-6">Удобства</h3>
       <div className="grid grid-cols-4 gap-y-8 gap-x-24 p-5 max-md:grid-cols-3 max-sm:grid-cols-2 ">
         {arr.map((item, i) => (
           <div className="flex-center flex-col gap-y-1" key={i}>

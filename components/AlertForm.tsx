@@ -16,7 +16,7 @@ const AlertForm = () => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button className="uppercase" variant="outline">
-          Book Now
+          Забронировать
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-md:w-[90%] max-h-[100%] overflow-y-auto bg-amber-50 flex justify-center">

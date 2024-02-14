@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Частые вопросы",
-  description: "Гостевой дом / Отель в центре Санкт-Петербурга",
+  description: "Часто задаваемые вопросы ",
   keywords: [
     "Басков",
     "Отель Басков",

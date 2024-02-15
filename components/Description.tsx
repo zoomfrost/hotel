@@ -16,11 +16,14 @@ const Description = ({ photos, isHomePage }: IDescriptionDataProps) => {
             <h2 className="font-semibold max-md:text-2xl text-4xl ">
               {item.heading}
             </h2>
-            <p className="">{item.text}</p>
+
             {isHomePage && (
-              <Link className="hover:font-bold block w-24" href="/area">
-                Read more
-              </Link>
+              <>
+                <p className="">{item.text}</p>
+                <Link className="hover:font-bold block w-24" href="/rooms">
+                  Read more
+                </Link>
+              </>
             )}
           </div>
           <div className="w-1/2 max-md:w-full h-[400px]">

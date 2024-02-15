@@ -1,9 +1,9 @@
 "use server";
 
 import { Booking } from "@/models/booking";
+import { Price } from "@/models/price";
 import { BookingsFromDB, IBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
-import { getOverlappingDaysInIntervals } from "date-fns";
 import { revalidatePath } from "next/cache";
 
 export const addBooking = async (formData: IBooking) => {
@@ -75,6 +75,39 @@ export async function getBookings(roomType: string) {
     });
 
     return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function createPrice(formData: { room: string; price: string }) {
+  const { room, price } = await formData;
+  try {
+    await connectToDB();
+    const newPrices = await Price.find({ roomType: room });
+    if (newPrices.length !== 0) {
+      await Price.findOneAndUpdate({ roomType: room }, { price: price });
+    } else {
+      const newPrice = new Price({
+        roomType: room,
+        price: price,
+      });
+
+      await newPrice.save();
+    }
+    return { status: "ok" };
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getPrice() {
+  try {
+    await connectToDB();
+    const newPrices = await Price.find();
+    return newPrices.map((item) => {
+      return item.price;
+    });
   } catch (error) {
     return error;
   }

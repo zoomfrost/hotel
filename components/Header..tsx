@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import logo from "@/public/logo.png";
+import logo from "@/public/logo.svg";
 import { IHeaderDataProps } from "@/types";
 import dynamic from "next/dynamic";
-
 import AlertForm from "./AlertForm";
 
 const MobileNav = dynamic(() => import("@/components/MobileNav"));
@@ -12,10 +11,10 @@ const MobileNav = dynamic(() => import("@/components/MobileNav"));
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (
     <header>
-      <nav className="flex-center fixed top-0 z-50 w-[100vw] borber-black-200 py-7  bg-gray-400">
-        <div className="flex items-center justify-around mx-auto w-full max-w-screen-2xl px-6 xs:px-8 sm:px-16 max=md:">
+      <nav className="flex-center fixed top-0 z-50 w-[100vw] borber-black-200 py-4  bg-gray-400">
+        <div className="flex items-center justify-around mx-auto w-full max-w-screen-2xl px-2 xs:px-8 sm:px-16 max=md:">
           <Link href="/">
-            <Image priority src={logo} alt="logo" />
+            <Image width={60} height={60} priority src={logo} alt="logo" />
           </Link>
           <ul className="flex-center gap-x-3 max-md:hidden md:gap-x-10 lg:gap-x-14">
             {links.map((item, i) => (

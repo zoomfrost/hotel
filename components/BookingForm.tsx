@@ -317,7 +317,7 @@ const BookingForm = () => {
             variant={"outline"}
             type="submit"
           >
-            {isSubmitting ? "Booking..." : "Book"}
+            {isSubmitting ? "Бронируем..." : "Забронировать"}
           </Button>
           <br />
           <FeedBackNotification status={bookingStatus} />.

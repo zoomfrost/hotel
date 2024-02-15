@@ -15,7 +15,7 @@ const AlertForm = () => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="uppercase" variant="outline">
+        <Button className="uppercase max-sm:text-xs" variant="outline">
           Забронировать
         </Button>
       </AlertDialogTrigger>

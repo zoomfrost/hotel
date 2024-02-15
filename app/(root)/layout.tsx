@@ -20,7 +20,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       id: 3,
     },
     {
-      name: "Частые вопросы",
+      name: "Faq",
       link: "/faq",
       id: 4,
     },

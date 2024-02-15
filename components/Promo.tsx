@@ -5,7 +5,7 @@ import { IPromoProps } from "@/types";
 
 const Promo = ({ title, isHomePage }: IPromoProps) => {
   return (
-    <section className="mt-[122px] w-full relative ">
+    <section className="mt-[104px] w-full relative ">
       <div
         className={`w-full h-[150px]  ${
           isHomePage

@@ -1,9 +1,9 @@
 import BookingForm from "@/components/BookingForm";
 import BookingList from "@/components/dashboard/BookingList";
-
+import CreatingPricesForm from "@/components/dashboard/creatingPricesForm";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "@/models/booking";
-import { ActiveBooking, IBooking } from "@/types";
+import { ActiveBooking } from "@/types";
 import { connectToDB } from "@/utils/database";
 import { Suspense } from "react";
 
@@ -31,8 +31,10 @@ const DashboardHome = async () => {
           <BookingList allActiveBookings={allActiveBookings} />
         </Suspense>
       </div>
-      <div className="grid grid-cols-1 w-[500px] max-sm:w-full gap-y-12">
+      <div className="grid grid-cols-1 w-[500px] max-sm:w-full">
+        <p>Создать бронь</p>
         <BookingForm />
+        <CreatingPricesForm />
       </div>
     </section>
   );

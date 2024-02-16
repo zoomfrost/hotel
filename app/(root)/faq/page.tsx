@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 const Faq = () => {
   return (
-    <Container title="Faq">
+    <Container title="Частые вопросы">
       <section className="w-full paddings">
         <FaqComponent />
       </section>

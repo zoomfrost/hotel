@@ -1,11 +1,4 @@
-import dynamic from "next/dynamic";
 import Container from "@/components/ui/container";
-
-// const Description = dynamic(() => import("@/components/Description"));
-// const PhotoGallery = dynamic(() => import("@/components/PhotoGallery"));
-// const Facilities = dynamic(() => import("@/components/Facilities"));
-// const HotelCarousel = dynamic(() => import("@/components/HotelCarousel"));
-// const InTouch = dynamic(() => import("@/components/InTouch"));
 
 import type { Metadata } from "next";
 import Description from "@/components/Description";
@@ -13,6 +6,7 @@ import PhotoGallery from "@/components/PhotoGallery";
 import Facilities from "@/components/Facilities";
 import HotelCarousel from "@/components/HotelCarousel";
 import InTouch from "@/components/InTouch";
+import InTouchBooking from "@/components/InTouchBooking";
 
 export const metadata: Metadata = {
   title: "Baskov",
@@ -59,7 +53,7 @@ const Home = async () => {
     alt: "feedback",
   };
   return (
-    <Container isHomePage title="Hotel in the center of Saint-Petesrburg">
+    <Container isHomePage title="Отель в центре Санкт-Петербуга">
       <section className="w-full">
         <Description isHomePage={true} photos={descrArr} />
         <PhotoGallery />

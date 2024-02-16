@@ -1,4 +1,6 @@
 import React from "react";
+import RoomsPrices from "./RoomsPrices";
+import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 
 const RoomsDescription = () => {
   const listArray = [
@@ -32,7 +34,7 @@ const RoomsDescription = () => {
           есть все необходимое:
         </p>
 
-        <ul className="grid mx-auto w-full max-sm:w-3/4 grid-cols-2 justify-items-start max-sm:grid-cols-1 list-disc">
+        <ul className="grid mx-auto w-4/5 max-sm:w-3/4 grid-cols-2 justify-items-start max-sm:grid-cols-1 list-disc">
           {listArray.map((li, i) => (
             <li
               className="uppercase font-light max-sm:text-base text-lg text-main"
@@ -43,6 +45,7 @@ const RoomsDescription = () => {
           ))}
         </ul>
       </div>
+      <RoomsPrices />
     </section>
   );
 };

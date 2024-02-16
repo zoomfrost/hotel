@@ -51,5 +51,6 @@ export interface BookingsFromDB extends IBooking {
 export type ActiveBooking = Omit<IBooking, "canceled">;
 
 export interface IPricesFromDB {
-  [key: string]: string;
+  roomType: string;
+  price: string;
 }

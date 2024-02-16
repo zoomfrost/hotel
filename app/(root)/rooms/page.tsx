@@ -77,7 +77,7 @@ const Area = () => {
     alt: "Hotel",
   };
   return (
-    <Container title="area">
+    <Container title="Номера">
       <section>
         <RoomsDescription />
         <HotelCarousel array={photos} />

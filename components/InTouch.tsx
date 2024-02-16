@@ -4,6 +4,7 @@ import whatsapp from "@/public/whatsapp.svg";
 import telegram from "@/public/telegram.svg";
 import viber from "@/public/viber.svg";
 import InTouchBooking from "./InTouchBooking";
+import { ReactNode } from "react";
 
 const InTouch = () => {
   const socialLinksArr = [

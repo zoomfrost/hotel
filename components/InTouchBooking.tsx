@@ -6,7 +6,7 @@ import bookHotel from "@/public/hotel4.jpg";
 import { getPrice } from "@/actions/action";
 import Image from "next/image";
 import Link from "next/link";
-import FormFeedBackNotification from "./FeedBackNotification";
+
 import FeedBackNotification from "./FeedBackNotification";
 
 const InTouchBooking = () => {
@@ -14,7 +14,9 @@ const InTouchBooking = () => {
   const [status, setStatus] = useState("Загрузка");
   useEffect(() => {
     getPrice()
-      .then((data) => setPrice(data as number[]))
+      .then((data) => {
+        setPrice(data as number[]);
+      })
       .catch(() => setStatus("Ошибка загрузки"));
   }, []);
   return (

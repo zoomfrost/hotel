@@ -15,7 +15,7 @@ const AdminLogin = async () => {
     redirect("/dashboard");
   }
   return (
-    <Container title="Login to dashboard">
+    <Container title="Вход администратора">
       <FormLogin />
     </Container>
   );

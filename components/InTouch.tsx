@@ -1,21 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import bookHotel from "@/public/hotel4.jpg";
 import whatsapp from "@/public/whatsapp.svg";
 import telegram from "@/public/telegram.svg";
 import viber from "@/public/viber.svg";
-import { getPrice } from "@/actions/action";
+import InTouchBooking from "./InTouchBooking";
 
 const InTouch = () => {
-  const [price, setPrice] = useState<any>();
-  useEffect(() => {
-    getPrice().then((data) => setPrice(data));
-  }, []);
-
   const socialLinksArr = [
     {
       text: "WhatsApp",
@@ -75,23 +65,7 @@ const InTouch = () => {
           })}
         </ul>
       </div>
-      <div className="w-96 max-lg:w-80 max-sm:w-72">
-        <Image className="object-cover" src={bookHotel} alt="room" />
-        <div className="flex w-full">
-          <Link className="w-3/5 block" href="/booking">
-            <Button className="w-full h-24 bg-gray-600 hover:bg-gray-500 rounded-none">
-              Book
-            </Button>
-          </Link>
-          <div className="bg-amber-100 w-2/5 flex-center">
-            <span>
-              From <br />
-              &nbsp;&nbsp;<b>{price ? price.sort()[0] : ""}</b>
-              <br /> &nbsp;&nbsp;&nbsp;&nbsp;per night
-            </span>
-          </div>
-        </div>
-      </div>
+      <InTouchBooking />
     </div>
   );
 };

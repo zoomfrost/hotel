@@ -2,7 +2,7 @@
 
 import { Booking } from "@/models/booking";
 import { Price } from "@/models/price";
-import { BookingsFromDB, IBooking } from "@/types";
+import { BookingsFromDB, IBooking, IPricesFromDB } from "@/types";
 import { connectToDB } from "@/utils/database";
 import { revalidatePath } from "next/cache";
 
@@ -104,9 +104,9 @@ export async function createPrice(formData: { room: string; price: string }) {
 export async function getPrice() {
   try {
     await connectToDB();
-    const newPrices = await Price.find();
+    const newPrices: IPricesFromDB[] = await Price.find();
     return newPrices.map((item) => {
-      return item.price;
+      return +item.price;
     });
   } catch (error) {
     return error;

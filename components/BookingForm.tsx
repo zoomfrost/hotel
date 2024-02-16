@@ -39,7 +39,7 @@ import { BookingsFromDB } from "@/types";
 
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
-  const [bookingStatus, setBookingStatus] = useState<boolean | null>(null);
+  const [bookingStatus, setBookingStatus] = useState<string | null>(null);
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
@@ -165,13 +165,13 @@ const BookingForm = () => {
       created: new Date(),
     })
       .then(() => {
-        setBookingStatus(true);
+        setBookingStatus("Успешно");
         setTimeout(() => {
           setBookingStatus(null);
         }, 2500);
       })
       .catch(() => {
-        setBookingStatus(false);
+        setBookingStatus("Ошибка");
       });
     form.reset();
 

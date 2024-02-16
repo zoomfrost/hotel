@@ -26,7 +26,7 @@ import { Input } from "../ui/input";
 import { createPrice } from "@/actions/action";
 
 const creatingPricesForm = () => {
-  const [pricingStatus, setPricingStatus] = useState<boolean | null>(null);
+  const [pricingStatus, setPricingStatus] = useState<string | null>(null);
   const [data, setData] = useState<any>();
   console.log(data);
 
@@ -61,13 +61,13 @@ const creatingPricesForm = () => {
     const response = await createPrice(values)
       .then((data) => {
         setData(data);
-        setPricingStatus(true);
+        setPricingStatus("Успешно");
         setTimeout(() => {
           setPricingStatus(null);
         }, 2500);
       })
       .catch(() => {
-        setPricingStatus(false);
+        setPricingStatus("Ошибка");
       });
     form.reset();
   };

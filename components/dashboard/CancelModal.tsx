@@ -19,15 +19,15 @@ interface IModalProps {
 }
 const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
   const [btnDisabled, setBtnDisabled] = useState(false);
-  const [cancelStatus, setCancelStatus] = useState<boolean | null>(null);
+  const [cancelStatus, setCancelStatus] = useState<string | null>(null);
 
   const handleCancelBooking = (id: string) => {
     setBtnDisabled(true);
     setCancelStatus(null);
     action(id)
-      .then(() => setCancelStatus(true))
+      .then(() => setCancelStatus("Успешно"))
       .catch(() => {
-        setCancelStatus(false);
+        setCancelStatus("Ошибка");
         setBtnDisabled(false);
       });
 

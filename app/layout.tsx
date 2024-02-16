@@ -12,6 +12,10 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
+  openGraph: {
+    title: "Baskov",
+    description: "Отель в центре Санкт-Петербурга",
+  },
 };
 
 export default function RootLayout({

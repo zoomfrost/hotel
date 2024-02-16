@@ -42,15 +42,19 @@ const RoomsPrices = () => {
           <TableHeader>
             <TableRow>
               {tableHead.map((item) => {
-                return <TableHead key={item}>{item}</TableHead>;
+                return (
+                  <TableHead className="even:text-right" key={item}>
+                    {item}
+                  </TableHead>
+                );
               })}
             </TableRow>
           </TableHeader>
           <TableBody>
             {tableRows.map((item, i) => (
               <TableRow key={item.name}>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>
+                <TableCell className="text-left">{item.name}</TableCell>
+                <TableCell className="text-right">
                   {price ? (
                     `${price[i]} руб.`
                   ) : (

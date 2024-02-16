@@ -74,7 +74,7 @@ const creatingPricesForm = () => {
 
   return (
     <>
-      <p>Установить цену номера</p>
+      <p className="text-center">Установить цену номера</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

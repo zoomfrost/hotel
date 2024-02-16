@@ -48,19 +48,19 @@ const BookingForm = () => {
 
   const selectRoomData = [
     {
-      value: "№1",
+      value: "triple1",
       text: "Трехместный №1",
     },
     {
-      value: "№2",
+      value: "triple2",
       text: "Трехместный №2",
     },
     {
-      value: "№3",
+      value: "double1",
       text: "Двухместный №1",
     },
     {
-      value: "№4",
+      value: "double2",
       text: "Двухместный №2",
     },
   ];
@@ -235,6 +235,7 @@ const BookingForm = () => {
                   onValueChange={(event) => {
                     setTypeOfRooms(event);
                     field.onChange(event);
+                    setRange(undefined);
                   }}
                 >
                   <FormControl>

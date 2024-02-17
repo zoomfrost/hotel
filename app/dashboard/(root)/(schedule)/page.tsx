@@ -32,8 +32,10 @@ const DashboardHome = async () => {
         </Suspense>
       </div>
       <div className="grid grid-cols-1 w-[500px] max-sm:w-full">
-        <p className="text-center">Создать бронь</p>
-        <BookingForm />
+        <div>
+          <p className="text-center">Создать бронь</p>
+          <BookingForm />
+        </div>
         <CreatingPricesForm />
       </div>
     </section>

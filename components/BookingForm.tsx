@@ -2,13 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format, closestTo, sub } from "date-fns";
-import { SetStateAction, useEffect, useState } from "react";
-import {
-  DateAfter,
-  DateRange,
-  Matcher,
-  SelectRangeEventHandler,
-} from "react-day-picker";
+import { useEffect, useReducer, useState } from "react";
+import { DateAfter, DateRange, Matcher } from "react-day-picker";
 import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -36,6 +31,8 @@ import { CalendarIcon } from "@radix-ui/react-icons";
 import { addBooking, getBookings } from "@/actions/action";
 import FeedBackNotification from "./FeedBackNotification";
 import { BookingsFromDB } from "@/types";
+import Link from "next/link";
+import { Checkbox } from "./ui/checkbox";
 
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
@@ -45,6 +42,7 @@ const BookingForm = () => {
   const [range, setRange] = useState<DateRange | undefined>(undefined);
   const daysBefore = [{ before: new Date() }];
   const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
+  const [privacyCheckbox, setPrivacyCheckbox] = useState(true);
 
   const selectRoomData = [
     {
@@ -65,25 +63,47 @@ const BookingForm = () => {
     },
   ];
 
-  const formSchema = z.object({
-    name: z
-      .string()
-      .min(2, {
-        message: "Name must be min 2 ",
-      })
-      .max(50),
-    surname: z.string(),
-    room: z.string(),
-    phone: z
-      .string()
-      .regex(
-        /^\++[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}/,
-        "Неверный формат номера"
-      ),
-    checkIn: z.string(),
-    dateFrom: z.date(),
-    dateTo: z.date(),
-  });
+  const formSchema = z
+    .object({
+      name: z
+        .string()
+        .min(2, {
+          message: "Минимум 2 символа ",
+        })
+        .max(50, {
+          message: "Максимум 50 символов",
+        }),
+      surname: z
+        .string({
+          required_error: "Обязательно",
+        })
+        .min(2, {
+          message: "Минимум 2 символа ",
+        })
+        .max(50, {
+          message: "Максимум 50 символов",
+        }),
+      room: z.string({
+        required_error: "Выберите номер",
+      }),
+      phone: z
+        .string()
+        .regex(
+          /^\++[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}/,
+          "Неверный формат номера"
+        ),
+      checkIn: z.string({
+        required_error: "Напишите время заезда",
+      }),
+      dateFrom: z.date({ required_error: "Выберите дату заезда" }),
+      dateTo: z.date({
+        required_error: "Выберите дату выезда",
+      }),
+      privacy: z.boolean({
+        required_error: "Согласие",
+      }),
+    })
+    .required();
 
   function createDisabledDays(array: BookingsFromDB[]) {
     if (array.length > 0) {
@@ -120,9 +140,10 @@ const BookingForm = () => {
       surname: "",
       phone: "",
       room: undefined,
-      checkIn: "",
-      dateFrom: new Date(),
-      dateTo: new Date(),
+      checkIn: undefined,
+      dateFrom: undefined,
+      dateTo: undefined,
+      privacy: undefined,
     },
   });
 
@@ -295,6 +316,11 @@ const BookingForm = () => {
                   </PopoverContent>
                 </Popover>
                 <FormMessage />
+                <FormField
+                  control={form.control}
+                  name="dateTo"
+                  render={({ field }) => <FormMessage className="m-0" />}
+                />
               </FormItem>
             )}
           />
@@ -311,10 +337,50 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="privacy"
+            render={({ field }) => (
+              <FormItem>
+                <div className=" flex items-center space-x-2">
+                  <FormControl>
+                    <Checkbox
+                      key={field.name}
+                      className="w-5 h-5 border-black-100 checked:color"
+                      checked={field.value}
+                      onCheckedChange={(e) => {
+                        field.onChange(e);
+                        setPrivacyCheckbox((prevState) => {
+                          return !prevState;
+                        });
+                      }}
+                    />
+                  </FormControl>
+                  <FormLabel>
+                    Я согласен с{" "}
+                    <Link
+                      className="text-primary underline underline-offset-2"
+                      href="/booking"
+                    >
+                      Правилами бронирования
+                    </Link>{" "}
+                    и{" "}
+                    <Link
+                      className="text-primary underline underline-offset-2"
+                      href="/privacy"
+                    >
+                      Политикой конфиденциальности
+                    </Link>
+                  </FormLabel>
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           {/* <p>к оплате 1000 руб.</p> */}
           <Button
             className="disabled:bg-amber-100"
-            disabled={isSubmitting}
+            disabled={isSubmitting || privacyCheckbox}
             variant={"outline"}
             type="submit"
           >

@@ -2,7 +2,7 @@ import { IBookingRules } from "@/types";
 
 const Rules = ({ rules }: { rules: IBookingRules[] }) => {
   return (
-    <div>
+    <div id="rules">
       {rules.map((item, i) => (
         <div key={i} className="flex flex-col gap-y-3 p-7 xs:p-5">
           <h4 className="text-xl font-semibold text-main">{item.heading}</h4>

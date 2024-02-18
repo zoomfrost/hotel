@@ -33,6 +33,7 @@ import FeedBackNotification from "./FeedBackNotification";
 import { BookingsFromDB } from "@/types";
 import Link from "next/link";
 import { Checkbox } from "./ui/checkbox";
+import { usePathname } from "next/navigation";
 
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
@@ -43,6 +44,7 @@ const BookingForm = () => {
   const daysBefore = [{ before: new Date() }];
   const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
   const [privacyCheckbox, setPrivacyCheckbox] = useState(true);
+  const pathname = usePathname();
 
   const selectRoomData = [
     {
@@ -66,7 +68,9 @@ const BookingForm = () => {
   const formSchema = z
     .object({
       name: z
-        .string()
+        .string({
+          required_error: "Обязательное поле",
+        })
         .min(2, {
           message: "Минимум 2 символа ",
         })
@@ -75,7 +79,7 @@ const BookingForm = () => {
         }),
       surname: z
         .string({
-          required_error: "Обязательно",
+          required_error: "Обязательное поле",
         })
         .min(2, {
           message: "Минимум 2 символа ",
@@ -93,7 +97,7 @@ const BookingForm = () => {
           "Неверный формат номера"
         ),
       checkIn: z.string({
-        required_error: "Напишите время заезда",
+        required_error: "Обязательное поле",
       }),
       dateFrom: z.date({ required_error: "Выберите дату заезда" }),
       dateTo: z.date({
@@ -136,8 +140,8 @@ const BookingForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      surname: "",
+      name: undefined,
+      surname: undefined,
       phone: "",
       room: undefined,
       checkIn: undefined,
@@ -337,50 +341,44 @@ const BookingForm = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="privacy"
-            render={({ field }) => (
-              <FormItem>
-                <div className=" flex items-center space-x-2">
-                  <FormControl>
-                    <Checkbox
-                      key={field.name}
-                      className="w-5 h-5 border-black-100 checked:color"
-                      checked={field.value}
-                      onCheckedChange={(e) => {
-                        field.onChange(e);
-                        setPrivacyCheckbox((prevState) => {
-                          return !prevState;
-                        });
-                      }}
-                    />
-                  </FormControl>
-                  <FormLabel>
-                    Я согласен с{" "}
-                    <Link
-                      className="text-primary underline underline-offset-2"
-                      href="/booking"
-                    >
-                      Правилами бронирования
-                    </Link>{" "}
-                    и{" "}
-                    <Link
-                      className="text-primary underline underline-offset-2"
-                      href="/privacy"
-                    >
-                      Политикой конфиденциальности
-                    </Link>
-                  </FormLabel>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {pathname !== "/dashboard" ? (
+            <div className="flex items-center gap-x-3">
+              <Checkbox
+                className="w-5 h-5 border-black-100 checked:color"
+                onCheckedChange={(e) => {
+                  setPrivacyCheckbox((prevState) => {
+                    return !prevState;
+                  });
+                }}
+              />
+              <FormLabel>
+                Я согласен с{" "}
+                <Link
+                  target="_blank"
+                  className="text-primary underline underline-offset-2"
+                  href="/booking"
+                >
+                  Правилами бронирования
+                </Link>{" "}
+                и{" "}
+                <Link
+                  target="_blank"
+                  className="text-primary underline underline-offset-2"
+                  href="/privacy"
+                >
+                  Политикой конфиденциальности
+                </Link>
+              </FormLabel>
+            </div>
+          ) : null}
           {/* <p>к оплате 1000 руб.</p> */}
           <Button
-            className="disabled:bg-amber-100"
-            disabled={isSubmitting || privacyCheckbox}
+            className="disabled:bg-gray-300"
+            disabled={
+              isSubmitting || pathname === "/dashboard"
+                ? false
+                : privacyCheckbox
+            }
             variant={"outline"}
             type="submit"
           >

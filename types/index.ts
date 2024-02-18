@@ -54,3 +54,12 @@ export interface IPricesFromDB {
   roomType: string;
   price: string;
 }
+
+export interface IFaq {
+  heading: string;
+  rules: string[];
+}
+
+export interface IFaqProps {
+  rules: IFaq[];
+}

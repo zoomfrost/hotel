@@ -19,7 +19,7 @@ interface HotelCarouselProps {
 const HotelCarousel = ({ array }: HotelCarouselProps) => {
   const { title, alt, photos } = array;
   return (
-    <div className="paddings">
+    <div className="pt-12 px-6">
       <h2 className="text-4xl max-sm:text-2xl text-center">{title}</h2>
       <Carousel
         className="mt-6"

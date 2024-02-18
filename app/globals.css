@@ -8,77 +8,9 @@
   font-family: "Raleway", sans-serif;
 }
 
-.icon {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
-}
-.icon-connection {
-  width: 1.25em;
-}
-
 @layer utilities {
-  .base-regular {
-    @apply text-[24px] font-normal leading-[31.2px];
-  }
-
-  .base-bold {
-    @apply text-[24px] font-semibold leading-[31.2px];
-  }
-
-  .paragraph-regular {
-    @apply text-[20px] font-normal leading-[26px];
-  }
-
-  .paragraph-semibold {
-    @apply text-[20px] font-semibold leading-[26px];
-  }
-
-  .body-regular {
-    @apply text-[16px] font-normal leading-[20.8px];
-  }
-
-  .body-semibold {
-    @apply text-[16px] font-semibold leading-[20.8px];
-  }
-
-  .body-medium {
-    @apply text-[16px] font-medium leading-[22.4px];
-  }
-
-  .small-regular {
-    @apply text-[14px] font-normal leading-[17.5px];
-  }
-
-  .small-bold {
-    @apply text-[14px] font-semibold leading-[17.5px];
-  }
-
-  .heading4 {
-    @apply font-semibold text-[20px] leading-[26px] tracking-[0.25%];
-  }
-
-  .body-text {
-    @apply text-[16px] leading-[22px] font-normal;
-  }
-
   .paddings {
     @apply sm:p-16 xs:p-8 px-6 py-12;
-  }
-
-  .y-paddings {
-    @apply sm:py-16 py-12;
-  }
-
-  .x-paddings {
-    @apply sm:px-16 px-6;
-  }
-
-  .career-paddings {
-    @apply sm:p-28 xs:p-8 px-6 py-12;
   }
 
   .flex-between {
@@ -95,84 +27,6 @@
 
   .flex-end {
     @apply flex justify-end;
-  }
-
-  .inner-width {
-    @apply 3xl:max-w-[1280px] w-full mx-auto;
-  }
-
-  .inter-width {
-    @apply lg:w-[80%] w-[100%];
-  }
-
-  .no-focus {
-    @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
-  }
-}
-
-.frame {
-  border-style: inset;
-  border: 1px solid #40a0ff;
-  position: relative;
-}
-
-.sm-box {
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  border: 1px solid #40a0ff;
-}
-
-.sm-box-1 {
-  top: -15px;
-  left: -15px;
-}
-
-.sm-box-2 {
-  top: -15px;
-  right: -15px;
-}
-
-.sm-box-3 {
-  bottom: -15px;
-  right: -15px;
-}
-
-.sm-box-4 {
-  bottom: -15px;
-  left: -15px;
-}
-
-.sm-box-5 {
-  bottom: 50%;
-  left: -15px;
-}
-
-.sm-box-6 {
-  bottom: 50%;
-  right: -15px;
-}
-
-.sm-box-7 {
-  bottom: -15px;
-  left: 50%;
-}
-
-.sm-box-8 {
-  top: -15px;
-  left: 50%;
-}
-
-@media screen and (max-width: 500px) {
-  .sm-box-5,
-  .sm-box-6,
-  .sm-box-7,
-  .sm-box-8 {
-    display: none;
-  }
-
-  .frame {
-    border-radius: 10px;
   }
 }
 

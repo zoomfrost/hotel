@@ -27,8 +27,6 @@ import { createPrice } from "@/actions/action";
 
 const creatingPricesForm = () => {
   const [pricingStatus, setPricingStatus] = useState<string | null>(null);
-  const [data, setData] = useState<any>();
-  console.log(data);
 
   const selectRoomData = [
     {
@@ -41,16 +39,22 @@ const creatingPricesForm = () => {
     },
   ];
 
-  const formSchema = z.object({
-    room: z.string(),
-    price: z.string(),
-  });
+  const formSchema = z
+    .object({
+      room: z.string({
+        required_error: "Обязательное поле",
+      }),
+      price: z.string({
+        required_error: "Обязательное поле",
+      }),
+    })
+    .required();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       room: undefined,
-      price: "",
+      price: undefined,
     },
   });
 
@@ -60,7 +64,6 @@ const creatingPricesForm = () => {
     setPricingStatus(null);
     const response = await createPrice(values)
       .then((data) => {
-        setData(data);
         setPricingStatus("Успешно");
         setTimeout(() => {
           setPricingStatus(null);
@@ -126,7 +129,7 @@ const creatingPricesForm = () => {
             )}
           />
           <Button
-            className="disabled:bg-amber-100"
+            className="disabled:bg-gray-300"
             disabled={isSubmitting}
             variant={"outline"}
             type="submit"

@@ -5,27 +5,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
+import { IFaqProps } from "@/types";
 
-const Faq = () => {
-  const rules = [
-    {
-      heading: "Rules",
-      rules: ["No smoking", "No pets"],
-    },
-    {
-      heading: "Cancellation policy",
-      rules: [
-        "Free cancellation until 1:00 PM on Mar 27",
-        "After that, cancel before 2:00 PM on Apr 1 and get a 50% refund, minus the first night and service fee.",
-      ],
-    },
-    {
-      heading: "import information",
-      rules: [
-        "You need to hike a steep hill to arrive at the treehouses, it takes approx 20-30 minutes on a trail with stairs and uneven ground.",
-      ],
-    },
-  ];
+const Faq = ({ rules }: IFaqProps) => {
   return (
     <Accordion
       type="multiple"
@@ -33,7 +15,7 @@ const Faq = () => {
     >
       {rules.map((rule, i) => (
         <AccordionItem key={i} className="" value={`item-${i}`}>
-          <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 text-xs xs:text-sm md:text-lg  text-main">
+          <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 text-xs xs:text-sm md:text-lg  text-main text-start">
             {rule.heading}
           </AccordionTrigger>
           {rule.rules.map((item, i) => (

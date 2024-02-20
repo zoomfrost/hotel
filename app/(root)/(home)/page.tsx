@@ -6,7 +6,6 @@ import PhotoGallery from "@/components/PhotoGallery";
 import Facilities from "@/components/Facilities";
 import HotelCarousel from "@/components/HotelCarousel";
 import InTouch from "@/components/InTouch";
-import InTouchBooking from "@/components/InTouchBooking";
 
 export const metadata: Metadata = {
   title: "Baskov",
@@ -34,8 +33,8 @@ const Home = async () => {
   const descrArr = [
     {
       photo: "https://i.postimg.cc/wTGTYRTy/hotel6.jpg",
-      heading: "Baskov",
-      text: "Løvtag’s three exclusive and comfortable cabins, Et, Ro and Ly, are designed by architect Sigurd Larsen. They all have an open space with a double bed, a double sofa bed, kitchen, separate toilet and an outdoor shower. On the roof, surrounded by treetops, there is a terrace, which is about nine meters above ground. The cottages are built around tall, old trees that go through the entire cottage from floor to ceiling.",
+      heading: "Басков",
+      text: "Прикоснитесь к истории Санкт-Петербурга, остановившись в самом сердце города. У нас вы сможете почувствовать себя как дома. В нашем гостевом доме всего четыре номера. Два трехместных и два двухместных. Есть возможность дополнительного размещения в каждом номере. В номерах стоят 1,5-спальные кровати, тумбочки, стол, стулья, шкаф. Также в каждом номере есть чайник, посуда. Постельное белье и полотенца комплектуются в номере по количеству гостей. Также для вашего удобства есть фен, утюг, гладильная доска, стиральная машина, тапочки. Для того, чтобы приготовить еду стоят мультиварка и микроволновка. Холодильник общий на 4 номера",
     },
   ];
 

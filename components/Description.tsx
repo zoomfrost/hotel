@@ -19,9 +19,9 @@ const Description = ({ photos, isHomePage }: IDescriptionDataProps) => {
 
             {isHomePage && (
               <>
-                <p className="">{item.text}</p>
+                <p className="indent-5">{item.text}</p>
                 <Link className="hover:font-bold block w-24" href="/rooms">
-                  Read more
+                  Подробнее
                 </Link>
               </>
             )}

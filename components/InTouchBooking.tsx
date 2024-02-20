@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import bookHotel from "@/public/hotel4.jpg";
-import { getPrice } from "@/actions/action";
+import { getPricePerDay } from "@/actions/action";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +13,7 @@ const InTouchBooking = () => {
   const [price, setPrice] = useState<number[] | null>(null);
   const [status, setStatus] = useState("Загрузка");
   useEffect(() => {
-    getPrice()
+    getPricePerDay()
       .then((data) => {
         setPrice(data as number[]);
       })

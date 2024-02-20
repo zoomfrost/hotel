@@ -10,7 +10,7 @@ const InTouch = () => {
   const socialLinksArr = [
     {
       text: "WhatsApp",
-      link: "",
+      link: "https://wa.me/89117283072",
       icon: whatsapp,
       id: 1,
     },
@@ -35,13 +35,13 @@ const InTouch = () => {
         <div>
           <Link
             className='after:content-["\260e"] after:ml-2'
-            href="tel:+79129112937"
+            href="tel:+79117283072"
           >
-            +7912012012
+            +79117283072
           </Link>
           <br />
-          <Link className="mt-5" href="mailto:baskov@gmail.com">
-            baskov@gmail.com
+          <Link className="mt-5" href="mailto:support@baskov.online">
+            support@baskov.online
           </Link>
         </div>
         <ul className="flex flex-row items-center justify-start gap-x-5">

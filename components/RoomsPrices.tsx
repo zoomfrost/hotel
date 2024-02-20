@@ -9,14 +9,14 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { getPrice } from "@/actions/action";
+import { getPricePerDay } from "@/actions/action";
 import FeedBackNotification from "./FeedBackNotification";
 
 const RoomsPrices = () => {
   const [price, setPrice] = useState<number[] | null>(null);
   const [status, setStatus] = useState("Загрузка");
   useEffect(() => {
-    getPrice()
+    getPricePerDay()
       .then((data) => {
         setPrice([...(data as number[]), 300]);
       })

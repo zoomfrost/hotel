@@ -3,7 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format, closestTo, sub } from "date-fns";
 import { useEffect, useReducer, useState } from "react";
-import { DateAfter, DateRange, Matcher } from "react-day-picker";
+import {
+  DateAfter,
+  DateRange,
+  Matcher,
+  SelectRangeEventHandler,
+} from "react-day-picker";
 import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -28,7 +33,11 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { addBooking, getBookings } from "@/actions/action";
+import {
+  addBooking,
+  getBookings,
+  getCurrentRoomPricePerDay,
+} from "@/actions/action";
 import FeedBackNotification from "./FeedBackNotification";
 import { BookingsFromDB } from "@/types";
 import Link from "next/link";
@@ -38,6 +47,8 @@ import { usePathname } from "next/navigation";
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
   const [bookingStatus, setBookingStatus] = useState<string | null>(null);
+
+  const [prepayment, setPrepayment] = useState<number[] | null>(null);
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
@@ -170,6 +181,12 @@ const BookingForm = () => {
       createDisabledDays(data as BookingsFromDB[])
     );
   }, [typeOfRooms, range, bookingStatus]);
+
+  useEffect(() => {
+    getCurrentRoomPricePerDay(typeOfRooms.replace(/[0-9]/g, "")).then((data) =>
+      setPrepayment(data as number[])
+    );
+  }, [typeOfRooms]);
 
   const onSelectDays = (e: any) => {
     if (e !== undefined) {
@@ -371,7 +388,9 @@ const BookingForm = () => {
               </FormLabel>
             </div>
           ) : null}
-          {/* <p>к оплате 1000 руб.</p> */}
+          {prepayment && prepayment?.length !== 0 ? (
+            <p>{`Сумма предоплаты ${prepayment[0]}`}</p>
+          ) : null}
           <Button
             className="disabled:bg-gray-300"
             disabled={

@@ -70,7 +70,10 @@ const Facilities = () => {
       <h3 className="text-center my-3 text-2xl mb-6">Удобства</h3>
       <div className="grid grid-cols-4 hyphens-auto gap-y-7 gap-x-24 p-5 max-md:grid-cols-3 max-sm:grid-cols-2 ">
         {arr.map((item, i) => (
-          <div className="flex-center flex-col gap-y-1" key={i}>
+          <div
+            className="flex items-center justify-start flex-col gap-y-1 p-1"
+            key={i}
+          >
             <Image src={item.imgSrc} alt="photo" />
             <p className="max-md:text-sm text-center">{item.text}</p>
           </div>

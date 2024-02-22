@@ -26,7 +26,7 @@ const DashboardHome = async () => {
     };
   });
   return (
-    <section className="grid mt-10 max-lg:grid-cols-1 grid-cols-2 gap-x-14 gap-y-14 pt-10">
+    <section className="grid w-full justify-items-center mt-10 max-lg:grid-cols-1 grid-cols-2 gap-x-14 gap-y-14 pt-10">
       <div className="grid auto-rows-min gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
           <BookingList allActiveBookings={allActiveBookings} />

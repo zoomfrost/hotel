@@ -5,18 +5,18 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "Администратор",
-  description: "Гостевой дом / Отель в центре Санкт-Петербурга",
+  description: "Гостевой дом / Отель в Санкт-Петербурге",
 };
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   const links = [
     {
-      name: "Schedule",
+      name: "Расписание",
       link: "/dashboard",
       id: 1,
     },
     {
-      name: "History",
+      name: "История",
       link: "/dashboard/history",
       id: 2,
     },

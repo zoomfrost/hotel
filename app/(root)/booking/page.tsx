@@ -33,25 +33,19 @@ const Booking = () => {
       rules: ["Предоплата включает в себя первые сутки проживания"],
     },
     {
-      heading: "Rules",
+      heading: "Внутренние правила",
       rules: [
-        "Не курить",
-        "Не распивать алкоголь",
+        "Не курить на территории",
+        "Не распивать алкоголь на территории",
         "Выезд до 12:00",
         "Заезд после 14:00",
       ],
     },
     {
-      heading: "Cancellation policy",
+      heading: "Политика отмены бронирования",
       rules: [
-        "Free cancellation until 1:00 PM on Mar 27",
-        "After that, cancel before 2:00 PM on Apr 1 and get a 50% refund, minus the first night and service fee.",
-      ],
-    },
-    {
-      heading: "import information",
-      rules: [
-        "You need to hike a steep hill to arrive at the treehouses, it takes approx 20-30 minutes on a trail with stairs and uneven ground.",
+        "При отмене более чем за 3 дня возвращаем полную сумму ",
+        "Менее чем за 3 дня до заезда удерживаем стоимость первых суток",
       ],
     },
   ];

@@ -21,6 +21,7 @@ const History = async () => {
       id: item.id,
       created: item.created,
       canceled: item.canceled,
+      comment: item.comment,
     };
   });
   return (

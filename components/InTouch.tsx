@@ -22,7 +22,7 @@ const InTouch = () => {
     },
     {
       text: "Viber",
-      link: "",
+      link: "viber://chat?number=%2B79117283072",
       icon: viber,
       id: 3,
     },

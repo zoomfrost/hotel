@@ -28,21 +28,21 @@ const BookingItem = memo(
       <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-10 text-black xs:text-xs sm:text-sm md:text-base max-md:gap-x-1">
         <div>
           <span>
-            Date: {format(dateFrom, "dd.MM.yyyy")} -{" "}
+            Даты: {format(dateFrom, "dd.MM.yyyy")} -{" "}
             {format(dateTo, "dd.MM.yyyy")}
           </span>
           <br />
-          <span>Name: {name}</span>
+          <span>Имя: {name}</span>
           <br />
-          <span>Room: {room}</span>
+          <span>Номер: {room}</span>
           <br />
-          <span>Phone: {phone}</span>
+          <span>Телефон: {phone}</span>
           <br />
-          <span>Check in: {checkIn}</span>
+          <span>Время заезда: {checkIn}</span>
           <br />
-          <span>Created {format(created, "dd.MM.yyyy  HH.mm.ss")} </span>
+          <span>Создано {format(created, "dd.MM.yyyy  HH.mm.ss")} </span>
           <br />
-          <span>Комментарий {comment} </span>
+          <span>Комментарий: {comment} </span>
         </div>
         {!!canceled ? (
           <>

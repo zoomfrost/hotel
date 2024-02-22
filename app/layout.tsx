@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://baskov.online"),
   referrer: "origin-when-cross-origin",
   authors: [{ name: "Anton", url: "https://github.com/zoomfrost" }],
   creator: "Anton Rez",

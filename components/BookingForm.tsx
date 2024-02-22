@@ -43,6 +43,7 @@ import { BookingsFromDB } from "@/types";
 import Link from "next/link";
 import { Checkbox } from "./ui/checkbox";
 import { usePathname } from "next/navigation";
+import { Textarea } from "./ui/textarea";
 
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
@@ -79,21 +80,17 @@ const BookingForm = () => {
   const formSchema = z
     .object({
       name: z
-        .string({
-          required_error: "Обязательное поле",
-        })
+        .string()
         .min(2, {
-          message: "Минимум 2 символа ",
+          message: "Обязательное поле",
         })
         .max(50, {
           message: "Максимум 50 символов",
         }),
       surname: z
-        .string({
-          required_error: "Обязательное поле",
-        })
+        .string()
         .min(2, {
-          message: "Минимум 2 символа ",
+          message: "Обязательное поле",
         })
         .max(50, {
           message: "Максимум 50 символов",
@@ -107,16 +104,20 @@ const BookingForm = () => {
           /^\++[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}/,
           "Неверный формат номера"
         ),
-      checkIn: z.string({
-        required_error: "Обязательное поле",
+      checkIn: z.string().min(2, {
+        message: "Обязательное поле",
       }),
       dateFrom: z.date({ required_error: "Выберите дату заезда" }),
       dateTo: z.date({
         required_error: "Выберите дату выезда",
       }),
-      privacy: z.boolean({
-        required_error: "Согласие",
-      }),
+      comment: z
+        .string({
+          required_error: "Обязательное поле",
+        })
+        .max(250, {
+          message: "Максимум 250 символов",
+        }),
     })
     .required();
 
@@ -151,14 +152,14 @@ const BookingForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: undefined,
-      surname: undefined,
+      name: "",
+      surname: "",
       phone: "",
       room: undefined,
-      checkIn: undefined,
+      checkIn: "",
       dateFrom: undefined,
       dateTo: undefined,
-      privacy: undefined,
+      comment: "",
     },
   });
 
@@ -353,6 +354,23 @@ const BookingForm = () => {
                 <FormLabel>Время заезда</FormLabel>
                 <FormControl>
                   <Input placeholder="15:00" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="comment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Комментарий</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="h-[100px] whitespace-normal resize-none"
+                    placeholder="Понадобится раскладушка, хотел бы продлить время выезда на час ..."
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -41,6 +41,7 @@ export interface IBooking {
   canceled: boolean;
   id: string;
   created: Date;
+  comment: string;
 }
 
 export interface BookingsFromDB extends IBooking {

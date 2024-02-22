@@ -17,6 +17,7 @@ export const addBooking = async (formData: IBooking) => {
     canceled,
     id,
     created,
+    comment,
   } = await formData;
 
   try {
@@ -31,6 +32,7 @@ export const addBooking = async (formData: IBooking) => {
       canceled,
       id,
       created,
+      comment,
     });
 
     await newBooking.save();

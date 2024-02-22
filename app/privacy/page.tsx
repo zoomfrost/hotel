@@ -5,11 +5,11 @@ import Container from "@/components/ui/container";
 const page = () => {
   return (
     <div className="w-full h-screen">
-      {/* <iframe
+      <iframe
         className="w-full h-full"
-        src="https://1drv.ms/w/c/805d3f5bdd433533/IQMzNUPdWz9dIICAgAAAAAAAATQSZygDLdzCoUEKO_zUs2g?em=2&amp;wdPrint=0&amp;wdEmbedCode=1&amp;wdStartOn=1"
+        src="https://onedrive.live.com/embed?resid=73B1A47790F9A5FC%21256&amp;authkey=!AJ498X1CzZogCcU&amp;em=2&amp;wdEmbedCode=0&amp;wdPrint=1&amp;wdStartOn=2"
         frameBorder="0"
-      ></iframe> */}
+      ></iframe>
     </div>
   );
 };

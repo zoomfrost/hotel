@@ -22,6 +22,7 @@ const DashboardHome = async () => {
       dateTo: item.dateTo,
       id: item.id,
       created: item.created,
+      comment: item.comment,
     };
   });
   return (

@@ -22,6 +22,7 @@ const BookingItem = memo(
       canceled,
       id,
       created,
+      comment,
     } = bookings;
     return (
       <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-10 text-black xs:text-xs sm:text-sm md:text-base max-md:gap-x-1">
@@ -40,6 +41,8 @@ const BookingItem = memo(
           <span>Check in: {checkIn}</span>
           <br />
           <span>Created {format(created, "dd.MM.yyyy  HH.mm.ss")} </span>
+          <br />
+          <span>Комментарий {comment} </span>
         </div>
         {!!canceled ? (
           <>

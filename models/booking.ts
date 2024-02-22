@@ -10,6 +10,7 @@ const BookingSchema = new Schema({
   canceled: Boolean,
   id: String,
   created: Date,
+  comment: String,
 });
 
 export const Booking = models.Booking || model("Booking", BookingSchema);

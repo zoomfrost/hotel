@@ -54,8 +54,7 @@ export type ActiveBooking = Omit<IBooking, "canceled">;
 export interface IPricesFromDB {
   roomType: string;
   dates: {
-    dateFrom: Date;
-    dateTo: Date;
+    interval: { start: Date; end: Date };
     price: string;
   };
 }

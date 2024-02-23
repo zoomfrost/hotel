@@ -2,16 +2,16 @@ import React from "react";
 
 const PriceNotification = ({
   prepayment,
-  AmountOfDays,
+  price,
 }: {
-  prepayment: number[] | null;
-  AmountOfDays: number | null;
+  prepayment: number | null;
+  price: number | null;
 }) => {
-  if (prepayment?.length !== 0 && AmountOfDays) {
+  if (prepayment && price) {
     return (
       <div>
         <p>Сумма предоплаты {prepayment} руб.</p>
-        <p>К оплате после заезда {AmountOfDays * prepayment![0]} руб.</p>
+        <p>К оплате после заезда {price} руб.</p>
       </div>
     );
   }

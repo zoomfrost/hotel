@@ -51,7 +51,8 @@ const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
   const [bookingStatus, setBookingStatus] = useState<string | null>(null);
 
-  const [prepayment, setPrepayment] = useState<number[] | null>(null);
+  const [prepayment, setPrepayment] = useState<number | null>(null);
+  const [actualPrice, setActualPrice] = useState<number | null>(null);
   const [AmountOfDays, setAmountOfDays] = useState<number | null>(null);
 
   const pastMonth = new Date();
@@ -185,16 +186,26 @@ const BookingForm = () => {
       createDisabledDays(data as BookingsFromDB[])
     );
   }, [typeOfRooms, range, bookingStatus]);
-
   useEffect(() => {
-    getCurrentRoomPricePerDay(typeOfRooms.replace(/[0-9]/g, "")).then((data) =>
-      setPrepayment(data as number[])
-    );
-    setAmountOfDays(
-      differenceInCalendarDays(range?.to as Date, range?.from as Date)
-    );
+    setActualPrice(null);
+    if (range?.from && range.to) {
+      getCurrentRoomPricePerDay(typeOfRooms.replace(/[0-9]/g, ""), {
+        start: range?.from as Date,
+        end: range?.to as Date,
+      }).then((data) => {
+        console.log(data);
+        setPrepayment(data[0].price);
+        setActualPrice(
+          data.reduce(function (currentSum, currentInterval) {
+            return currentSum + currentInterval.days * currentInterval.price;
+          }, 0)
+        );
+      });
+      // setAmountOfDays(
+      //   differenceInCalendarDays(range?.to as Date, range?.from as Date)
+      // );
+    }
   }, [range]);
-
   const onSelectDays = (e: any) => {
     if (e !== undefined) {
       setRange(e);
@@ -413,10 +424,7 @@ const BookingForm = () => {
               </FormLabel>
             </div>
           ) : null}
-          <PriceNotification
-            prepayment={prepayment}
-            AmountOfDays={AmountOfDays}
-          />
+          <PriceNotification price={actualPrice} prepayment={prepayment} />
           <Button
             className="disabled:bg-gray-300"
             disabled={

@@ -40,13 +40,13 @@ const RoomsPrices = () => {
   const tableRows = [
     {
       name: "Двухместный",
-      price: doubleRoomPrice === Infinity ? 0 : doubleRoomPrice,
+      price: doubleRoomPrice === Infinity ? 0 : `от ${doubleRoomPrice} руб.`,
     },
     {
       name: "Трехместный",
-      price: tripleRoomPrice === Infinity ? 0 : tripleRoomPrice,
+      price: tripleRoomPrice === Infinity ? 0 : `от ${tripleRoomPrice} руб.`,
     },
-    { name: "Дополнительное спальное место", price: 300 },
+    { name: "Дополнительное спальное место", price: `300 руб.` },
   ];
   return (
     <div className="mt-9">
@@ -72,7 +72,7 @@ const RoomsPrices = () => {
                 <TableCell className="text-left">{item.name}</TableCell>
                 <TableCell className="text-right">
                   {item.price ? (
-                    `от ${item.price} руб.`
+                    item.price
                   ) : (
                     <FeedBackNotification status={status} />
                   )}

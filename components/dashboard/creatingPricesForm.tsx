@@ -40,10 +40,10 @@ const creatingPricesForm = () => {
   let days = "";
   if (range?.from) {
     if (!range.to) {
-      days = `Заезд ${format(range.from, "dd.MM.yyyy")}`;
+      days = `с ${format(range.from, "dd.MM.yyyy")}`;
     } else if (range.to) {
-      days = `Заезд ${format(range.from, "dd.MM.yyyy")} - Выезд ${format(
-        add(range.to, { days: 1 }),
+      days = `с ${format(range.from, "dd.MM.yyyy")} - по ${format(
+        range.to,
         "dd.MM.yyyy"
       )}`;
     }

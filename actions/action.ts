@@ -4,6 +4,12 @@ import { Booking } from "@/models/booking";
 import { Price } from "@/models/price";
 import { BookingsFromDB, IBooking, IPricesFromDB } from "@/types";
 import { connectToDB } from "@/utils/database";
+import {
+  add,
+  areIntervalsOverlapping,
+  getOverlappingDaysInIntervals,
+  isFuture,
+} from "date-fns";
 import { revalidatePath } from "next/cache";
 
 export const addBooking = async (formData: IBooking) => {
@@ -92,10 +98,12 @@ export async function createPrice(formData: {
     await connectToDB();
     const newPrice = new Price({
       roomType: room,
-      dates: { from: dateFrom, to: dateTo, price },
+      dates: {
+        interval: { start: dateFrom, end: add(dateTo, { days: 1 }) },
+        price,
+      },
     });
     await newPrice.save();
-    console.log(newPrice);
 
     // if (newPrices.length !== 0) {
     //   await Price.findOneAndUpdate({ roomType: room }, { price: price });
@@ -112,31 +120,38 @@ export async function createPrice(formData: {
   }
 }
 
-export async function deletePrices() {
-  try {
-    await connectToDB();
-    const deleted = await Price.deleteMany();
-    return deleted;
-  } catch (error) {
-    return error;
-  }
+export async function deletePrices(roomType: string) {
+  await connectToDB();
+  const deleted = await Price.deleteMany({ roomType: roomType });
+  return deleted;
 }
 
 export async function getPricesPerDay(): Promise<IPricesFromDB[]> {
   await connectToDB();
   const newPrices: IPricesFromDB[] = await Price.find();
-  console.log(newPrices);
-  return newPrices;
+  return newPrices.filter((price) => isFuture(price.dates.interval.end));
 }
 
-export async function getCurrentRoomPricePerDay(roomType: string) {
-  try {
-    await connectToDB();
-    const newPrices: IPricesFromDB[] = await Price.find({ roomType: roomType });
-    return newPrices.map((item) => {
-      return +item.dates.price;
+interface IReturnCurrentRoomPrice {
+  price: number;
+  days: number;
+}
+
+export async function getCurrentRoomPricePerDay(
+  roomType: string,
+  dates: { start: Date; end: Date }
+): Promise<IReturnCurrentRoomPrice[]> {
+  await connectToDB();
+  const newPrices: IPricesFromDB[] = await Price.find({ roomType: roomType });
+
+  return newPrices
+    .filter((item) =>
+      areIntervalsOverlapping(dates, item.dates.interval, { inclusive: true })
+    )
+    .map((item, i) => {
+      return {
+        price: +item.dates.price,
+        days: getOverlappingDaysInIntervals(dates, item.dates.interval),
+      };
     });
-  } catch (error) {
-    return error;
-  }
 }

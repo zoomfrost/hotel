@@ -81,38 +81,52 @@ export async function getBookings(roomType: string) {
   }
 }
 
-export async function createPrice(formData: { room: string; price: string }) {
-  const { room, price } = await formData;
+export async function createPrice(formData: {
+  room: string;
+  price: string;
+  dateFrom: Date;
+  dateTo: Date;
+}) {
+  const { room, price, dateFrom, dateTo } = await formData;
   try {
     await connectToDB();
-    const newPrices = await Price.find({ roomType: room });
-    console.log(newPrices);
-    if (newPrices.length !== 0) {
-      await Price.findOneAndUpdate({ roomType: room }, { price: price });
-    } else {
-      const newPrice = new Price({
-        roomType: room,
-        price: price,
-      });
+    const newPrice = new Price({
+      roomType: room,
+      dates: { from: dateFrom, to: dateTo, price },
+    });
+    await newPrice.save();
+    console.log(newPrice);
 
-      await newPrice.save();
-    }
-    return { status: "ok" };
+    // if (newPrices.length !== 0) {
+    //   await Price.findOneAndUpdate({ roomType: room }, { price: price });
+    // } else {
+    //   const newPrice = new Price({
+    //     roomType: room,
+    //     price: price,
+    //   });
+    //   await newPrice.save();
+    // }
+    // return { status: "ok" };
   } catch (error) {
     return error;
   }
 }
 
-export async function getPricePerDay() {
+export async function deletePrices() {
   try {
     await connectToDB();
-    const newPrices: IPricesFromDB[] = await Price.find();
-    return newPrices.map((item) => {
-      return +item.price;
-    });
+    const deleted = await Price.deleteMany();
+    return deleted;
   } catch (error) {
     return error;
   }
+}
+
+export async function getPricesPerDay(): Promise<IPricesFromDB[]> {
+  await connectToDB();
+  const newPrices: IPricesFromDB[] = await Price.find();
+  console.log(newPrices);
+  return newPrices;
 }
 
 export async function getCurrentRoomPricePerDay(roomType: string) {
@@ -120,7 +134,7 @@ export async function getCurrentRoomPricePerDay(roomType: string) {
     await connectToDB();
     const newPrices: IPricesFromDB[] = await Price.find({ roomType: roomType });
     return newPrices.map((item) => {
-      return +item.price;
+      return +item.dates.price;
     });
   } catch (error) {
     return error;

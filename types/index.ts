@@ -53,7 +53,11 @@ export type ActiveBooking = Omit<IBooking, "canceled">;
 
 export interface IPricesFromDB {
   roomType: string;
-  price: string;
+  dates: {
+    dateFrom: Date;
+    dateTo: Date;
+    price: string;
+  };
 }
 
 export interface IFaq {

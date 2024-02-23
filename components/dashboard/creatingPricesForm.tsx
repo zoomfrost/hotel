@@ -24,9 +24,30 @@ import { useForm, useFormState } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { createPrice } from "@/actions/action";
+import { DateRange } from "react-day-picker";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Calendar } from "../ui/calendar";
+import { add, format } from "date-fns";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 
 const creatingPricesForm = () => {
   const [pricingStatus, setPricingStatus] = useState<string | null>(null);
+
+  const [range, setRange] = useState<DateRange | undefined>(undefined);
+  const pastMonth = new Date();
+
+  let days = "";
+  if (range?.from) {
+    if (!range.to) {
+      days = `Заезд ${format(range.from, "dd.MM.yyyy")}`;
+    } else if (range.to) {
+      days = `Заезд ${format(range.from, "dd.MM.yyyy")} - Выезд ${format(
+        add(range.to, { days: 1 }),
+        "dd.MM.yyyy"
+      )}`;
+    }
+  }
 
   const selectRoomData = [
     {
@@ -47,6 +68,8 @@ const creatingPricesForm = () => {
       price: z.string({
         required_error: "Обязательное поле",
       }),
+      dateFrom: z.date(),
+      dateTo: z.date(),
     })
     .required();
 
@@ -54,9 +77,21 @@ const creatingPricesForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       room: undefined,
-      price: undefined,
+      price: "",
+      dateFrom: undefined,
+      dateTo: undefined,
     },
   });
+
+  const onSelectDays = (e: any) => {
+    if (e !== undefined) {
+      setRange(e);
+      form.setValue("dateFrom", e.from);
+      form.setValue("dateTo", e.to);
+    } else {
+      setRange(undefined);
+    }
+  };
 
   const { isSubmitting } = useFormState(form);
 
@@ -73,6 +108,7 @@ const creatingPricesForm = () => {
         setPricingStatus("Ошибка");
       });
     form.reset();
+    setRange(undefined);
   };
 
   return (
@@ -112,6 +148,51 @@ const creatingPricesForm = () => {
                   </SelectContent>
                 </Select>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="dateFrom"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full pl-3 h-auto whitespace-normal text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {days ? days : <span>Выберите даты</span>}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white" align="start">
+                    <Calendar
+                      mode="range"
+                      min={2}
+                      selected={range}
+                      onSelect={onSelectDays}
+                      defaultMonth={pastMonth}
+                      modifiersClassNames={{
+                        selected: "selected",
+                      }}
+                      modifiersStyles={{
+                        disabled: { color: "red" },
+                      }}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+                <FormField
+                  control={form.control}
+                  name="dateTo"
+                  render={({ field }) => <FormMessage className="m-0" />}
+                />
               </FormItem>
             )}
           />

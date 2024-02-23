@@ -1,6 +1,7 @@
 import BookingForm from "@/components/BookingForm";
 import BookingList from "@/components/dashboard/BookingList";
 import CreatingPricesForm from "@/components/dashboard/creatingPricesForm";
+import DeletePrices from "@/components/dashboard/deletePrices";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "@/models/booking";
 import { ActiveBooking } from "@/types";
@@ -38,6 +39,7 @@ const DashboardHome = async () => {
           <BookingForm />
         </div>
         <CreatingPricesForm />
+        <DeletePrices />
       </div>
     </section>
   );

@@ -9,16 +9,30 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { getPricePerDay } from "@/actions/action";
+import { getPricesPerDay } from "@/actions/action";
 import FeedBackNotification from "./FeedBackNotification";
 
 const RoomsPrices = () => {
-  const [price, setPrice] = useState<number[] | null>(null);
+  const [doubleRoomPrice, setDoubleRoomPrice] = useState<number | null>(null);
+  const [tripleRoomPrice, setTripleRoomPrice] = useState<number | null>(null);
   const [status, setStatus] = useState("Загрузка");
   useEffect(() => {
-    getPricePerDay()
+    getPricesPerDay()
       .then((data) => {
-        setPrice([...(data as number[]), 300]);
+        setDoubleRoomPrice(
+          Math.min(
+            ...data
+              .filter((item) => item.roomType === "double")
+              .map((item) => +item.dates.price)
+          )
+        );
+        setTripleRoomPrice(
+          Math.min(
+            ...data
+              .filter((item) => item.roomType === "triple")
+              .map((item) => +item.dates.price)
+          )
+        );
       })
       .catch(() => setStatus("Ошибка загрузки"));
   }, []);
@@ -26,11 +40,13 @@ const RoomsPrices = () => {
   const tableRows = [
     {
       name: "Двухместный",
+      price: doubleRoomPrice === Infinity ? 0 : doubleRoomPrice,
     },
     {
       name: "Трехместный",
+      price: tripleRoomPrice === Infinity ? 0 : tripleRoomPrice,
     },
-    { name: "Дополнительное спальное место" },
+    { name: "Дополнительное спальное место", price: 300 },
   ];
   return (
     <div className="mt-9">
@@ -55,8 +71,8 @@ const RoomsPrices = () => {
               <TableRow key={item.name}>
                 <TableCell className="text-left">{item.name}</TableCell>
                 <TableCell className="text-right">
-                  {price ? (
-                    `${price[i]} руб.`
+                  {item.price ? (
+                    `от ${item.price} руб.`
                   ) : (
                     <FeedBackNotification status={status} />
                   )}

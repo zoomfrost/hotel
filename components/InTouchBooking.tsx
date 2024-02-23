@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import bookHotel from "@/public/hotel4.jpg";
-import { getPricePerDay } from "@/actions/action";
+import { getPricesPerDay } from "@/actions/action";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,9 +13,9 @@ const InTouchBooking = () => {
   const [price, setPrice] = useState<number[] | null>(null);
   const [status, setStatus] = useState("Загрузка");
   useEffect(() => {
-    getPricePerDay()
+    getPricesPerDay()
       .then((data) => {
-        setPrice(data as number[]);
+        setPrice(data.map((item) => +item.dates.price));
       })
       .catch(() => setStatus("Ошибка загрузки"));
   }, []);

@@ -56,8 +56,8 @@ const Booking = () => {
     <Container title="Бронирование">
       <section>
         <div className="grid grid-cols-2 gap-x-7 max-md:grid-cols-1 max-md:gap-y-3 justify-items-center">
-          <BookingForm />
           <Rules rules={rules} />
+          <BookingForm />
         </div>
       </section>
     </Container>

@@ -31,7 +31,7 @@ const InTouch = () => {
     <div className="pt-12 grid grid-cols-2 max-md:grid-cols-1 max-md:gap-y-5 p-4  gap-x-44 justify-items-center">
       <div className="flex flex-col gap-y-8">
         <h4 className="md:text-5xl xs:text-3xl">Контакты</h4>
-        <p>Saint-Petersburg, Baskov, 13-15</p>
+        <p>Санкт-Петербург, пер. Басков д.13-15</p>
         <div>
           <Link
             className='after:content-["\260e"] after:ml-2'

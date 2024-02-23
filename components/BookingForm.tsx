@@ -53,7 +53,6 @@ const BookingForm = () => {
 
   const [prepayment, setPrepayment] = useState<number | null>(null);
   const [actualPrice, setActualPrice] = useState<number | null>(null);
-  const [AmountOfDays, setAmountOfDays] = useState<number | null>(null);
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
@@ -193,7 +192,6 @@ const BookingForm = () => {
         start: range?.from as Date,
         end: range?.to as Date,
       }).then((data) => {
-        console.log(data);
         setPrepayment(data[0].price);
         setActualPrice(
           data.reduce(function (currentSum, currentInterval) {
@@ -201,9 +199,6 @@ const BookingForm = () => {
           }, 0)
         );
       });
-      // setAmountOfDays(
-      //   differenceInCalendarDays(range?.to as Date, range?.from as Date)
-      // );
     }
   }, [range]);
   const onSelectDays = (e: any) => {
@@ -234,7 +229,6 @@ const BookingForm = () => {
         setBookingStatus("Ошибка");
       });
     form.reset();
-
     setRange(undefined);
   };
 
@@ -298,11 +292,13 @@ const BookingForm = () => {
                     setRange(undefined);
                   }}
                 >
+                  <FormLabel>Выберите номер</FormLabel>
+
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue
                         defaultValue={field.value}
-                        placeholder="Выберите номер"
+                        placeholder="Не выбрано"
                       />
                     </SelectTrigger>
                   </FormControl>
@@ -323,6 +319,8 @@ const BookingForm = () => {
             name="dateFrom"
             render={({ field }) => (
               <FormItem className="flex flex-col">
+                <FormLabel>Выберите даты</FormLabel>
+
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -333,7 +331,7 @@ const BookingForm = () => {
                           !field.value && "text-muted-foreground"
                         )}
                       >
-                        {days ? days : <span>Выберите даты</span>}
+                        {days ? days : <span>Не выбрано</span>}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
                     </FormControl>
@@ -397,6 +395,7 @@ const BookingForm = () => {
           {pathname !== "/dashboard" ? (
             <div className="flex items-center gap-x-3">
               <Checkbox
+                key={form.getValues("name")}
                 className="w-5 h-5 border-black-100 checked:color"
                 onCheckedChange={(e) => {
                   setPrivacyCheckbox((prevState) => {

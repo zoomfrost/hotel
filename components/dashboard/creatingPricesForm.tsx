@@ -27,7 +27,7 @@ import { createPrice } from "@/actions/action";
 import { DateRange } from "react-day-picker";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
-import { add, format } from "date-fns";
+import { format } from "date-fns";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
@@ -178,6 +178,7 @@ const creatingPricesForm = () => {
                       selected={range}
                       onSelect={onSelectDays}
                       defaultMonth={pastMonth}
+                      disabled={{ before: new Date() }}
                       modifiersClassNames={{
                         selected: "selected",
                       }}

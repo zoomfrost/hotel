@@ -9,14 +9,15 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm, useFormState } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "@/components/ui/passwordInput";
+import FeedBackNotification from "@/components/FeedBackNotification";
 
 const FormLogin = () => {
-  const [error, setError] = useState<String | null>(null);
+  const [loginStatus, setLoginStatus] = useState<string | null>(null);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -28,6 +29,7 @@ const FormLogin = () => {
   const { isSubmitting } = useFormState(form);
 
   const onSubmit = async (values: any) => {
+    setLoginStatus(null);
     const response = await signIn("credentials", {
       login: values.login,
       password: values.password,
@@ -35,11 +37,11 @@ const FormLogin = () => {
     });
     form.reset;
     if (!response?.error) {
-      setError(null);
+      setLoginStatus("Успешно");
       router.push("/dashboard");
       router.refresh();
     } else if (response?.error) {
-      setError("Неверный логин или пароль");
+      setLoginStatus("Неверный логин или пароль");
     }
   };
 
@@ -54,9 +56,9 @@ const FormLogin = () => {
           name="login"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Login</FormLabel>
+              <FormLabel>Логин</FormLabel>
               <FormControl>
-                <Input placeholder="Login" {...field} />
+                <Input placeholder="Админ" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -66,19 +68,19 @@ const FormLogin = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Пароль</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Password" {...field} />
+                <PasswordInput placeholder="1234.." {...field} />
               </FormControl>
             </FormItem>
           )}
         />
 
         <Button variant={"outline"} type="submit">
-          {isSubmitting ? "Loading..." : "Log in"}
+          {isSubmitting ? "Загрузка..." : "Войти"}
         </Button>
       </form>
-      {error && <p>{error}</p>}
+      <FeedBackNotification status={loginStatus} />
     </Form>
   );
 };

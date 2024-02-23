@@ -86,6 +86,7 @@ export async function createPrice(formData: { room: string; price: string }) {
   try {
     await connectToDB();
     const newPrices = await Price.find({ roomType: room });
+    console.log(newPrices);
     if (newPrices.length !== 0) {
       await Price.findOneAndUpdate({ roomType: room }, { price: price });
     } else {
@@ -118,9 +119,7 @@ export async function getCurrentRoomPricePerDay(roomType: string) {
   try {
     await connectToDB();
     const newPrices: IPricesFromDB[] = await Price.find({ roomType: roomType });
-    return newPrices.map((item) => {
-      return +item.price;
-    });
+    return newPrices[0].price;
   } catch (error) {
     return error;
   }

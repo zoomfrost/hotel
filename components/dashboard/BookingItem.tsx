@@ -24,6 +24,22 @@ const BookingItem = memo(
       created,
       comment,
     } = bookings;
+
+    var roomToRightType;
+    switch (room) {
+      case "triple1":
+        roomToRightType = "№1";
+        break;
+      case "triple2":
+        roomToRightType = "№2";
+        break;
+      case "double1":
+        roomToRightType = "№3";
+        break;
+      case "double2":
+        roomToRightType = "№4";
+        break;
+    }
     return (
       <div className="relative p-4 bg-white shadow-black-300 grid grid-cols-2 gap-x-10 text-black xs:text-xs sm:text-sm md:text-base max-md:gap-x-1">
         <div>
@@ -34,7 +50,7 @@ const BookingItem = memo(
           <br />
           <span>Имя: {name}</span>
           <br />
-          <span>Номер: {room}</span>
+          <span>Номер: {roomToRightType}</span>
           <br />
           <span>Телефон: {phone}</span>
           <br />

@@ -1,14 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format, closestTo, sub } from "date-fns";
-import { useEffect, useReducer, useState } from "react";
 import {
-  DateAfter,
-  DateRange,
-  Matcher,
-  SelectRangeEventHandler,
-} from "react-day-picker";
+  format,
+  closestTo,
+  sub,
+  add,
+  differenceInCalendarDays,
+} from "date-fns";
+import { useEffect, useState } from "react";
+import { DateAfter, DateRange, Matcher } from "react-day-picker";
 import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -44,12 +45,14 @@ import Link from "next/link";
 import { Checkbox } from "./ui/checkbox";
 import { usePathname } from "next/navigation";
 import { Textarea } from "./ui/textarea";
+import PriceNotification from "./PriceNotification";
 
 const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
   const [bookingStatus, setBookingStatus] = useState<string | null>(null);
 
-  const [prepayment, setPrepayment] = useState<number[] | null>(null);
+  const [prepayment, setPrepayment] = useState<number | null>(null);
+  const [fullPrice, setFullPrice] = useState<number | null>(null);
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
@@ -57,6 +60,8 @@ const BookingForm = () => {
   const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
   const [privacyCheckbox, setPrivacyCheckbox] = useState(true);
   const pathname = usePathname();
+
+  console.log(fullPrice);
 
   const selectRoomData = [
     {
@@ -124,7 +129,7 @@ const BookingForm = () => {
   function createDisabledDays(array: BookingsFromDB[]) {
     if (array.length > 0) {
       const days = array.map((booking) => {
-        return { from: booking.dateFrom, to: sub(booking.dateTo, { days: 1 }) };
+        return { from: booking.dateFrom, to: booking.dateTo };
       });
       const startsDayArray = array.map((item) => {
         return item.dateFrom;
@@ -171,7 +176,7 @@ const BookingForm = () => {
       days = `Заезд ${format(range.from, "dd.MM.yyyy")}`;
     } else if (range.to) {
       days = `Заезд ${format(range.from, "dd.MM.yyyy")} - Выезд ${format(
-        range.to,
+        add(range.to, { days: 1 }),
         "dd.MM.yyyy"
       )}`;
     }
@@ -185,9 +190,13 @@ const BookingForm = () => {
 
   useEffect(() => {
     getCurrentRoomPricePerDay(typeOfRooms.replace(/[0-9]/g, "")).then((data) =>
-      setPrepayment(data as number[])
+      setPrepayment(data as number)
     );
-  }, [typeOfRooms]);
+    setFullPrice(
+      differenceInCalendarDays(range?.to as Date, range?.from as Date) *
+        prepayment!
+    );
+  }, [range]);
 
   const onSelectDays = (e: any) => {
     if (e !== undefined) {
@@ -324,6 +333,7 @@ const BookingForm = () => {
                   <PopoverContent className="w-auto p-0 bg-white" align="start">
                     <Calendar
                       mode="range"
+                      min={2}
                       selected={range}
                       onSelect={onSelectDays}
                       defaultMonth={pastMonth}
@@ -406,9 +416,7 @@ const BookingForm = () => {
               </FormLabel>
             </div>
           ) : null}
-          {prepayment && prepayment?.length !== 0 ? (
-            <p>{`Сумма предоплаты ${prepayment[0]}`}</p>
-          ) : null}
+          <PriceNotification prepayment={prepayment} fullPrice={fullPrice} />
           <Button
             className="disabled:bg-gray-300"
             disabled={

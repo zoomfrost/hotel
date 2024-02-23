@@ -51,8 +51,8 @@ const BookingForm = () => {
   const [typeOfRooms, setTypeOfRooms] = useState("");
   const [bookingStatus, setBookingStatus] = useState<string | null>(null);
 
-  const [prepayment, setPrepayment] = useState<number | null>(null);
-  const [fullPrice, setFullPrice] = useState<number | null>(null);
+  const [prepayment, setPrepayment] = useState<number[] | null>(null);
+  const [AmountOfDays, setAmountOfDays] = useState<number | null>(null);
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
@@ -60,8 +60,6 @@ const BookingForm = () => {
   const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
   const [privacyCheckbox, setPrivacyCheckbox] = useState(true);
   const pathname = usePathname();
-
-  console.log(fullPrice);
 
   const selectRoomData = [
     {
@@ -190,11 +188,10 @@ const BookingForm = () => {
 
   useEffect(() => {
     getCurrentRoomPricePerDay(typeOfRooms.replace(/[0-9]/g, "")).then((data) =>
-      setPrepayment(data as number)
+      setPrepayment(data as number[])
     );
-    setFullPrice(
-      differenceInCalendarDays(range?.to as Date, range?.from as Date) *
-        prepayment!
+    setAmountOfDays(
+      differenceInCalendarDays(range?.to as Date, range?.from as Date)
     );
   }, [range]);
 
@@ -416,7 +413,10 @@ const BookingForm = () => {
               </FormLabel>
             </div>
           ) : null}
-          <PriceNotification prepayment={prepayment} fullPrice={fullPrice} />
+          <PriceNotification
+            prepayment={prepayment}
+            AmountOfDays={AmountOfDays}
+          />
           <Button
             className="disabled:bg-gray-300"
             disabled={

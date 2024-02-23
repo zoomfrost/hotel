@@ -119,7 +119,9 @@ export async function getCurrentRoomPricePerDay(roomType: string) {
   try {
     await connectToDB();
     const newPrices: IPricesFromDB[] = await Price.find({ roomType: roomType });
-    return newPrices[0].price;
+    return newPrices.map((item) => {
+      return +item.price;
+    });
   } catch (error) {
     return error;
   }

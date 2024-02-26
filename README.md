@@ -10,5 +10,7 @@
 - Mongoose v.8.1.1
 ---
 ### There is a Admin dashboard with some features:
+---
 **See the list of bookings and cancel chosen booking** 
+
 ![booking](https://i.postimg.cc/RVkh1Y1P/image.png)

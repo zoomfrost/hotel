@@ -11,6 +11,10 @@
 ---
 ### There is a Admin dashboard with some features:
 ---
-**See the list of bookings and cancel chosen booking** 
+ **See the list of bookings and cancel chosen booking** 
 
 ![booking](https://i.postimg.cc/RVkh1Y1P/image.png)
+
+**Create a new booking by yourself**
+
+![booking](https://i.postimg.cc/7YZswBpZ/2024-02-26-17-26-35.png)

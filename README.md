@@ -18,3 +18,7 @@
 **Create a new booking by yourself**
 
 ![booking](https://i.postimg.cc/7YZswBpZ/2024-02-26-17-26-35.png)
+
+**Create a price for chosen rooms with specific date interval**
+
+![price](https://i.postimg.cc/GpwZjWpm/2024-02-26-17-28-56.png)

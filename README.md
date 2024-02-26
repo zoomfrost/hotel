@@ -1,4 +1,4 @@
----
+
 ## Next js Hotel application
 ---
 ### Tech stack
@@ -8,3 +8,4 @@
 - Next Auth v.4.24.5
 - MongoDB v.6.3.0
 - Mongoose v.8.1.1
+---

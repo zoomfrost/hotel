@@ -40,11 +40,11 @@ const RoomsPrices = () => {
   const tableRows = [
     {
       name: "Двухместный",
-      price: doubleRoomPrice === Infinity ? 0 : `от ${doubleRoomPrice} руб.`,
+      price: doubleRoomPrice === null ? 0 : `от ${doubleRoomPrice} руб.`,
     },
     {
       name: "Трехместный",
-      price: tripleRoomPrice === Infinity ? 0 : `от ${tripleRoomPrice} руб.`,
+      price: tripleRoomPrice === null ? 0 : `от ${tripleRoomPrice} руб.`,
     },
     { name: "Дополнительное спальное место", price: `300 руб.` },
   ];

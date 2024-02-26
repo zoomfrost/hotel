@@ -9,7 +9,14 @@ import {
   differenceInCalendarDays,
 } from "date-fns";
 import { useEffect, useState } from "react";
-import { DateAfter, DateRange, Matcher } from "react-day-picker";
+import {
+  DateAfter,
+  DateRange,
+  Matcher,
+  SelectRangeEventHandler,
+} from "react-day-picker";
+import { ru } from "date-fns/locale";
+
 import { useForm, useFormState } from "react-hook-form";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -56,8 +63,7 @@ const BookingForm = () => {
 
   const pastMonth = new Date();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
-  const daysBefore = [{ before: new Date() }];
-  const [disabledDays, setDisabledDays] = useState<Matcher[]>(daysBefore);
+  const [disabledDays, setDisabledDays] = useState<Matcher[]>([]);
   const [privacyCheckbox, setPrivacyCheckbox] = useState(true);
   const pathname = usePathname();
 
@@ -83,14 +89,6 @@ const BookingForm = () => {
   const formSchema = z
     .object({
       name: z
-        .string()
-        .min(2, {
-          message: "Обязательное поле",
-        })
-        .max(50, {
-          message: "Максимум 50 символов",
-        }),
-      surname: z
         .string()
         .min(2, {
           message: "Обязательное поле",
@@ -144,11 +142,11 @@ const BookingForm = () => {
         });
       } else {
         setDisabledDays(() => {
-          return [...daysBefore, ...days];
+          return [...days];
         });
       }
     } else {
-      setDisabledDays(daysBefore);
+      setDisabledDays([]);
     }
   }
 
@@ -156,7 +154,6 @@ const BookingForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      surname: "",
       phone: "",
       room: undefined,
       checkIn: "",
@@ -201,11 +198,11 @@ const BookingForm = () => {
       });
     }
   }, [range]);
-  const onSelectDays = (e: any) => {
+  const onSelectDays = (e: DateRange | undefined) => {
     if (e !== undefined) {
       setRange(e);
-      form.setValue("dateFrom", e.from);
-      form.setValue("dateTo", e.to);
+      form.setValue("dateFrom", e.from as Date);
+      form.setValue("dateTo", e.to as Date);
     } else {
       setRange(undefined);
     }
@@ -244,22 +241,9 @@ const BookingForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Имя</FormLabel>
+                <FormLabel>ФИО</FormLabel>
                 <FormControl>
-                  <Input placeholder="Иван" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="surname"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Фамилия</FormLabel>
-                <FormControl>
-                  <Input placeholder="Иванов" {...field} />
+                  <Input placeholder="Иванов Иван" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -338,6 +322,8 @@ const BookingForm = () => {
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0 bg-white" align="start">
                     <Calendar
+                      locale={ru}
+                      fixedWeeks={true}
                       mode="range"
                       min={2}
                       selected={range}
@@ -350,6 +336,7 @@ const BookingForm = () => {
                         disabled: { color: "red" },
                       }}
                       disabled={disabledDays}
+                      fromDate={new Date()}
                     />
                   </PopoverContent>
                 </Popover>

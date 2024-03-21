@@ -412,7 +412,7 @@ const BookingForm = () => {
           ) : null}
           <PriceNotification price={actualPrice} prepayment={prepayment} />
           <Button
-            className="disabled:bg-gray-300"
+            className="disabled:bg-gray-300 "
             disabled={
               isSubmitting || pathname === "/dashboard"
                 ? false

@@ -52,7 +52,11 @@ export const cancelBookingAction = async (id: string) => {
   try {
     await connectToDB();
 
-    await Booking.findOneAndUpdate({ id: id }, { canceled: true });
+    await Booking.findOneAndUpdate(
+      { id: id },
+      { canceled: true },
+      { new: true }
+    );
     revalidatePath("/dashboard");
     return { status: "ok" };
   } catch (error) {

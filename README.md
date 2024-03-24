@@ -11,7 +11,7 @@
 - Mongoose v.8.1.1
 - React Hook Form v.7.49.3
 ---
-### There is a Admin dashboard with some features:
+### There is an Admin dashboard with some features:
 ---
  **See the list of bookings and cancel chosen booking** 
 

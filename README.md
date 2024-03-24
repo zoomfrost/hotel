@@ -10,6 +10,7 @@
 - MongoDB v.6.3.0
 - Mongoose v.8.1.1
 - React Hook Form v.7.49.3
+- Shadcn UI library
 ---
 ### There is an Admin dashboard with some features:
 ---

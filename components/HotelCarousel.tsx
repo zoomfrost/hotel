@@ -9,15 +9,15 @@ import {
 import Image from "next/image";
 
 interface HotelCarouselProps {
-  array: {
+  data: {
     photos: string[];
     title: string;
     alt: string;
   };
 }
 
-const HotelCarousel = ({ array }: HotelCarouselProps) => {
-  const { title, alt, photos } = array;
+const HotelCarousel = ({ data }: HotelCarouselProps) => {
+  const { title, alt, photos } = data;
   return (
     <div className="pt-12 px-6">
       <h2 className="text-4xl max-sm:text-2xl text-center">{title}</h2>

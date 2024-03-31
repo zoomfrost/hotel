@@ -1,9 +1,8 @@
-import Description from "@/components/Description";
 import React from "react";
 import Container from "@/components/ui/container";
 import { Metadata } from "next";
-import HotelCarousel from "@/components/HotelCarousel";
 import RoomsDescription from "@/components/RoomsDescription";
+import HotelCarousel from "@/components/HotelCarousel";
 
 export const metadata: Metadata = {
   title: "Номера",
@@ -30,29 +29,6 @@ export const metadata: Metadata = {
 };
 
 const Area = () => {
-  // const descrArr = [
-  //   {
-  //     photo: "https://i.postimg.cc/8PmCLJBH/photo-2024-02-14-16-52-42-min.jpg",
-  //     heading: "Трехместный №1",
-  //     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
-  //   },
-  //   {
-  //     photo: "https://i.postimg.cc/SNhsX78R/photo-2024-02-14-16-52-40-min.jpg",
-  //     heading: "Трехместный №2",
-  //     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
-  //   },
-  //   {
-  //     photo: "https://i.postimg.cc/m2BLZZfF/photo-2024-02-14-16-52-54-min.jpg",
-  //     heading: "Двухместный №1",
-  //     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
-  //   },
-  //   {
-  //     photo: "https://i.postimg.cc/FzQ9LNY8/photo-2024-02-14-16-52-49-min.jpg",
-  //     heading: "Двухместный №2",
-  //     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quo iusto velit quis perspiciatis molestiae natus, eius odit, accusamus laboriosam repellat architecto sed ratione sequi debitis? Corrupti fugit adipisci quos?",
-  //   },
-  // ];
-
   const photos = {
     photos: [
       "https://i.postimg.cc/rmRm4fQ0/photo-2024-02-14-16-52-32-min.jpg",
@@ -78,10 +54,10 @@ const Area = () => {
   };
   return (
     <Container title="Номера">
-      <section>
+      <div>
         <RoomsDescription />
-        <HotelCarousel array={photos} />
-      </section>
+        <HotelCarousel data={photos} />
+      </div>
     </Container>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "../ui/button";
 
 import FeedBackNotification from "../FeedBackNotification";
@@ -18,20 +18,17 @@ interface IModalProps {
   action: (id: string) => Promise<unknown>;
 }
 const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
-  const [btnDisabled, setBtnDisabled] = useState(false);
   const [cancelStatus, setCancelStatus] = useState<string | null>(null);
 
+  const [isPending, startTransition] = useTransition();
+
   const handleCancelBooking = (id: string) => {
-    setBtnDisabled(true);
     setCancelStatus(null);
     action(id)
       .then(() => setCancelStatus("Успешно"))
       .catch(() => {
         setCancelStatus("Ошибка");
-        setBtnDisabled(false);
       });
-
-    setBtnDisabled(false);
   };
   return (
     <AlertDialog onOpenChange={setOpen} open={open}>
@@ -41,8 +38,12 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter className="max-sm:w-3/4 mx-auto gap-y-4">
           <Button
-            onClick={() => handleCancelBooking(selectedId)}
-            disabled={btnDisabled}
+            onClick={() =>
+              startTransition(async () => {
+                await handleCancelBooking(selectedId);
+              })
+            }
+            disabled={isPending}
             variant={"outline"}
             className="disabled:bg-white-400"
           >

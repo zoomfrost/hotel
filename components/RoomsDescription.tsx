@@ -1,6 +1,5 @@
 import React from "react";
 import RoomsPrices from "./RoomsPrices";
-import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 
 const RoomsDescription = () => {
   const listArray = [

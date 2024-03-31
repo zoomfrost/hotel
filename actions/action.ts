@@ -28,7 +28,7 @@ export const addBooking = async (formData: IBooking) => {
 
   try {
     await connectToDB();
-    const newBooking = new Booking({
+    const newBooking = await Booking.create({
       name,
       phone,
       room,
@@ -41,8 +41,7 @@ export const addBooking = async (formData: IBooking) => {
       comment,
     });
 
-    await newBooking.save();
-    revalidatePath("/dashboard");
+    if (newBooking) revalidatePath("/dashboard");
   } catch (error) {
     return { error };
   }
@@ -52,12 +51,11 @@ export const cancelBookingAction = async (id: string) => {
   try {
     await connectToDB();
 
-    await Booking.findOneAndUpdate(
+    const canceledBooking = await Booking.findOneAndUpdate(
       { id: id },
-      { canceled: true },
-      { new: true }
+      { canceled: true }
     );
-    revalidatePath("/dashboard");
+    if (canceledBooking) revalidatePath("/dashboard");
     return { status: "ok" };
   } catch (error) {
     return error;
@@ -68,9 +66,9 @@ export const deleteBookingAction = async (id: string) => {
   try {
     await connectToDB();
 
-    await Booking.findOneAndDelete({ id: id });
+    const deletedBooking = await Booking.findOneAndDelete({ id: id });
 
-    revalidatePath("/dashboard");
+    if (deletedBooking) revalidatePath("/dashboard");
     return { status: "ok" };
   } catch (error) {
     return error;

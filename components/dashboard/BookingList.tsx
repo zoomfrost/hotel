@@ -2,14 +2,20 @@
 
 import { memo, useCallback, useState } from "react";
 
-import AppointmentItem from "./BookingItem";
+import BookingItem from "./BookingItem";
 
 import CancelModal from "./CancelModal";
-import { ActiveBooking } from "@/types";
-import { cancelBookingAction } from "@/actions/action";
+import { ActiveBooking, IBooking } from "@/types";
+import { cancelBookingAction, deleteBookingAction } from "@/actions/action";
 
 const BookingList = memo(
-  ({ allActiveBookings }: { allActiveBookings: ActiveBooking[] }) => {
+  ({
+    bookings,
+    type,
+  }: {
+    bookings: ActiveBooking[] | IBooking[];
+    type: string;
+  }) => {
     const [open, setOpen] = useState(false);
     const [selectedId, selectId] = useState("0");
 
@@ -22,18 +28,21 @@ const BookingList = memo(
     }, []);
     return (
       <>
-        {allActiveBookings.map((item) => (
-          <AppointmentItem
-            key={item.id}
-            bookings={item}
-            setOpen={handleSetOpen}
-            selectId={handleSelectId}
-          />
-        ))}
+        {bookings &&
+          bookings.map((item) => (
+            <BookingItem
+              key={item.id}
+              bookings={item}
+              setOpen={handleSetOpen}
+              selectId={handleSelectId}
+            />
+          ))}
 
         <CancelModal
           open={open}
-          action={cancelBookingAction}
+          action={
+            type === "history" ? deleteBookingAction : cancelBookingAction
+          }
           selectedId={selectedId}
           setOpen={handleSetOpen}
         />

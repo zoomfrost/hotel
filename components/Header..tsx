@@ -5,8 +5,7 @@ import logo from "@/public/logo.svg";
 import { IHeaderDataProps } from "@/types";
 import dynamic from "next/dynamic";
 import AlertForm from "./AlertForm";
-
-const MobileNav = dynamic(() => import("@/components/MobileNav"));
+import MobileNav from "./MobileNav";
 
 const Header = ({ links, isDashboard }: IHeaderDataProps) => {
   return (

@@ -22,7 +22,7 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
 
   const [isPending, startTransition] = useTransition();
 
-  const handleCancelBooking = (id: string) => {
+  const handleBookingAction = (id: string) => {
     setCancelStatus(null);
     action(id)
       .then(() => setCancelStatus("Успешно"))
@@ -40,7 +40,7 @@ const CancelModal = ({ selectedId, open, setOpen, action }: IModalProps) => {
           <Button
             onClick={() =>
               startTransition(async () => {
-                await handleCancelBooking(selectedId);
+                await handleBookingAction(selectedId);
               })
             }
             disabled={isPending}

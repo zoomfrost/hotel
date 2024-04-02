@@ -16,6 +16,7 @@ const AlertForm = () => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button
+          type="button"
           className="uppercase max-sm:text-xs hover:bg-gray-500 active:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-700"
           variant="outline"
         >

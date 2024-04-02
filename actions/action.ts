@@ -53,7 +53,8 @@ export const cancelBookingAction = async (id: string) => {
 
     const canceledBooking = await Booking.findOneAndUpdate(
       { id: id },
-      { canceled: true }
+      { canceled: true },
+      { new: true }
     );
     if (canceledBooking) revalidatePath("/dashboard");
     return { status: "ok" };

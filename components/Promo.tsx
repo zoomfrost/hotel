@@ -16,6 +16,7 @@ const Promo = ({ title, isHomePage }: IPromoProps) => {
         <Image
           priority
           quality={50}
+          fill
           placeholder="blur"
           className="h-full w-full mx-auto brightness-50 object-cover"
           src={promo}

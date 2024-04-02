@@ -30,7 +30,7 @@ const DashboardHome = async () => {
     <section className="grid w-full justify-items-center mt-10 max-lg:grid-cols-1 grid-cols-2 gap-x-14 gap-y-14 pt-10">
       <div className="grid auto-rows-min gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
-          <BookingList allActiveBookings={allActiveBookings} />
+          <BookingList type="schedule" bookings={allActiveBookings} />
         </Suspense>
       </div>
       <div className="grid grid-cols-1 w-[500px] max-sm:w-full">

@@ -1,4 +1,4 @@
-import HistoryList from "@/components/dashboard/HistoryList";
+import BookingList from "@/components/dashboard/BookingList";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Booking } from "@/models/booking";
 import { IBooking } from "@/types";
@@ -28,7 +28,7 @@ const History = async () => {
     <section className="grid grid-cols-1 gap-y-32 pt-12 ">
       <div className="grid auto-rows-min gap-y-6">
         <Suspense fallback={<Skeleton className={"h-[125px] w-[250px]"} />}>
-          <HistoryList bookings={data} />
+          <BookingList type="history" bookings={data} />
         </Suspense>
       </div>
     </section>

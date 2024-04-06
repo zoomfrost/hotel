@@ -1,5 +1,11 @@
-import FaqComponent from "@/components/Faq";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import Container from "@/components/ui/container";
+import { faqRules } from "@/constants";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -26,59 +32,29 @@ export const metadata: Metadata = {
 };
 
 const Faq = () => {
-  const rules = [
-    {
-      heading: "Где припарковать машину?",
-      rules: [
-        "Парковака в центре города платная с 08:00 до 20:00.",
-        "Есть парковки с недорогой посуточной оплатой.",
-      ],
-    },
-    {
-      heading: "Можно оставить багаж до заезда либо после выезда?",
-      rules: ["Да, можно."],
-    },
-    {
-      heading: "Душевая и туалет в номере?",
-      rules: ["Нет, санузел раздельный и общий на 4 номера"],
-    },
-    {
-      heading: "Как происходит оплата?",
-      rules: ["Наличными или переводом на карту при заезде"],
-    },
-    {
-      heading: "Возвращаем ли предоплату?",
-      rules: [
-        "Да, если это форс-мажор.",
-        "Обстоятельство, имеющее характер непреодолимой силы.",
-      ],
-    },
-    {
-      heading: "Как получить ключ?",
-      rules: ["Перед заездом отправляется подробная инструкция с фото"],
-    },
-    {
-      heading: "Можно ли заехать раньше/выехать позже?",
-      rules: [
-        "При возможности мы продлим время или заселим раньше бесплатно, в рамках часа-двух.",
-        "Более длительное время обговаривается отдельно и за доп. плату",
-      ],
-    },
-    {
-      heading: "Предоставляете дополнительное спальное место?",
-      rules: ["Да, раскладушка 300 руб./сутки"],
-    },
-    {
-      heading: "Можно ли с питомцами?",
-      rules: [
-        "Да, если они небольшие. По предварительной договоренности. Это бесплатно",
-      ],
-    },
-  ];
   return (
     <Container title="Частые вопросы">
       <section className="w-full paddings">
-        <FaqComponent rules={rules} />
+        <Accordion
+          type="multiple"
+          className="w-full md:w-3/4 gap-y-9 flex flex-col"
+        >
+          {faqRules.map((rule) => (
+            <AccordionItem key={rule.id} className="" value={`item-${rule.id}`}>
+              <AccordionTrigger className="hover:no-underline uppercase border-main border-[1px] p-4 text-xs xs:text-sm md:text-lg  text-main text-start">
+                {rule.heading}
+              </AccordionTrigger>
+              {rule.rules.map((item, i) => (
+                <AccordionContent
+                  key={`content-${i}`}
+                  className="p-3 text-sm md:text-lg font-semibold"
+                >
+                  {item}
+                </AccordionContent>
+              ))}
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
     </Container>
   );

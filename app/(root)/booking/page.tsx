@@ -1,5 +1,4 @@
 import BookingForm from "@/components/BookingForm";
-import Rules from "@/components/Rules";
 import Container from "@/components/ui/container";
 import { Metadata } from "next";
 
@@ -56,7 +55,29 @@ const Booking = () => {
     <Container title="Бронирование">
       <section>
         <div className="grid grid-cols-2 gap-x-7 max-md:grid-cols-1 max-md:gap-y-3 justify-items-center">
-          <Rules rules={rules} />
+          <div id="rules">
+            {rules.map((item) => (
+              <div
+                key={item.heading}
+                className="flex flex-col gap-y-3 p-7 xs:p-5"
+              >
+                <h4 className="text-xl font-semibold text-main">
+                  {item.heading}
+                </h4>
+                <span className="h-[1px] w-full bg-main block"></span>
+                <ul>
+                  {item.rules.map((rule) => (
+                    <li
+                      key={rule}
+                      className="list-disc text-black-100 text-lg font-extralight"
+                    >
+                      {rule}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
           <BookingForm />
         </div>
       </section>

@@ -32,6 +32,7 @@ const HotelCarousel = ({ data }: HotelCarouselProps) => {
             <CarouselItem className="pl-3 md:basis-1/2 lg:basis-1/3" key={i}>
               <div className="h-[450px]">
                 <Image
+                  loading="lazy"
                   width={1000}
                   height={2000}
                   className="w-full h-full object-contain"

@@ -26,11 +26,6 @@ export interface IDescriptionDataProps {
   isHomePage: boolean;
 }
 
-export interface IBookingRules {
-  heading: string;
-  rules: string[];
-}
-
 export interface IBooking {
   name: string;
   phone: string;
@@ -57,13 +52,4 @@ export interface IPricesFromDB {
     interval: { start: Date; end: Date };
     price: string;
   };
-}
-
-export interface IFaq {
-  heading: string;
-  rules: string[];
-}
-
-export interface IFaqProps {
-  rules: IFaq[];
 }

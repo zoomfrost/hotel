@@ -74,13 +74,13 @@ export const cityPhotoArr = [
 
 export const feedback = {
   photos: [
-    "https://i.postimg.cc/FzP2ZmWD/feedback1.jpg",
-    "https://i.postimg.cc/RCX59QSK/feedback2.jpg",
-    "https://i.postimg.cc/pX6w5Wnd/feedback3.jpg",
-    "https://i.postimg.cc/zXvmfbvM/feedback4.jpg",
-    "https://i.postimg.cc/XvMtxsLS/feedback5.jpg",
-    "https://i.postimg.cc/QMpwzcYB/feedback6.jpg",
-    "https://i.postimg.cc/8zfqh2hm/feedback7.jpg",
+    "/photo/feedback1.jpg",
+    "/photo/feedback2.jpg",
+    "/photo/feedback3.jpg",
+    "/photo/feedback4.jpg",
+    "/photo/feedback5.jpg",
+    "/photo/feedback6.jpg",
+    "/photo/feedback7.jpg",
   ],
   title: "Отзывы",
   alt: "feedback",
@@ -104,5 +104,95 @@ export const socialLinksArr = [
     link: "viber://chat?number=%2B79117283072",
     icon: viber,
     id: 3,
+  },
+];
+
+export const faqRules = [
+  {
+    id: 1,
+    heading: "Где припарковать машину?",
+    rules: [
+      "Парковака в центре города платная с 08:00 до 20:00.",
+      "Есть парковки с недорогой посуточной оплатой.",
+    ],
+  },
+  {
+    id: 2,
+
+    heading: "Можно оставить багаж до заезда либо после выезда?",
+    rules: ["Да, можно."],
+  },
+  {
+    id: 3,
+
+    heading: "Душевая и туалет в номере?",
+    rules: ["Нет, санузел раздельный и общий на 4 номера"],
+  },
+  {
+    id: 4,
+
+    heading: "Как происходит оплата?",
+    rules: ["Наличными или переводом на карту при заезде"],
+  },
+  {
+    id: 5,
+
+    heading: "Возвращаем ли предоплату?",
+    rules: [
+      "Да, если это форс-мажор.",
+      "Обстоятельство, имеющее характер непреодолимой силы.",
+    ],
+  },
+  {
+    id: 6,
+
+    heading: "Как получить ключ?",
+    rules: ["Перед заездом отправляется подробная инструкция с фото"],
+  },
+  {
+    id: 7,
+
+    heading: "Можно ли заехать раньше/выехать позже?",
+    rules: [
+      "При возможности мы продлим время или заселим раньше бесплатно, в рамках часа-двух.",
+      "Более длительное время обговаривается отдельно и за доп. плату",
+    ],
+  },
+  {
+    id: 8,
+
+    heading: "Предоставляете дополнительное спальное место?",
+    rules: ["Да, раскладушка 300 руб./сутки"],
+  },
+  {
+    id: 9,
+
+    heading: "Можно ли с питомцами?",
+    rules: [
+      "Да, если они небольшие. По предварительной договоренности. Это бесплатно",
+    ],
+  },
+];
+
+export const navLinks = [
+  {
+    name: "Главная",
+    link: "/",
+    id: 1,
+  },
+  {
+    name: "Номера",
+    link: "/rooms",
+    id: 2,
+  },
+  {
+    name: "Бронирование",
+    link: "/booking",
+    id: 3,
+  },
+  {
+    name: "Faq",
+    link: "/faq",
+    id: 4,
   },
 ];

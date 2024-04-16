@@ -1,8 +1,8 @@
 <div align="center">
 <h2 align="center">Hotel application</h2>
-### <a align='center' href='https://baskov.online' target="_blank">Visit</a>
+ <h3 align='center'><a  href='https://baskov.online' target="_blank">Visit</a></h3>
   <br />
-      <img src="/public/github/promo.jpg" alt='promo'>
+      <img src="/public/github/promo.png" alt='promo'>
   <br />
 </div>
 
